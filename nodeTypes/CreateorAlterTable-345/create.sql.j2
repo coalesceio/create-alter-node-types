@@ -1,0 +1,132 @@
+{% if desiredState == currentState %}
+
+{{ stage('Nothing to do.') }}
+select 1 = 0
+
+{% elif desiredState %}
+
+{% set ns = namespace(column_constraints=[],constraint='',flag=false,primarykeyValues='',foreignkeyValues='',foreignk='') %} {# Initialize an empty list in the namespace #}
+
+ {# Inline constraints #}
+ {%if desiredState.config.inlineconst == true%}
+
+   {% for item in desiredState.config.constraintsspec.get('items') %}
+    {% set column_name = item.columnname.name %}
+    {% set constraint_spec = item.constspec %}
+
+    {# Create a temporary dictionary for the current item #}
+    {% set col_dict = {'name': column_name, 'constraint': constraint_spec} %}
+
+    {# Append the dictionary to the list in the namespace #}
+    {% set ns.column_constraints = ns.column_constraints + [col_dict] %}
+  {% endfor %}
+ {%endif%}
+ 
+ # Out of line constraints
+ # Primary key clause
+
+{%if desiredState.config.primary == true%}
+
+   {% set column = desiredState.config.primarykeycon.get('items') | map(attribute='primarykey.name')| list%}
+   
+	 
+	      {% for r in column %}
+			   {% set ns.primarykeyValues = ns.primarykeyValues +'"'+r+'"' %}
+         {%- if not loop.last -%} {% set ns.primarykeyValues = ns.primarykeyValues +','%} {% endif %}
+        {% endfor %}
+       
+         {% set ns.primarykeyValues = 'CONSTRAINT ' + desiredState.config.primarykeyname + ' PRIMARY KEY ('+ns.primarykeyValues +')' %}
+
+{%endif%}
+
+#Foreign key clause
+
+{%if desiredState.config.foreignk == true%}
+
+   {% set columnl = desiredState.config.foreignkeycon.get('items') | map(attribute='foreignkey.name')| list%}
+
+	      {% for r in columnl %}
+			   {% set ns.foreignk = ns.foreignk +'"'+r+'"' %}
+         {%- if not loop.last -%} {% set ns.foreignk = ns.foreignk +','%} {% endif %}
+        {% endfor %}
+       
+         {% set ns.foreignkeyValues = 'CONSTRAINT ' + desiredState.config.foreignkeyname + ' FOREIGN KEY ('+ns.foreignk +')' + ' REFERENCES '+ desiredState.config.parentabname %}
+
+{%endif%}
+
+
+{{ns.foreignkeyValues}}
+    {# Figure out cluster key #}
+        {% set nsVariables = namespace(finalClusterKey="") %}
+        {% if desiredState.config.clusterKey == true %}
+            {% if desiredState.config.clusterKeyExpressions == true %}
+                {% set column, expression = desiredState.config.clusterKeyConfigExpressions.get('items') | map(attribute='columnNameExpressions.name') | list, desiredState.config.clusterKeyConfigExpressions.get('items') | map(attribute='sqlExpression') | list %}
+
+                {%- set nsVariables = namespace(clusterValues=[]) %}
+
+                {% for r in column %}
+                    {% if expression[loop.index0] == "" %}
+                        {% set nsVariables.clusterValues = nsVariables.clusterValues + ['"'+r+'"'] %}
+                    {% else %}
+                        {% set nsVariables.clusterValues = nsVariables.clusterValues + [expression[loop.index0]] %}
+                    {% endif %}
+                {% endfor %}
+
+                {% set nsVariables.finalClusterKey = 'CLUSTER BY (' + nsVariables.clusterValues | join(',') + ')' %}
+
+            {% else %}
+
+                {% set column = desiredState.config.clusterKeyConfig.get('items') | map(attribute='columnName.name') | list %}
+
+                {%- set nsVariables = namespace(clusterValues=[]) %}
+
+                {% for r in column %}
+                    {% set nsVariables.clusterValues = nsVariables.clusterValues + ['"'+r+'"'] %}
+                {% endfor %}
+
+                {% set nsVariables.finalClusterKey = 'CLUSTER BY (' + nsVariables.clusterValues | join(',') + ')' %}
+
+            {% endif %}
+        {% endif %}
+
+
+{# CreateSQL for Table #}
+{{ stage('Create/Alter '+ desiredState.node.materializationType) }}
+
+	CREATE OR ALTER {{desiredState.node.materializationType}} {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
+	(
+        
+		{% for col in desiredState.columns %}
+    
+             {%set ns.constraint = ''%}
+             {%set ns.flag= false%}
+            {# Check if col.name matches any name in column_constraints #}
+         {% for item in ns.column_constraints %}
+            {% if item.name == col.name and ns.flag== false %}
+              {% set ns.constraint = item.constraint %}
+               {% set ns.flag = true %}  {# Stop the inner loop if match is found #}
+            {% endif %}
+         {% endfor %}
+          
+          {# Print with or without constraint #}
+            "{{ col.name }}" {{ col.dataType }} 
+            {%- if ns.constraint %} {{ ns.constraint }}{% endif %}
+            {%- if not col.nullable %} NOT NULL {% endif %}
+            {%- if col.defaultValue | length > 0 %} DEFAULT {{ col.defaultValue }}{% endif %}
+           {%- if col.description | length > 0 %} COMMENT '{{ col.description | escape }}'{% endif %}
+            {%- if not loop.last -%}, {% endif %}
+		{% endfor %}
+        {% if desiredState.config.primary == true%} ,{{ns.primarykeyValues}}{%if desiredState.config.foreign == true -%},{%endif-%}{%endif%}
+         {%if desiredState.config.foreignk == true%}{% if desiredState.config.primary == false%},{%endif%}{{ns.foreignkeyValues}}{%endif%}
+	)
+
+	{%- if desiredState.node.description | length > 0 %} COMMENT = '{{ desiredState.node.description | escape }}'{% endif %}
+	{{nsVariables.finalClusterKey}}
+	{%if desiredState.config.datretention != "" %}DATA_RETENTION_TIME_IN_DAYS = {{desiredState.config.datretention}}{%endif%}
+    {%if desiredState.config.maxdataretention != "" %}MAX_DATA_EXTENSION_TIME_IN_DAYS = {{desiredState.config.maxdataretention}}{%endif%}
+    {%if desiredState.config.eschemaevol == true %}ENABLE_SCHEMA_EVOLUTION = {{desiredState.config.eschemaevol}}{%endif%}
+{%if desiredState.config.changetracking == true %}CHANGE_TRACKING = {{desiredState.config.changetracking}}{%endif%}
+{%if desiredState.config.defaultcoallation != "" %}DEFAULT_DDL_COLLATION = {{desiredState.config.defaultcoallation}}{%endif%}
+
+
+{%endif%}

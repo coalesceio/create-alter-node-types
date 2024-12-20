@@ -1,0 +1,184 @@
+fileVersion: 1
+id: "345"
+isDisabled: false
+metadata:
+  defaultStorageLocation: null
+  error: null
+  nodeMetadataSpec: |-
+    capitalized: Create or Alter
+    short: CT
+    tagColor: '#059659'
+    plural: Create
+
+    deployStrategy: advanced
+
+    config:
+    - groupName: Options
+      items:
+      - type: materializationSelector
+        default: table
+        options:
+        - table
+        - transient table
+        isRequired: true
+        
+      - type: toggleButton
+        attributeName: clusterKey
+        displayName: Cluster Key
+        default: false
+        isRequired: false
+        enableIf: "{% if node.materializationType == 'table' or node.materializationType == 'transient table'  %} true {% else %} false {% endif %}"
+
+      - type: toggleButton
+        attributeName: clusterKeyExpressions
+        displayName: Allow Expressions in Cluster Key
+        default: false
+        isRequired: false
+        enableIf: "{% if config.clusterKey %} true {% else %} false {% endif %}"
+
+      - type: tabular
+        displayName: 'Cluster Key'
+        attributeName: clusterKeyConfig
+        columns:
+
+        -  type: columnDropdownSelector
+           displayName: Column Name
+           attributeName: columnName
+           isRequired: false
+      
+        isRequired: false
+        enableIf: "{% if (config.clusterKey and not config.clusterKeyExpressions) %} true {% else %} false {% endif %}"
+
+      - type: tabular
+        displayName: 'Cluster Key'
+        attributeName: clusterKeyConfigExpressions
+        columns:
+
+        -  type: columnDropdownSelector
+           displayName: Column Name
+           attributeName: columnNameExpressions
+           isRequired: false
+      
+        -  type: textBox
+           displayName: Expression
+           attributeName: sqlExpression
+           default: "ex. trunc(<column_name>, -5)"
+           isRequired: false
+      
+        isRequired: false
+        enableIf: "{% if (config.clusterKey and config.clusterKeyExpressions) %} true {% else %} false {% endif %}"
+
+      - type: toggleButton
+        attributeName: changetracking
+        displayName: Change tracking
+        default: false
+        isRequired: false
+
+      - type: toggleButton
+        attributeName: eschemaevol
+        displayName: Enable Schema Evolution
+        default: false
+        isRequired: false
+
+      - type: toggleButton
+        attributeName: inlineconst
+        displayName: Inline Constraints
+        default: false
+        isRequired: false
+      
+      - type: tabular
+        displayName: 'Constraints'
+        attributeName: constraintsspec
+        columns:
+
+        -  type: columnDropdownSelector
+           displayName: Column Name
+           attributeName: columnname
+           isRequired: false
+      
+        -  type: textBox
+           displayName: Constraint specification
+           attributeName: constspec
+           default: "ex. COLLATE <collate_specification>"
+           isRequired: false
+      
+        isRequired: false
+        enableIf: "{% if (config.inlineconst) %} true {% else %} false {% endif %}"
+
+      - type: toggleButton
+        attributeName: outlineconst
+        displayName: Out-of-line Constraints
+        default: false
+        isRequired: false
+
+      - type: toggleButton
+        displayName: Primary key
+        attributeName: primary
+        enableIf: "{% if (config.outlineconst) %} true {% else %} false {% endif %}"
+
+      - type: textBox
+        displayName: Primary key Name
+        attributeName: primarykeyname
+        enableIf: "{% if (config.outlineconst and config.primary) %} true {% else %} false {% endif %}"
+
+      - type: tabular   
+        displayName: Primary key columns
+        attributeName: primarykeycon
+        columns:
+
+        -  type: columnDropdownSelector
+           displayName: Columns
+           attributeName: primarykey
+
+        isRequired: false
+        enableIf: "{% if (config.outlineconst and config.primary) %} true {% else %} false {% endif %}"
+
+      - type: toggleButton
+        displayName: Foreign key
+        attributeName: foreignk
+        enableIf: "{% if (config.outlineconst) %} true {% else %} false {% endif %}"
+
+      - type: tabular   
+        displayName: Foreign key attributes
+        attributeName: foreignkeycon
+        columns:
+
+        - type: textBox
+          displayName: Foreign key Name
+          attributeName: foreignkeyname
+          enableIf: "{% if (config.outlineconst and config.foreign) %} true {% else %} false {% endif %}"
+
+        - type: textBox
+          displayName: Parent table name
+          attributeName: parentabname
+          default: "ex:`<database>`.`<schema>`.`<tablename>`"
+          enableIf: "{% if (config.outlineconst and config.foreign) %} true {% else %} false {% endif %}"
+
+        - type: textBox
+          displayName: Foreign key columns
+          attributeName: foreignkeycol
+          
+        isRequired: false
+        enableIf: "{% if (config.outlineconst and config.foreign ) %} true {% else %} false {% endif %}"
+
+      - displayName: Data Retention Time(In days)
+        attributeName: datretention
+        type: textBox
+        default: '<integer>'
+        isRequired: false
+
+      - displayName: Maximum Data Extension time(In days)
+        attributeName: maxdataretention
+        type: textBox
+        default: '<integer>'
+        isRequired: false
+      
+      - displayName: Default DDL Collation
+        attributeName: defaultcoallation
+        type: textBox
+        default: '<collation specification>'
+        isRequired: false
+
+      
+name: Create or Alter Table
+type: NodeType

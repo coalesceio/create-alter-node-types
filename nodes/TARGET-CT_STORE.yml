@@ -1,0 +1,122 @@
+fileVersion: 1
+id: 65dfd1f2-0db5-4769-85d6-9828b29423c1
+name: CT_STORE
+operation:
+  config:
+    changetracking: false
+    clusterKey: false
+    clusterKeyConfig:
+      items:
+        - {}
+    clusterKeyConfigExpressions:
+      items:
+        - {}
+    clusterKeyExpressions: false
+    constraintsspec:
+      items:
+        - columnname:
+            columnCounter: 7b173949-1e7b-4f53-abe8-ea21813db181
+            stepCounter: 65dfd1f2-0db5-4769-85d6-9828b29423c1
+          constspec: NOT NULL
+    datretention: ""
+    defaultcoallation: ""
+    eschemaevol: false
+    foreign: false
+    foreignkeycon:
+      items:
+        - {}
+    foreignkeyname: ""
+    inlineconst: true
+    maxdataretention: ""
+    outlineconst: false
+    parentabname: ex:`<catalog>`.`<schema>`.`<tablename>`
+    primary: false
+    primarykeycon:
+      items:
+        - {}
+    primarykeyname: ""
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: TARGET
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 09733a67-696d-44be-94a9-f61cc405aa38
+          stepCounter: 65dfd1f2-0db5-4769-85d6-9828b29423c1
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        name: STORE_ID
+        nullable: false
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: "0"
+                stepCounter: "0"
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 7b173949-1e7b-4f53-abe8-ea21813db181
+          stepCounter: 65dfd1f2-0db5-4769-85d6-9828b29423c1
+        config: {}
+        dataType: VARCHAR(100)
+        description: ""
+        name: CITY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: "0"
+                stepCounter: "0"
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: a0a4a3a2-17ad-4bdc-8861-e05b564113aa
+          stepCounter: 65dfd1f2-0db5-4769-85d6-9828b29423c1
+        config: {}
+        dataType: VARCHAR(255)
+        description: ""
+        name: STORE_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: "0"
+                stepCounter: "0"
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 8d42b9c3-1431-423f-ac10-ef75a3b6bfde
+          stepCounter: 65dfd1f2-0db5-4769-85d6-9828b29423c1
+        config: {}
+        dataType: VARCHAR(20)
+        description: ""
+        name: PHONE_NO
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: "0"
+                stepCounter: "0"
+            transform: ""
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases: {}
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SAMPLE_SOURCE
+            nodeName: STORE
+        join:
+          joinCondition: FROM {{ ref('SAMPLE_SOURCE', 'STORE') }} "STORE"
+        name: CT_STORE
+        noLinkRefs: []
+  name: CT_STORE
+  overrideSQL: false
+  schema: ""
+  sqlType: "345"
+  type: sql
+  version: 1
+type: Node
