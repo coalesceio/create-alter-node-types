@@ -1,3 +1,15 @@
+{#
+    Copyright (c) 2023 Coalesce. All rights reserved.
+This script and its associated documentation are confidential and proprietary to Coalesce.
+Unauthorized reproduction, distribution, or disclosure of this material is strictly prohibited.
+Coalesce permits you to copy and modify this script for the purposes of using with Coalsce but
+does not permit copying or modification for any other purpose.  
+#}
+{# == Node Type Version        : 1  == #}
+{# == Node Type Name           : Create or Alter table == #}
+{# == Node Type Description    : This node loads data into the table created and inserts data into the same == #}
+
+
 {% if desiredState == currentState %}
 
 {{ stage('Nothing to do.') }}
@@ -43,19 +55,16 @@ select 1 = 0
 
 {%if desiredState.config.foreignk == true%}
 
-   {% set columnl = desiredState.config.foreignkeycon.get('items') | map(attribute='foreignkey.name')| list%}
+   {% set fname,foreigncolumns,parenttable = desiredState.config.foreignkeycon.get('items') | map(attribute='foreignkeyname')| list,desiredState.config.foreignkeycon.get('items') | map(attribute='foreignkeycol')| list,desiredState.config.foreignkeycon.get('items') | map(attribute='parentabname')| list%}
 
-	      {% for r in columnl %}
-			   {% set ns.foreignk = ns.foreignk +'"'+r+'"' %}
-         {%- if not loop.last -%} {% set ns.foreignk = ns.foreignk +','%} {% endif %}
-        {% endfor %}
-       
-         {% set ns.foreignkeyValues = 'CONSTRAINT ' + desiredState.config.foreignkeyname + ' FOREIGN KEY ('+ns.foreignk +')' + ' REFERENCES '+ desiredState.config.parentabname %}
-
+	      {% for r in fname %}
+			   
+                {% set ns.foreignkeyValues = ns.foreignkeyValues +'CONSTRAINT ' + r + ' FOREIGN KEY ('+ foreigncolumns[loop.index0] +')' + ' REFERENCES '+ parenttable[loop.index0] %}
+         {%- if not loop.last -%} {% set ns.foreignkeyValues = ns.foreignkeyValues + ' , '%} {% endif %}
+        {% endfor %}       
+        
 {%endif%}
 
-
-{{ns.foreignkeyValues}}
     {# Figure out cluster key #}
         {% set nsVariables = namespace(finalClusterKey="") %}
         {% if desiredState.config.clusterKey == true %}
@@ -116,7 +125,7 @@ select 1 = 0
            {%- if col.description | length > 0 %} COMMENT '{{ col.description | escape }}'{% endif %}
             {%- if not loop.last -%}, {% endif %}
 		{% endfor %}
-        {% if desiredState.config.primary == true%} ,{{ns.primarykeyValues}}{%if desiredState.config.foreign == true -%},{%endif-%}{%endif%}
+        {% if desiredState.config.primary == true%} ,{{ns.primarykeyValues}}{%if desiredState.config.foreignk == true -%},{%endif-%}{%endif%}
          {%if desiredState.config.foreignk == true%}{% if desiredState.config.primary == false%},{%endif%}{{ns.foreignkeyValues}}{%endif%}
 	)
 

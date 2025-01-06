@@ -146,20 +146,20 @@ metadata:
         - type: textBox
           displayName: Foreign key Name
           attributeName: foreignkeyname
-          enableIf: "{% if (config.outlineconst and config.foreign) %} true {% else %} false {% endif %}"
+          enableIf: "{% if (config.outlineconst and config.foreignk) %} true {% else %} false {% endif %}"
 
         - type: textBox
           displayName: Parent table name
           attributeName: parentabname
           default: "ex:`<database>`.`<schema>`.`<tablename>`"
-          enableIf: "{% if (config.outlineconst and config.foreign) %} true {% else %} false {% endif %}"
+          enableIf: "{% if (config.outlineconst and config.foreignk) %} true {% else %} false {% endif %}"
 
         - type: textBox
           displayName: Foreign key columns
           attributeName: foreignkeycol
           
         isRequired: false
-        enableIf: "{% if (config.outlineconst and config.foreign ) %} true {% else %} false {% endif %}"
+        enableIf: "{% if (config.outlineconst and config.foreignk ) %} true {% else %} false {% endif %}"
 
       - displayName: Data Retention Time(In days)
         attributeName: datretention
