@@ -23,10 +23,7 @@ operation:
       items:
         - foreignkeycol: N_NATIONKEY
           foreignkeyname: fk_1
-          parentabname: "\"ANANDHIS_DEV\".\"SOURCE_DATA\".\"NATION\""
-        - foreignkeycol: R_NAME
-          foreignkeyname: fk_2
-          parentabname: "\"ANANDHIS_DEV\".\"SOURCE_DATA\".\"REGION\""
+          parentabname: "\"ANANDHIS_DEV\".\"SOURCE_DATA\".\"CT_NATION\""
     inlineconst: false
     maxdataretention: ""
     outlineconst: true

@@ -20,7 +20,7 @@ does not permit copying or modification for any other purpose.
     {% endfor %}
 
 {% if node.materializationType == 'table' or node.materializationType == 'transient table'%}
-
+{%set source = sources[0]%}
 
 {# == Truncate data before data insertion  == #}
 	
@@ -48,7 +48,8 @@ does not permit copying or modification for any other purpose.
 				{%- if not loop.last -%}, {% endif %}
 			{% endfor %}
 	
-			{{ source.join }}
+			{{ source.join }})
+{%endif%}
 
 {# == To run data quality tests after data insertion == #}
 

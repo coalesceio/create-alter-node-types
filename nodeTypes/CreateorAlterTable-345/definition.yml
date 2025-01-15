@@ -161,22 +161,19 @@ metadata:
         isRequired: false
         enableIf: "{% if (config.outlineconst and config.foreignk ) %} true {% else %} false {% endif %}"
 
-      - displayName: Data Retention Time(In days)
+      - displayName: Data Retention Time(In days-'<integer>')
         attributeName: datretention
         type: textBox
-        default: '<integer>'
         isRequired: false
 
-      - displayName: Maximum Data Extension time(In days)
+      - displayName: Maximum Data Extension time(In days-'<integer>')
         attributeName: maxdataretention
         type: textBox
-        default: '<integer>'
         isRequired: false
       
-      - displayName: Default DDL Collation
+      - displayName: Default DDL Collation('<collation specification>')
         attributeName: defaultcoallation
         type: textBox
-        default: '<collation specification>'
         isRequired: false
 
       
