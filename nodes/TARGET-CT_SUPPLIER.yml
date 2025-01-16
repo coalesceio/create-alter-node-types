@@ -167,7 +167,7 @@ operation:
           - locationName: SAMPLE_SOURCE
             nodeName: SUPPLIER
         join:
-          joinCondition: FROM {{ ref('SAMPLE_SOURCE', 'SUPPLIER') }} "SUPPLIER"
+          joinCondition: ""
         name: CT_SUPPLIER
         noLinkRefs: []
   name: CT_SUPPLIER
