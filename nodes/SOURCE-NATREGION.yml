@@ -143,6 +143,26 @@ operation:
                 stepCounter: "0"
             transform: ""
         systemColumnType: None
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 8c21b5f8-b50d-4ffb-8714-ff1758b2af41
+          stepCounter: 508a7b0a-118b-4101-885d-3847ec766458
+        config: {}
+        dataType: VARCHAR(255)
+        defaultValue: ""
+        description: ""
+        keyColumnType: None
+        name: N_REG
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: "0"
+                stepCounter: "0"
+            transform: substr(N_NATIONKEY,1,2)
+        systemColumnType: None
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:

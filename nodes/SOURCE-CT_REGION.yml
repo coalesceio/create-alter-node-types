@@ -18,6 +18,10 @@ operation:
             columnCounter: 236223a1-cda9-4217-a5ff-78c4a7e3c151
             stepCounter: 3b24406a-8754-443d-82e0-7cc8fd91af3b
           constspec: NOT NULL
+        - columnname:
+            columnCounter: 2a6a416b-a8e5-4c7c-b4de-9631212335e5
+            stepCounter: 3b24406a-8754-443d-82e0-7cc8fd91af3b
+          constspec: AUTOINCREMENT
     datretention: "2"
     defaultcoallation: ""
     eschemaevol: true
@@ -26,7 +30,7 @@ operation:
       items:
         - {}
     inlineconst: true
-    maxdataretention: ""
+    maxdataretention: "2"
     outlineconst: false
     primary: false
     primarykeycon:
@@ -98,6 +102,26 @@ operation:
               - columnCounter: cb2cbdc5-7a54-4dc5-88f8-052311fe1c43
                 stepCounter: b3d2771b-303c-4a9d-b993-c118951b23d4
             transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 2a6a416b-a8e5-4c7c-b4de-9631212335e5
+          stepCounter: 3b24406a-8754-443d-82e0-7cc8fd91af3b
+        config: {}
+        dataType: NUMBER(38,0)
+        defaultValue: ""
+        description: ""
+        keyColumnType: None
+        name: R_INC
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: "0"
+                stepCounter: "0"
+            transform: ""
+        systemColumnType: None
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
