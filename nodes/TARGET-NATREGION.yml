@@ -1,0 +1,183 @@
+fileVersion: 1
+id: 508a7b0a-118b-4101-885d-3847ec766458
+name: NATREGION
+operation:
+  config:
+    changetracking: false
+    clusterKey: false
+    clusterKeyConfig:
+      items:
+        - {}
+    clusterKeyConfigExpressions:
+      items:
+        - {}
+    clusterKeyExpressions: false
+    constraintsspec:
+      items:
+        - {}
+    datretention: ""
+    defaultcoallation: ""
+    eschemaevol: false
+    foreignk: true
+    foreignkeycon:
+      items:
+        - foreignkeycol: N_NATIONKEY
+          foreignkeyname: fk_1
+          parentabname: "\"ANANDHIS_DEV\".\"SOURCE_DATA\".\"CT_NATION\""
+    inlineconst: false
+    maxdataretention: ""
+    outlineconst: true
+    primary: true
+    primarykeycon:
+      items:
+        - primarykey:
+            columnCounter: 7f9239f7-8c73-4041-9ec2-06cf17ef6f47
+            stepCounter: 508a7b0a-118b-4101-885d-3847ec766458
+    primarykeyname: PK_1
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: TARGET
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 7f9239f7-8c73-4041-9ec2-06cf17ef6f47
+          stepCounter: 508a7b0a-118b-4101-885d-3847ec766458
+        config: {}
+        dataType: NUMBER(38,0)
+        defaultValue: ""
+        description: ""
+        keyColumnType: None
+        name: REGIONKEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: "0"
+                stepCounter: "0"
+            transform: ""
+        systemColumnType: None
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 90599557-9ade-4f40-9a4a-7d4b90a0593f
+          stepCounter: 508a7b0a-118b-4101-885d-3847ec766458
+        config: {}
+        dataType: VARCHAR(255)
+        defaultValue: ""
+        description: ""
+        keyColumnType: None
+        name: R_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: "0"
+                stepCounter: "0"
+            transform: ""
+        systemColumnType: None
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 4e5c1d75-d17a-48a6-8fa5-e3729544867d
+          stepCounter: 508a7b0a-118b-4101-885d-3847ec766458
+        config: {}
+        dataType: NUMBER(38,0)
+        defaultValue: ""
+        description: ""
+        keyColumnType: None
+        name: N_NATIONKEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: "0"
+                stepCounter: "0"
+            transform: ""
+        systemColumnType: None
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 66e5fdd4-dda0-4358-b0ac-8bfde2f8b896
+          stepCounter: 508a7b0a-118b-4101-885d-3847ec766458
+        config: {}
+        dataType: STRING
+        defaultValue: ""
+        description: ""
+        keyColumnType: None
+        name: N_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: "0"
+                stepCounter: "0"
+            transform: ""
+        systemColumnType: None
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: ab2b9495-9968-404a-b001-5e7f98f7ae92
+          stepCounter: 508a7b0a-118b-4101-885d-3847ec766458
+        config: {}
+        dataType: NUMBER(38,0)
+        defaultValue: ""
+        description: ""
+        keyColumnType: None
+        name: N_REGIONKEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: "0"
+                stepCounter: "0"
+            transform: ""
+        systemColumnType: None
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 8c21b5f8-b50d-4ffb-8714-ff1758b2af41
+          stepCounter: 508a7b0a-118b-4101-885d-3847ec766458
+        config: {}
+        dataType: VARCHAR(255)
+        defaultValue: ""
+        description: ""
+        keyColumnType: None
+        name: N_REG
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: "0"
+                stepCounter: "0"
+            transform: substr(N_NATIONKEY,1,2)
+        systemColumnType: None
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases: {}
+        customSQL:
+          customSQL: ""
+        dependencies: []
+        join:
+          joinCondition: ""
+        name: NATREGION
+        noLinkRefs: []
+  name: NATREGION
+  overrideSQL: false
+  schema: ""
+  sqlType: "345"
+  type: sql
+  version: 1
+type: Node
