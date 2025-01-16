@@ -41,7 +41,7 @@ operation:
   description: ""
   isMultisource: false
   locationName: TARGET
-  materializationType: transient table
+  materializationType: table
   metadata:
     appliedNodeTests: []
     columns:
