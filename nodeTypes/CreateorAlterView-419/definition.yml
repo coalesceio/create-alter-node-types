@@ -1,0 +1,33 @@
+fileVersion: 1
+id: "419"
+isDisabled: false
+metadata:
+  defaultStorageLocation: null
+  error: null
+  nodeMetadataSpec: |+
+    capitalized: Create or Alter
+    short: CT
+    tagColor: '#059659'
+    plural: Create
+
+    deployStrategy: advanced
+
+
+    config:
+    - groupName: Options
+      items:
+
+        - type: toggleButton
+          attributeName: secureOption
+          displayName: Secure
+          default: false
+          isRequired: false
+
+        - type: toggleButton
+          attributeName: changetracking
+          displayName: Change tracking
+          default: false
+          isRequired: false
+
+name: Create or Alter View
+type: NodeType
