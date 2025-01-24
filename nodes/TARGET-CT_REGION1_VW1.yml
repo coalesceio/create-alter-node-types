@@ -1,9 +1,9 @@
 fileVersion: 1
-id: 3b24406a-8754-443d-82e0-7cc8fd91af3b
-name: CT_REGION
+id: 480cd44b-db67-4b29-b36b-bd326470db5d
+name: CT_REGION1_VW1
 operation:
   config:
-    changetracking: true
+    changetracking: false
     clusterKey: false
     clusterKeyConfig:
       items:
@@ -14,42 +14,36 @@ operation:
     clusterKeyExpressions: false
     constraintsspec:
       items:
-        - columnname:
-            columnCounter: 236223a1-cda9-4217-a5ff-78c4a7e3c151
-            stepCounter: 3b24406a-8754-443d-82e0-7cc8fd91af3b
-          constspec: NOT NULL
-        - columnname:
-            columnCounter: 2a6a416b-a8e5-4c7c-b4de-9631212335e5
-            stepCounter: 3b24406a-8754-443d-82e0-7cc8fd91af3b
-          constspec: AUTOINCREMENT
-    datretention: "2"
+        - {}
+    datretention: ""
     defaultcoallation: ""
-    eschemaevol: true
+    eschemaevol: false
     foreignk: false
     foreignkeycon:
       items:
         - {}
-    inlineconst: true
-    maxdataretention: "2"
+    inlineconst: false
+    maxdataretention: ""
     outlineconst: false
     primary: false
     primarykeycon:
       items:
         - {}
     primarykeyname: ""
+    secureOption: true
   database: ""
   deployEnabled: true
   description: ""
   isMultisource: false
-  locationName: SOURCE
+  locationName: TARGET
   materializationType: table
   metadata:
     appliedNodeTests: []
     columns:
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 236223a1-cda9-4217-a5ff-78c4a7e3c151
-          stepCounter: 3b24406a-8754-443d-82e0-7cc8fd91af3b
+          columnCounter: 69bb42b3-6fa1-46cb-af8d-116f1ba8418c
+          stepCounter: 480cd44b-db67-4b29-b36b-bd326470db5d
         config: {}
         dataType: NUMBER(38,0)
         description: ""
@@ -62,8 +56,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 236a0d64-22cc-4e43-a36f-3fc1518c07a6
-          stepCounter: 3b24406a-8754-443d-82e0-7cc8fd91af3b
+          columnCounter: 9ccb6e88-5373-4d76-a7a8-fcbaea339b0a
+          stepCounter: 480cd44b-db67-4b29-b36b-bd326470db5d
         config: {}
         dataType: VARCHAR(25)
         description: ""
@@ -76,8 +70,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: ea5b3014-a0a8-46a3-a3d9-db1ab29fba40
-          stepCounter: 3b24406a-8754-443d-82e0-7cc8fd91af3b
+          columnCounter: 510e6438-a5bf-4a0a-8054-ea103eeabd66
+          stepCounter: 480cd44b-db67-4b29-b36b-bd326470db5d
         config: {}
         dataType: VARCHAR(152)
         description: ""
@@ -90,8 +84,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 0336bf0f-af4e-404c-ad74-68fe5d4b84ae
-          stepCounter: 3b24406a-8754-443d-82e0-7cc8fd91af3b
+          columnCounter: cb036833-a349-4ba4-a87a-6dbb9003be5d
+          stepCounter: 480cd44b-db67-4b29-b36b-bd326470db5d
         config: {}
         dataType: TIMESTAMP_LTZ(9)
         description: ""
@@ -107,20 +101,20 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 2a6a416b-a8e5-4c7c-b4de-9631212335e5
-          stepCounter: 3b24406a-8754-443d-82e0-7cc8fd91af3b
+          columnCounter: 399e8c29-b1f8-4e9e-b6ea-549fe96af43a
+          stepCounter: 480cd44b-db67-4b29-b36b-bd326470db5d
         config: {}
-        dataType: NUMBER(38,0)
+        dataType: VARCHAR(25)
         defaultValue: ""
         description: ""
         keyColumnType: None
-        name: R_INC
+        name: ABC
         nullable: true
         sourceColumnReferences:
           - columnReferences:
               - columnCounter: "0"
                 stepCounter: "0"
-            transform: ""
+            transform: "'DEMO'"
         systemColumnType: None
     cteString: ""
     enabledColumnTestIDs: []
@@ -133,12 +127,12 @@ operation:
             nodeName: REGION
         join:
           joinCondition: FROM {{ ref('SOURCE', 'REGION') }} "REGION"
-        name: CT_REGION
+        name: CT_REGION1_VW1
         noLinkRefs: []
-  name: CT_REGION
+  name: CT_REGION1_VW1
   overrideSQL: false
   schema: ""
-  sqlType: "345"
+  sqlType: "419"
   type: sql
   version: 1
 type: Node
