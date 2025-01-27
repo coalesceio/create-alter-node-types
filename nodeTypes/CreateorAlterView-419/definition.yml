@@ -41,6 +41,7 @@ metadata:
           enableIf: "{% if config.selectDistinct %} false {% else %} true {% endif %}"
 
         - type: multisourceToggle
+          attributeName: mstoggle
 
         - displayName: Multi Source Strategy
           attributeName: insertStrategy

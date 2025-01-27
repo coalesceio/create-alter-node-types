@@ -17,7 +17,7 @@ select 1 = 0
 
 {% elif desiredState == undefined %}
 
-    {# Table or View Name #}
+    {# View Name #}
     {% set targetObjectDatabase = ref_no_link(currentState.node.location.name, currentState.node.name).split('.')[0] %} 
     {% set targetObjectSchema = ref_no_link(currentState.node.location.name, currentState.node.name).split('.')[1] %} 
     {% set fullyQualifiedTargetObjectName = ref_no_link(currentState.node.location.name, currentState.node.name) %}
@@ -28,7 +28,7 @@ select 1 = 0
 {% elif currentState == undefined or (currentState != undefined and desiredState != currentState) %}
 
        
-             {%if currentState !=undefined%} 
+            {%if currentState !=undefined%} 
    
                    {% set ns = namespace( storageLocationTest= true,descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrentDepStorageLocations="",nsCurrentSourceStorageLocations="",nsDesiredDepStorageLocations="",nsDesiredSourceStorageLocations="",sourcestorageLocationTest=true ) %}
 		   ## Node
@@ -99,7 +99,19 @@ select 1 = 0
                 {% endif %}
             {% endfor %}
 
+          {#Multi source#}
+			{% set mulsrcTest = currentState.config.mstoggle == desiredState.config.mstoggle %}
+            {% set mulsrcstraTest = currentState.config.insertStrategy == desiredState.config.insertStrategy %}
             
+            {% if 
+                mulsrcTest == false or
+                mulsrcstraTest == false %}
+
+                {% set msrcTest = false %}
+            {% else %}
+                {% set msrcTest = true %}
+            {% endif %}
+
           {# Test to see if the transform in a column has changed #}
           {% set desiredTransformArray = desiredState.sources | map(attribute='columns') | first | map(attribute='transform') | list -%}
           {# Current Namespace Variables Transform #}
@@ -203,7 +215,9 @@ select 1 = 0
 			joinTest == false or 
 			columnsTransformTest == false or
             distst == false or
-            groupAlltst == false or ns.sourcestorageLocationTest == false %}    
+            groupAlltst == false or 
+            ns.sourcestorageLocationTest == false or
+            msrcTest == false%}    
 
             {% set createTest = true %}
           {% else %}
