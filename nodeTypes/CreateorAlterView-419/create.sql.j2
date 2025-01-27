@@ -27,13 +27,143 @@ select 1 = 0
 
 {% elif currentState == undefined or (currentState != undefined and desiredState != currentState) %}
 
-
-   {% set ns = namespace(column_constraints=[],constraint='',flag=false,primarykeyValues='',foreignkeyValues='',foreignk='') %} 
        
-        {# CreateSQL for View #}
+             {%if currentState !=undefined%} 
+   
+                   {% set ns = namespace( storageLocationTest= true,descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0 ) %}
+		   ## Node
+           {% set nodeNameTest = currentState.node.name == desiredState.node.name %}		   
+		   {% set joinTest = currentState.join == desiredState.join %}
+
+            
+          {# Test to see if the transform in a column has changed #}
+          {% set desiredTransformArray = desiredState.sources | map(attribute='columns') | first | map(attribute='transform') | list -%}
+          {# Current Namespace Variables Transform #}
+          {% set currentTransformArray = currentState.sources | map(attribute='columns') | first | map(attribute='transform') | list -%}
+
+          {% set columnsTransformTest = currentTransformArray == desiredTransformArray %}
+
+
+            {#Target location Test  #}
+            {%if currentState.storageLocations|length == 0%}          
+              {% set currentDatabase = currentState.storageLocations | selectattr('name', 'equalto', currentState.node.location.name) | map(attribute='database') | string %}
+              {% set currentSchema = currentState.storageLocations | selectattr('name', 'equalto', currentState.node.location.name) | map(attribute='schema') | string %}
+               {% set currentDatabaseSchema = currentDatabase + '.' + currentSchema %}
+               
+            {%else %}   
+            {# Current target node mappings #}
+            {% set currentDatabase = currentState.storageLocations | selectattr('name', 'equalto', currentState.node.location.name) | map(attribute='database') | first %}
+            {% set currentSchema = currentState.storageLocations | selectattr('name', 'equalto', currentState.node.location.name) | map(attribute='schema') | first %}
+            {% set currentDatabaseSchema = currentDatabase + '.' + currentSchema %}  
+			{% endif %}		 
+        
+            {# Desired target node mappings #}
+            {% set desiredDatabase = desiredState.storageLocations | selectattr('name', 'equalto', desiredState.node.location.name) | map(attribute='database') | first %}
+            {% set desiredSchema = desiredState.storageLocations | selectattr('name', 'equalto', desiredState.node.location.name) | map(attribute='schema') | first %}
+            {% set desiredDatabaseSchema = desiredDatabase + '.' + desiredSchema %}           
+            
+             {% if currentDatabaseSchema != desiredDatabaseSchema %}
+                {% set ns.storageLocationTest = false %}
+             {% endif %}
+
+		    {#Add columns#}
+            {% for addDesCol in desiredState.columns %}
+                {% if addDesCol.id not in currentState.columns | map(attribute="id") %}
+                {% set ns.colchanges = ns.colchanges + 1 %}
+                {% endif %}
+            {% endfor %}
+			
+			
+			{# Rename Columns #}
+            {% for renameCurCol in currentState.columns %}
+                {% if renameCurCol.id in desiredState.columns | map(attribute="id") %}
+                    {% set desiredColumnName = desiredState.columns | selectattr('id', 'equalto', renameCurCol.id) | map(attribute='name') | first %}
+                    {% if renameCurCol.name != desiredColumnName %}
+                        {% set ns.colchanges = ns.colchanges + 1 %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+             
+			{# Drop Columns #}
+            {% set nsVariables = namespace(colchanges=0) %}
+            {% for dropCurCol in currentState.columns %}
+                {% if dropCurCol.id not in desiredState.columns | map(attribute="id") %}
+                  {% set ns.colchanges = ns.colchanges + 1 %}
+                {% endif %}
+            {% endfor %}
+	
+            {#Column level changes test#}
+			{% for alterCurCol in currentState.columns %}        
+                {% if alterCurCol.id in desiredState.columns | map(attribute="id") %}
+                     {% set currentColumnName = currentState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='name') | first %}
+                    {% set currentDescription = currentState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='description') | first %}
+                    {% set currentDatatype = currentState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='dataType') | first %}
+                    {% set currentNullable = currentState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='nullable') | first %}
+                    {% set currentDefaultValue = currentState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='defaultValue') | first %}
+                    
+                    {% set desiredColumnName = desiredState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='name') | first %}
+                    {% set desiredDescription = desiredState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='description') | first %}
+                    {% set desiredDatatype = desiredState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='dataType') | first %}
+                    {% set desiredNullable = desiredState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='nullable') | first %}
+                    {% set desiredDefaultValue = desiredState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='defaultValue') | first %}
+                        
+
+                   {% set datatypeTest = currentDatatype == desiredDatatype %}
+                   {% set nullableTest = currentNullable == desiredNullable %}
+                   {% set defaultValueTest = currentDefaultValue == desiredDefaultValue %}
+                   {% set descriptionTest = currentDescription == desiredDescription %}
+                   {% set columnnameTest = currentColumnName == desiredColumnName %}
+
+                    {% if (descriptionTest == false) %}
+                        {% set ns.descolchanges = ns.descolchanges + 1 %}
+                    {%endif%} 														
+                    {%if (datatypeTest == false or nullableTest == false or defaultValueTest == false or columnnameTest == false )%} 
+                       {% set ns.othercolchanges = ns.othercolchanges + 1 %}                                      
+                     {%endif%} 																										
+                {%endif%}    
+            {% endfor %}
+         
+    
+           {#Config level changes #}
+		  
+		   {%set securetst = currentState.config.secureOption == desiredState.config.secureOption%}
+		   {%set chngtracktst = currentState.config.changetracking == desiredState.config.changetracking%}
+		   	
+            {% if 
+            chngtracktst == false or
+            securetst == false or 
+			ns.othercolchanges > 0 or 
+			ns.descolchanges > 0 or 
+			ns.colchanges > 0 or 
+			joinTest == false or 
+			columnsTransformTest == false%}    
+
+            {% set createTest = true %}
+          {% else %}
+            {% set createTest = false %}
+         {% endif %}      
+		 
+
+        {%if createTest == false and (ns.storageLocationTest == false or currentState.node.name != desiredState.node.name)  %}    
+           {%set altertest = true %}		   
+	     {%endif%}
+         
+
+                {%if ns.othercolchanges > 0 or ns.descolchanges > 0 or ns.colchanges > 0 or joinTest == false or columnsTransformTest == false  %}
+                     {{ stage('Drop View' + ' ' + ref_no_link(currentState.node.location.name, currentState.node.name), true, "sql", "drop") }}
+
+                      DROP VIEW IF EXISTS {{ ref_no_link(currentState.node.location.name, currentState.node.name) }}
+                     
+                {%endif%}
+    {%endif%}
+
+    {%if currentState == undefined  or createTest == true%}
+       
+       {# CreateSQL for View #}
         {{ stage('Create/Alter View') }}
 
-	  CREATE OR ALTER {% if desiredState.config.secureoption %} SECURE {% endif %} VIEW {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
+	     CREATE OR ALTER {% if desiredState.config.secureoption %} SECURE {% endif %} VIEW {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
         (
             {% for col in desiredState.columns %}
                 "{{ col.name }}"
@@ -55,5 +185,18 @@ select 1 = 0
             {% endfor %}
             {{ source.join }}
         {%endfor%}
+     {%endif%}
 
-    {%endif%}
+        {%if altertest == true %}
+         
+                {{ stage('Rename and / or Move View', true, "sql", "alter") }}
+                {% set srcSchName = currentState.node.location.name %}
+                {% set cdb = currentState.storageLocations | selectattr('name', 'equalto', srcSchName) | map(attribute='database') | first %}
+                {% set csch = currentState.storageLocations | selectattr('name', 'equalto', srcSchName) | map(attribute='schema') | first %}
+
+                ALTER VIEW "{{cdb}}"."{{csch}}"."{{currentState.node.name}}"
+                RENAME TO   {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
+       {%endif%}
+	
+
+{%endif%}

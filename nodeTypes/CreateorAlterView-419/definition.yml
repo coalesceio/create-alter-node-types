@@ -14,7 +14,7 @@ metadata:
 
 
     config:
-    - groupName: Options
+    - groupName: Create View Options
       items:
 
         - type: toggleButton
