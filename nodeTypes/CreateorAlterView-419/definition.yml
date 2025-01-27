@@ -5,8 +5,8 @@ metadata:
   defaultStorageLocation: null
   error: null
   nodeMetadataSpec: |+
-    capitalized: Create or Alter
-    short: CT
+    capitalized: Create or Alter View
+    short: CV
     tagColor: '#059659'
     plural: Create
 

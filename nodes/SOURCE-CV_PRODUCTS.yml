@@ -1,0 +1,122 @@
+fileVersion: 1
+id: 42279a09-ba85-4f2e-b69c-0df0a16a71d2
+name: CV_PRODUCTS
+operation:
+  config:
+    changetracking: false
+    groupByAll: false
+    insertStrategy: UNION
+    secureOption: false
+    selectDistinct: true
+  database: ""
+  deployEnabled: true
+  description: Multi-source products view
+  isMultisource: true
+  locationName: SOURCE
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 857a65c6-bc89-4d21-874d-bce0ba0488fa
+          stepCounter: 42279a09-ba85-4f2e-b69c-0df0a16a71d2
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        name: PRODUCT_ID
+        nullable: false
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: d7d3e7de-d112-4978-872f-0e2ac2e2e398
+                stepCounter: e518b2e9-9460-4e3d-acb7-343f57d03dbd
+            transform: ""
+          - columnReferences:
+              - columnCounter: 28d3400c-5075-4c1c-b66a-c1690b14d4e7
+                stepCounter: 17657da8-486c-4431-91d4-100b48eafd57
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 23893e41-b714-4b03-8bac-d98d75b5c0cb
+          stepCounter: 42279a09-ba85-4f2e-b69c-0df0a16a71d2
+        config: {}
+        dataType: VARCHAR(255)
+        description: ""
+        name: PRODUCT_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 9b85ef94-d1f8-4119-9f46-275e15d72729
+                stepCounter: e518b2e9-9460-4e3d-acb7-343f57d03dbd
+            transform: ""
+          - columnReferences:
+              - columnCounter: 92a17494-4f92-4407-8b7c-091bc8b3d90a
+                stepCounter: 17657da8-486c-4431-91d4-100b48eafd57
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: aff9f233-9bff-4c36-a392-e4109deedc87
+          stepCounter: 42279a09-ba85-4f2e-b69c-0df0a16a71d2
+        config: {}
+        dataType: VARCHAR(100)
+        description: ""
+        name: BRAND
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 3a387eac-9afb-495f-8997-360ed1a3732f
+                stepCounter: e518b2e9-9460-4e3d-acb7-343f57d03dbd
+            transform: ""
+          - columnReferences:
+              - columnCounter: 43a308d6-9ff0-4330-b824-be11d157a135
+                stepCounter: 17657da8-486c-4431-91d4-100b48eafd57
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: f96c337e-c939-4f57-90d9-aa05c7be8893
+          stepCounter: 42279a09-ba85-4f2e-b69c-0df0a16a71d2
+        config: {}
+        dataType: VARCHAR(50)
+        description: ""
+        name: COLOUR
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: b1c4ca2c-8b79-4e51-8af5-4e4c4a9cc0bb
+                stepCounter: e518b2e9-9460-4e3d-acb7-343f57d03dbd
+            transform: ""
+          - columnReferences:
+              - columnCounter: 4a50dfe2-aec5-485b-b289-1b6d800caec3
+                stepCounter: 17657da8-486c-4431-91d4-100b48eafd57
+            transform: ""
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases: {}
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SOURCE
+            nodeName: PRODUCTS_GROCERY
+        join:
+          joinCondition: FROM {{ ref('SOURCE', 'PRODUCTS_GROCERY') }} "PRODUCTS_GROCERY"
+        name: CV_PRODUCTS
+        noLinkRefs: []
+      - aliases:
+          PRODUCTS: 17657da8-486c-4431-91d4-100b48eafd57
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SOURCE
+            nodeName: PRODUCTS
+        join:
+          joinCondition: FROM {{ ref('SOURCE', 'PRODUCTS') }} "PRODUCTS"
+        name: PRODUCTS
+        noLinkRefs: []
+  name: CV_PRODUCTS
+  overrideSQL: false
+  schema: ""
+  sqlType: "419"
+  type: sql
+  version: 1
+type: Node

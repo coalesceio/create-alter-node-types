@@ -56,7 +56,7 @@ select 1 = 0
             {% endfor %}
 
             
-            {% set currentStorageLocations = (nsVariables.nsCurrentSourceStorageLocations).split(',') | list %}
+            {% set currentStorageLocations = (ns.nsCurrentSourceStorageLocations).split(',') | list %}
             {% set currentUniqueStorageLocations = currentStorageLocations | unique | sort | list %}
 
             
@@ -162,7 +162,6 @@ select 1 = 0
 
              
 			{# Drop Columns #}
-            {% set nsVariables = namespace(colchanges=0) %}
             {% for dropCurCol in currentState.columns %}
                 {% if dropCurCol.id not in desiredState.columns | map(attribute="id") %}
                   {% set ns.colchanges = ns.colchanges + 1 %}
