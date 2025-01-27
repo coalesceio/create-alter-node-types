@@ -305,7 +305,7 @@ select 1 = 0
 
         {# CreateSQL for Table #}
         
-        {{ stage('Create  ' + desiredState.node.materializationType, true, "sql", "create") }}
+        {{ stage('Create/Alter  ' + desiredState.node.materializationType, true, "sql", "create") }}
 
 	  CREATE OR ALTER {{desiredState.node.materializationType}} {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
 	 (

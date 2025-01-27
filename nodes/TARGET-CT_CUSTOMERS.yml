@@ -22,17 +22,22 @@ operation:
     foreignkeycon:
       items:
         - {}
+    groupByAll: false
     inlineconst: false
     maxdataretention: ""
+    orderby: false
     outlineconst: false
     primary: false
     primarykeycon:
       items:
         - {}
     primarykeyname: ""
+    selectDistinct: false
+    testsEnabled: false
+    truncateBefore: false
   database: ""
   deployEnabled: true
-  description: ""
+  description: Sample create or alter table
   isMultisource: false
   locationName: TARGET
   materializationType: table
@@ -130,7 +135,7 @@ operation:
         config: {}
         dataType: FLOAT
         description: ""
-        name: TOTAL_ORDER_VALUE
+        name: TOTAL_ORDER_VALUE1
         nullable: true
         sourceColumnReferences:
           - columnReferences:
