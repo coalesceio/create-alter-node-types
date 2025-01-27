@@ -29,5 +29,29 @@ metadata:
           default: false
           isRequired: false
 
+        - type: toggleButton
+          attributeName: selectDistinct
+          displayName: Distinct
+          enableIf: "{% if config.groupByAll %} false {% else %} true {% endif %}"
+
+        - displayName: Group By All
+          attributeName: groupByAll
+          type: toggleButton
+          default: false
+          enableIf: "{% if config.selectDistinct %} false {% else %} true {% endif %}"
+
+        - type: multisourceToggle
+
+        - displayName: Multi Source Strategy
+          attributeName: insertStrategy
+          type: dropdownSelector
+          default: UNION
+          options:
+          - "UNION"
+          - "UNION ALL" 
+          isRequired: false
+          enableIf: "{% if node.isMultisource %} true {% else %} false {% endif %}"
+
+
 name: Create or Alter View
 type: NodeType

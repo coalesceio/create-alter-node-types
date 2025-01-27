@@ -191,7 +191,7 @@ metadata:
         - "INSERT"
         - "UNION"
         - "UNION ALL"
-        isRequired: true
+        isRequired: false
         enableIf: "{% if node.isMultisource %} true {% else %} false {% endif %}"
 
       - displayName: Truncate Before
