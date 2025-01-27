@@ -13,7 +13,7 @@ operation:
         - columnNameExpressions:
             columnCounter: 5ff9d69c-147b-444c-b6bc-d3ed80826589
             stepCounter: 55328d85-d2df-4e13-bfcc-84c156649a5d
-          sqlExpression: " trunc(\"N_REGIONKEY\", -5)"
+          sqlExpression: " trunc(\"N_REGIONKEY1\", -5)"
     clusterKeyExpressions: true
     constraintsspec:
       items: []
@@ -73,20 +73,6 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 5ff9d69c-147b-444c-b6bc-d3ed80826589
-          stepCounter: 55328d85-d2df-4e13-bfcc-84c156649a5d
-        config: {}
-        dataType: NUMBER(38,0)
-        description: ""
-        name: N_REGIONKEY1
-        nullable: true
-        sourceColumnReferences:
-          - columnReferences:
-              - columnCounter: 9c3df30f-20ee-497c-bd82-84b231179a0f
-                stepCounter: 0c043e52-e522-43a8-9f2c-a6a7651e8c9b
-            transform: ""
-      - appliedColumnTests: {}
-        columnReference:
           columnCounter: 168f9437-3afc-4464-90bf-680da2e457d9
           stepCounter: 55328d85-d2df-4e13-bfcc-84c156649a5d
         config: {}
@@ -127,6 +113,26 @@ operation:
               - columnCounter: 53605242-24f9-4610-9af6-2d602c2fec40
                 stepCounter: 0c043e52-e522-43a8-9f2c-a6a7651e8c9b
             transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 4794bb8b-b6c8-4aa5-b4de-51a0a5740fe8
+          stepCounter: 55328d85-d2df-4e13-bfcc-84c156649a5d
+        config: {}
+        dataType: NUMBER(38,0)
+        defaultValue: ""
+        description: ""
+        keyColumnType: None
+        name: N_REGIONKEY1
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 9c3df30f-20ee-497c-bd82-84b231179a0f
+                stepCounter: 0c043e52-e522-43a8-9f2c-a6a7651e8c9b
+            transform: ""
+        systemColumnType: None
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
