@@ -20,15 +20,31 @@ does not permit copying or modification for any other purpose.
     {% endfor %}
 
 {% if node.materializationType == 'table' or node.materializationType == 'transient table'%}
-{%set source = sources[0]%}
 
 {# == Truncate data before data insertion  == #}
 	
 		{% if config.truncateBefore %}	
 			{{ stage('Truncate Stage Table') }}
 			TRUNCATE IF EXISTS {{ ref_no_link(node.location.name, node.name) }}
-		{% endif %}	
+		{% endif %}
 	
+{# == Multi-Source option  == #}
+	
+		{% if config.insertStrategy in ['UNION', 'UNION ALL'] %}
+			{{ stage( config.insertStrategy + ' Sources' | string ) }}
+			INSERT INTO {{ ref_no_link(node.location.name, node.name) }}
+				(
+					{% for col in columns %}
+						"{{ col.name }}"
+						{%- if not loop.last -%},{% endif %}
+					{% endfor %}
+				)
+		{% endif %}
+	
+	
+		{% for source in sources %}
+	
+			{% if config.insertStrategy == 'INSERT' %}
 				{{ stage('Insert ' + source.name | string ) }}
 	
 				INSERT INTO {{ ref_no_link(node.location.name, node.name) }}
@@ -38,7 +54,8 @@ does not permit copying or modification for any other purpose.
 						{%- if not loop.last -%},{% endif %}
 					{% endfor %}
 				)
-				
+			{% endif %}
+	
  			(SELECT
 			{% if config.selectDistinct %}
 			DISTINCT
@@ -48,8 +65,17 @@ does not permit copying or modification for any other purpose.
 				{%- if not loop.last -%}, {% endif %}
 			{% endfor %}
 	
-			{{ source.join }})
-{%endif%}
+			{{ source.join }}
+	
+                 {% if config.groupByAll %}
+                 GROUP BY ALL
+                 {% endif %}
+                 {{ sortorder_by_colv() }})
+			{% if config.insertStrategy in ['UNION', 'UNION ALL'] and not loop.last %}
+				{{config.insertStrategy}}
+			{% endif %}							 
+	
+		{% endfor %}
 
 {# == To run data quality tests after data insertion == #}
 
