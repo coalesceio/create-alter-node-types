@@ -62,10 +62,11 @@ When enabled, you can define both primary and foreign keys. |
 
 ### Recreating the Create Or Alter Table
 
-# Create or alter view
-
 ### Redeploying a DAG of Create Or Alter Tables Work
 
 ### Create Or Alter Tables Undeployment
+
+# Create or alter view
+
 
 
