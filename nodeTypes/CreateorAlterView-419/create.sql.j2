@@ -7,7 +7,7 @@ does not permit copying or modification for any other purpose.
 #}
 {# == Node Type Version        : 1  == #}
 {# == Node Type Name           : Create or Alter View == #}
-{# == Node Type Description    : This node loads data into the table created and inserts data into the same == #}
+{# == Node Type Description    : This node loads data creates and alters view== #}
 
 
 {% if desiredState == currentState %}
@@ -22,7 +22,7 @@ select 1 = 0
     {% set targetObjectSchema = ref_no_link(currentState.node.location.name, currentState.node.name).split('.')[1] %} 
     {% set fullyQualifiedTargetObjectName = ref_no_link(currentState.node.location.name, currentState.node.name) %}
     
-       {{ stage('Drop ' + currentState.node.materializationType , true, "sql", "drop") }}
+       {{ stage('Drop View' , true, "sql", "drop") }}
        DROP VIEW IF EXISTS {{ fullyQualifiedTargetObjectName }}
 
 {% elif currentState == undefined or (currentState != undefined and desiredState != currentState) %}
