@@ -172,15 +172,15 @@ Change in view definition like change in columns,add or drop columns,change in d
 
 | **Component** | **Link** |
 |--------------|-----------|
-| **Node definition** | [definition.yml]() |
-| **Create Template** | [create.sql.j2]() |
-| **Run Template** | [run.sql.j2]()
+| **Node definition** | [definition.yml](https://github.com/coalesceio/create-alter-node-types/blob/main/nodeTypes/CreateorAlterTable-345/definition.yml) |
+| **Create Template** | [create.sql.j2](https://github.com/coalesceio/create-alter-node-types/blob/main/nodeTypes/CreateorAlterTable-345/create.sql.j2) |
+| **Run Template** | [run.sql.j2](https://github.com/coalesceio/create-alter-node-types/blob/main/nodeTypes/CreateorAlterTable-345/run.sql.j2)
 
 ### Create or Alter view Code
 
 | **Component** | **Link** |
 |--------------|-----------|
-| **Node definition** | [definition.yml]() |
-| **Create Template** | [create.sql.j2]() |
-| **Run Template** | [run.sql.j2]()
+| **Node definition** | [definition.yml](https://github.com/coalesceio/create-alter-node-types/blob/main/nodeTypes/CreateorAlterView-419/definition.yml) |
+| **Create Template** | [create.sql.j2](https://github.com/coalesceio/create-alter-node-types/blob/main/nodeTypes/CreateorAlterView-419/create.sql.j2) |
+| **Run Template** | [run.sql.j2](https://github.com/coalesceio/create-alter-node-types/blob/main/nodeTypes/CreateorAlterView-419/run.sql.j2)
 
