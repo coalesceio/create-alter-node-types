@@ -53,6 +53,12 @@ When enabled, you can define both primary and foreign keys. |
 | **Group by All** | Toggle: True/False<br/>**True**: DISTINCT is invisible, data grouped by all columns<br/>**False**: DISTINCT is visible |
 | **Order By** | Toggle: True/False<br/>**True**: Sort column and sort order drop down are visible and are required to form order by clause. <br/>**False**: Sort options invisible |
 
+### Limitations of Create or Alter Table
+
+* Collation specifications cannot be altered.
+* Setting or unsetting an inline primary key changes the nullability of the column accordingly
+* New columns can only be added to the end of the column list
+* Columns cannot be renamed. If you attempt to rename a column, the column is dropped and a new column is added.WHen you rename a column in Coalesce mapping grid.Ensure to move the same to the end of column list in mapping grid.
 
 ### Create Or Alter Table Deployment
 
@@ -129,6 +135,9 @@ are detected<br/>If FALSE the node will not be deployed or will be dropped durin
 | **Group by All** | Toggle: True/False<br/>**True**: DISTINCT is invisible, data grouped by all columns<br/>**False**: DISTINCT is visible |
 | **Multi Source** | Toggle: True/False<br/>Implementation of SQL UNIONs<br/>**True**: Combine multiple sources in a single node<br/>True Options:<br/>- **UNION**: Combines with duplicate elimination<br/>- **UNION ALL**: Combines without duplicate elimination<br/>- **INSERT**: Individual insert for each source<br/>**False**: Single source node or multiple sources combined using a join. |
 
+### Limitations of Create or Alter View
+
+* The CREATE OR ALTER VIEW command doesn’t support changing a view definition once a view is created. In Coalesce,it is supported by dropping and recreating the view during redeployment.
 
 ### Create Or Alter View Deployment
 
