@@ -1,8 +1,8 @@
 ## Create or Alter package
 
 Create or Alter package includes:
-* [Create or alter table](#create or alter table)
-* [Create or alter view](#create or alter view)
+* [Create or alter table](#create-or-alter-table)
+* [Create or alter view](#create-or-alter-view)
 
 # Create or alter table
 
@@ -61,6 +61,8 @@ When enabled, you can define both primary and foreign keys. |
 ### Changing Materialization Type From Transient Create Or Alter Table to Create Or Alter Table
 
 ### Recreating the Create Or Alter Table
+
+# Create or alter view
 
 ### Redeploying a DAG of Create Or Alter Tables Work
 
