@@ -1,7 +1,10 @@
-Package includes:
-* [Create Or alter](#create or alter)
+## Create or Alter package
 
-# Create Or Alter
+Create or Alter package includes:
+* [Create or alter table](#create or alter table)
+* [Create or alter view](#create or alter view)
+
+# Create or alter table
 
 The CREATE TABLE(https://docs.snowflake.com/en/sql-reference/sql/create-table#create-or-alter-table) command in Snowflake allows creating, 
 replacing, or altering a table within a specified schema. Tables can include multiple columns with customizable attributes like data type, 
