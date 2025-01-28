@@ -6,7 +6,7 @@ operation:
     changetracking: false
     groupByAll: false
     insertStrategy: UNION
-    secureOption: false
+    secureOption: true
     selectDistinct: true
   database: ""
   deployEnabled: true

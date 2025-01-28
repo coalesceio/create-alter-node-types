@@ -117,6 +117,7 @@ select 1 = 0
           {# Current Namespace Variables Transform #}
           {% set currentTransformArray = currentState.sources | map(attribute='columns') | first | map(attribute='transform') | list -%}
 
+
           {% set columnsTransformTest = currentTransformArray == desiredTransformArray %}
 
 
@@ -227,9 +228,8 @@ select 1 = 0
         {%if createTest == false and (ns.storageLocationTest == false or currentState.node.name != desiredState.node.name)  %}    
            {%set altertest = true %}		   
 	     {%endif%}
-         
 
-                {%if ns.othercolchanges > 0 or ns.descolchanges > 0 or ns.colchanges > 0 or joinTest == false or columnsTransformTest == false  %}
+                {%if ns.othercolchanges > 0 or ns.descolchanges > 0 or ns.colchanges > 0 or joinTest == false or columnsTransformTest == false or distst == false or groupAlltst == false %}
                      {{ stage('Drop View' + ' ' + ref_no_link(currentState.node.location.name, currentState.node.name), true, "sql", "drop") }}
 
                       DROP VIEW IF EXISTS {{ ref_no_link(currentState.node.location.name, currentState.node.name) }}
@@ -242,7 +242,7 @@ select 1 = 0
        {# CreateSQL for View #}
         {{ stage('Create/Alter View') }}
 
-	     CREATE OR ALTER {% if desiredState.config.secureoption %} SECURE {% endif %} VIEW {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
+	     CREATE OR ALTER {% if desiredState.config.secureOption %} SECURE {% endif %} VIEW {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
         (
             {% for col in desiredState.columns %}
                 "{{ col.name }}"

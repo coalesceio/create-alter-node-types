@@ -24,8 +24,10 @@ operation:
     foreignkeycon:
       items:
         - {}
+    groupByAll: false
     inlineconst: false
     maxdataretention: ""
+    orderby: false
     outlineconst: true
     primary: true
     primarykeycon:
@@ -34,6 +36,9 @@ operation:
             columnCounter: 013d0e95-bd2a-4ce4-a35b-9fcba432d0ca
             stepCounter: 55328d85-d2df-4e13-bfcc-84c156649a5d
     primarykeyname: pk_nation
+    selectDistinct: true
+    testsEnabled: false
+    truncateBefore: false
   database: ""
   deployEnabled: true
   description: ""
