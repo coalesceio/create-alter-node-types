@@ -6,17 +6,15 @@ Create or Alter package includes:
 
 # Create or alter table
 
-The CREATE TABLE(https://docs.snowflake.com/en/sql-reference/sql/create-table#create-or-alter-table) command in Snowflake allows creating, 
-replacing, or altering a table within a specified schema. Tables can include multiple columns with customizable attributes like data type, 
-default values, constraints (e.g., NOT NULL, primary key, foreign key), and referential integrity.
-
+The [Create or alter table](https://docs.snowflake.com/en/sql-reference/sql/create-table#create-or-alter-table) creates table if it doesn’t exist, or alters it according to the table definition. 
 
 ### Create Or Alter Node properties
 
 Create Or Alter has two configuration groups: 
 
-*[Node Properties](#create-or-alter-node-properties)
-*[General Options](#create-or-alter-general-options)
+* [Node Properties](#create-or-alter-node-properties)
+* [Create table Options](#create-table-options)
+* [Insert data Options](#insert-data-options)
 
 #### Create Or Alter Node Properties
 
@@ -28,7 +26,7 @@ Create Or Alter has two configuration groups:
 | **Deploy Enabled** | If TRUE the node will be deployed/redeployed when changes 
 are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
 
-#### Create Or Alter General Options
+#### Create table Options
 
 | **Options** | **Description** |
 |-------------|-----------------|
