@@ -47,20 +47,6 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: e34238bd-d2de-497d-8d7d-3a4f42711b11
-          stepCounter: 8b562189-1787-4427-aba4-eefb4a5566bf
-        config: {}
-        dataType: NUMBER(6,0)
-        description: ""
-        name: AGE_BAND
-        nullable: true
-        sourceColumnReferences:
-          - columnReferences:
-              - columnCounter: c8076a5a-9117-4275-a42b-be378a76d778
-                stepCounter: d7ec13cd-f58a-4180-a8f5-301adffa8575
-            transform: ""
-      - appliedColumnTests: {}
-        columnReference:
           columnCounter: 05ed6c15-6cb8-4fc4-8a31-4f1358e40e92
           stepCounter: 8b562189-1787-4427-aba4-eefb4a5566bf
         config: {}
@@ -135,6 +121,20 @@ operation:
                 stepCounter: "0"
             transform: CURRENT_DATE()
         systemColumnType: None
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: e34238bd-d2de-497d-8d7d-3a4f42711b11
+          stepCounter: 8b562189-1787-4427-aba4-eefb4a5566bf
+        config: {}
+        dataType: NUMBER(6,0)
+        description: ""
+        name: AGE_BAND1
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: c8076a5a-9117-4275-a42b-be378a76d778
+                stepCounter: d7ec13cd-f58a-4180-a8f5-301adffa8575
+            transform: ""
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
