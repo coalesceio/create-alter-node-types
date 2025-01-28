@@ -3,6 +3,7 @@
 Create or Alter package includes:
 * [Create or Alter table](#create-or-alter-table)
 * [Create or Alter view](#create-or-alter-view)
+* [Code](#code)
 
 # Create or Alter table
 
@@ -164,4 +165,22 @@ Change in view definition like change in columns,add or drop columns,change in d
 |-----------|----------------|
 | **Create/Alter View** | This will execute a CREATE OR ALTER statement and create a view in the target environment |
 
+
+## Code
+
+### Create or Alter table Code
+
+| **Component** | **Link** |
+|--------------|-----------|
+| **Node definition** | [definition.yml]() |
+| **Create Template** | [create.sql.j2]() |
+| **Run Template** | [run.sql.j2]()
+
+### Create or Alter view Code
+
+| **Component** | **Link** |
+|--------------|-----------|
+| **Node definition** | [definition.yml]() |
+| **Create Template** | [create.sql.j2]() |
+| **Run Template** | [run.sql.j2]()
 
