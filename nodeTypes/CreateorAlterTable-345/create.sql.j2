@@ -10,10 +10,6 @@ does not permit copying or modification for any other purpose.
 {# == Node Type Description    : This node loads data into the table created and inserts data into the same == #}
 
 
-{% if desiredState == currentState %}
-
-{{ stage('Nothing to do.') }}
-select 1 = 0
 
 {% elif desiredState == undefined %}
 
