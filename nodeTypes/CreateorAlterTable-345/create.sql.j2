@@ -11,7 +11,7 @@ does not permit copying or modification for any other purpose.
 
 
 
-{% elif desiredState == undefined %}
+{% if desiredState == undefined %}
 
     {# Table or View Name #}
     {% set targetObjectDatabase = ref_no_link(currentState.node.location.name, currentState.node.name).split('.')[0] %} 
