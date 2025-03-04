@@ -93,6 +93,10 @@ When the Create or Alter table node is redeployed with any changes in table or c
 |-----------|----------------|
 | **Create/Alter table/transient table** | This will execute a CREATE OR ALTER statement and create a table in the target environment |
 
+### Redeployment with no changes 
+
+If the nodes are redeployed with no changes compared to previous deployment,then no stages are executed
+
 ### Create Or Alter Tables Undeployment
 
 If a Create or Alter table node of materialization type table/transient table are deleted from a Workspace, that Workspace is committed to Git and that commit deployed to a higher level environment then the table in the target environment will be dropped.
@@ -101,7 +105,7 @@ This is executed in below stage:
 
 | **Stage** | **Description** |
 |-----------|----------------|
-| **Drop table/transient table** | Removes the table or view from the environment |
+| **Drop table/transient table** | Removes the table from the environment |
 
 
 # Create or alter view
@@ -174,6 +178,19 @@ Change in view definition like change in columns,add or drop columns,change in d
 |-----------|----------------|
 | **Create/Alter View** | This will execute a CREATE OR ALTER statement and create a view in the target environment |
 
+### Redeployment with no changes 
+
+If the nodes are redeployed with no changes compared to previous deployment,then no stages are executed
+
+### Create Or Alter Tables Undeployment
+
+If a Create or Alter view node are deleted from a Workspace, that Workspace is committed to Git and that commit deployed to a higher level environment then the table in the target environment will be dropped.
+
+This is executed in below stage:
+
+| **Stage** | **Description** |
+|-----------|----------------|
+| **Drop View** | Removes the table or view from the environment |
 
 ## Code
 
