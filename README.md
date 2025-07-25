@@ -3,6 +3,7 @@
 Create or Alter package includes:
 * [Create or Alter table](#create-or-alter-table)
 * [Create or Alter view](#create-or-alter-view)
+* [Create or Alter Dimension](#create-or-alter-dimension)
 * [Code](#code)
 
 # Create or Alter table
@@ -191,6 +192,9 @@ This is executed in below stage:
 | **Stage** | **Description** |
 |-----------|----------------|
 | **Drop View** | Removes the table or view from the environment |
+
+## Create or Alter Dimension
+
 
 ## Code
 
