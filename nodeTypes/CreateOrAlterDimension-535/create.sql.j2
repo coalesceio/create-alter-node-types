@@ -1,0 +1,354 @@
+{#
+    Copyright (c) 2025 Coalesce. All rights reserved.
+This script and its associated documentation are confidential and proprietary to Coalesce.
+Unauthorized reproduction, distribution, or disclosure of this material is strictly prohibited.
+Coalesce permits you to copy and modify this script for the purposes of using with Coalesce but
+does not permit copying or modification for any other purpose.  
+#}
+{# == Node Type Version        : 1  == #}
+{# == Node Type Name           : Create or Alter Dimesion table == #}
+{# == Node Type Description    : This node loads data into the dimension table created and inserts data into the same == #}
+
+{% if desiredState == undefined %}
+
+    {# Table Name #}
+    {% set targetObjectDatabase = ref_no_link(currentState.node.location.name, currentState.node.name).split('.')[0] %} 
+    {% set targetObjectSchema = ref_no_link(currentState.node.location.name, currentState.node.name).split('.')[1] %} 
+    {% set fullyQualifiedTargetObjectName = ref_no_link(currentState.node.location.name, currentState.node.name) %}
+    
+       {{ stage('Drop ' + currentState.node.materializationType) }}
+       DROP TABLE IF EXISTS {{ fullyQualifiedTargetObjectName }}
+
+{% elif currentState == undefined or (currentState != undefined and desiredState != currentState) %}
+    
+       {%if currentState != undefined%} 
+        
+            {% set ns = namespace( storageLocationTest= true,descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0) %}
+
+            {# Node #}
+           {% set nodeNameTest = currentState.node.name == desiredState.node.name %}
+           {% set nodeMaterializationType = currentState.node.materializationType == desiredState.node.materializationType %} 
+
+		   {% set joinTest = currentState.join == desiredState.join %}
+            
+          {# Test to see if the transform in a column has changed #}
+          {% set desiredTransformArray = desiredState.sources | map(attribute='columns') | first | map(attribute='transform') | list -%}
+          {# Current Namespace Variables Transform #}
+          {% set currentTransformArray = currentState.sources | map(attribute='columns') | first | map(attribute='transform') | list -%}
+
+          {% set columnsTransformTest = currentTransformArray == desiredTransformArray %}
+
+            {#Target location Test  #}
+            {%if currentState.storageLocations|length == 0%}          
+              {% set currentDatabase = currentState.storageLocations | selectattr('name', 'equalto', currentState.node.location.name) | map(attribute='database') | string %}
+              {% set currentSchema = currentState.storageLocations | selectattr('name', 'equalto', currentState.node.location.name) | map(attribute='schema') | string %}
+               {% set currentDatabaseSchema = currentDatabase + '.' + currentSchema %}
+               
+            {%else %}   
+            {# Current target node mappings #}
+            {% set currentDatabase = currentState.storageLocations | selectattr('name', 'equalto', currentState.node.location.name) | map(attribute='database') | first %}
+            {% set currentSchema = currentState.storageLocations | selectattr('name', 'equalto', currentState.node.location.name) | map(attribute='schema') | first %}
+            {% set currentDatabaseSchema = currentDatabase + '.' + currentSchema %}  
+			{% endif %}		 
+        
+            {# Desired target node mappings #}
+            {% set desiredDatabase = desiredState.storageLocations | selectattr('name', 'equalto', desiredState.node.location.name) | map(attribute='database') | first %}
+            {% set desiredSchema = desiredState.storageLocations | selectattr('name', 'equalto', desiredState.node.location.name) | map(attribute='schema') | first %}
+            {% set desiredDatabaseSchema = desiredDatabase + '.' + desiredSchema %}           
+            
+             {% if currentDatabaseSchema != desiredDatabaseSchema %}
+                {% set ns.storageLocationTest = false %}
+             {% endif %}
+
+             {# Clustering Test #}
+            {% set clusterKeyTest = currentState.config.clusterKey == desiredState.config.clusterKey %}
+            {% set clusterKeyExpressionsTest = currentState.config.clusterKeyExpressions == desiredState.config.clusterKeyExpressions %}
+            {% set clusterKeyConfigTest = currentState.config.clusterKeyConfig == desiredState.config.clusterKeyConfig %}
+            {% set clusterKeyConfigExpressionsTest = currentState.config.clusterKeyConfigExpressions == desiredState.config.clusterKeyConfigExpressions %}
+
+            {% if 
+                clusterKeyTest == false or
+                clusterKeyExpressionsTest == false or
+                clusterKeyConfigTest == false or
+                clusterKeyConfigExpressionsTest == false %}
+
+                {% set clusterTest = false %}
+            {% else %}
+                {% set clusterTest = true %}
+            {% endif %}
+
+		   {#Add columns#}
+            {% for addDesCol in desiredState.columns %}
+                {% if addDesCol.id not in currentState.columns | map(attribute="id") %}
+                {% set ns.colchanges = ns.colchanges + 1 %}
+                {% endif %}
+            {% endfor %}
+			
+			
+			{# Rename Columns #}
+            {% for renameCurCol in currentState.columns %}
+                {% if renameCurCol.id in desiredState.columns | map(attribute="id") %}
+                    {% set desiredColumnName = desiredState.columns | selectattr('id', 'equalto', renameCurCol.id) | map(attribute='name') | first %}
+                    {% if renameCurCol.name != desiredColumnName %}
+                        {% set ns.colchanges = ns.colchanges + 1 %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+             
+			{# Drop Columns #}
+            {% set nsVariables = namespace(colchanges=0) %}
+            {% for dropCurCol in currentState.columns %}
+                {% if dropCurCol.id not in desiredState.columns | map(attribute="id") %}
+                  {% set ns.colchanges = ns.colchanges + 1 %}
+                {% endif %}
+            {% endfor %}
+	
+            {#Column level changes test#}
+			{% for alterCurCol in currentState.columns %}        
+                {% if alterCurCol.id in desiredState.columns | map(attribute="id") %}
+                     {% set currentColumnName = currentState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='name') | first %}
+                    {% set currentDescription = currentState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='description') | first %}
+                    {% set currentDatatype = currentState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='dataType') | first %}
+                    {% set currentNullable = currentState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='nullable') | first %}
+                    {% set currentDefaultValue = currentState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='defaultValue') | first %}
+                    
+                    {% set desiredColumnName = desiredState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='name') | first %}
+                    {% set desiredDescription = desiredState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='description') | first %}
+                    {% set desiredDatatype = desiredState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='dataType') | first %}
+                    {% set desiredNullable = desiredState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='nullable') | first %}
+                    {% set desiredDefaultValue = desiredState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='defaultValue') | first %}
+                        
+
+                   {% set datatypeTest = currentDatatype == desiredDatatype %}
+                   {% set nullableTest = currentNullable == desiredNullable %}
+                   {% set defaultValueTest = currentDefaultValue == desiredDefaultValue %}
+                   {% set descriptionTest = currentDescription == desiredDescription %}
+                   {% set columnnameTest = currentColumnName == desiredColumnName %}
+
+                    {% if (descriptionTest == false) %}
+                        {% set ns.descolchanges = ns.descolchanges + 1 %}
+                    {%endif%} 														
+                    {%if (datatypeTest == false or nullableTest == false or defaultValueTest == false or columnnameTest == false )%} 
+                       {% set ns.othercolchanges = ns.othercolchanges + 1 %}                                      
+                     {%endif%} 																										
+                {%endif%}    
+            {% endfor %}
+    
+          {#Config level changes #}
+		  
+		   {%set dretentiontest = currentState.config.datretention == desiredState.config.datretention%}
+		   {%set mretentiontest = currentState.config.maxdataretention == desiredState.config.maxdataretention%}
+		   {%set chngtracktst = currentState.config.changetracking == desiredState.config.changetracking %}
+		   {%set schematst    = currentState.config.eschemaevol == desiredState.config.eschemaevol %}
+		   
+		   {#Constraint test #}
+		   
+		   {%set inconsttst   = currentState.config.inlineconst == desiredState.config.inlineconst%}
+		   {%set consttst     = currentState.config.constraintsspec  ==  desiredState.config.constraintsspec%}                                                                          
+           {%set outconsttst   = currentState.config.outlineconst == desiredState.config.outlineconst%}
+		   
+	
+	       {#primary key test#}
+		   {%set primarykeytst = currentState.config.primary == desiredState.config.primary%}
+		   {%set pkeynametst = currentState.config.primarykeyname == desiredState.config.primarykeyname%}
+		   {%set primcoltst = currentState.config.primarykeycon == desiredState.config.primarykeycon%}
+		   
+            {% if 
+                primarykeytst == false or
+                pkeynametst == false or
+                primcoltst == false 
+               %}
+
+                {% set primTest = false %}
+             {% else %}
+                {% set primTest = true %}
+              {% endif %}
+
+           
+              {#foreign key test #}
+			{%set foreigntst = currentState.config.foreignk == desiredState.config.foreignk%}
+		    {%set foreignkeytst = currentState.config.foreignkeycon == desiredState.config.foreignkeycon%}
+		   
+			
+			{% if 
+                foreigntst == false or
+                foreignkeytst == false %}
+
+                {% set foreignTest = false %}
+            {% else %}
+                {% set foreignTest = true %}
+            {% endif %}
+
+            {% if 
+            ns.othercolchanges > 0 or
+			ns.descolchanges > 0 or
+            ns.colchanges > 0 or
+            joinTest == false or
+            columnsTransformTest == false or
+			nodeMaterializationType == false or
+            primTest == false or 
+            foreignTest == false or 
+            clusterTest == false or 
+			dretentiontest == false or
+            mretentiontest == false or
+            chngtracktst == false or
+            schematst == false or
+            inconsttst == false or
+            consttst == false or
+            outconsttst == false %}    
+
+            {% set createTest = true %}
+          {% else %}
+            {% set createTest = false %}
+         {% endif %} 
+
+         {%if createTest == false and (ns.storageLocationTest == false or currentState.node.name != desiredState.node.name)  %}    
+           {%set altertest = true %}		   
+	     {%endif%}
+         
+        {%if currentState.node.materializationType != desiredState.node.materializationType  %}
+
+                     {{ stage('Drop ' + currentState.node.materializationType + ' ' + ref_no_link(currentState.node.location.name, currentState.node.name)) }}
+
+                      DROP TABLE IF EXISTS {{ ref_no_link(currentState.node.location.name, currentState.node.name) }}					 
+        {%endif%}
+
+    {%endif%}
+
+    {%if currentState == undefined  or createTest == true%}
+
+      {% set ns = namespace(column_constraints=[],constraint='',flag=false,primarykeyValues='',foreignkeyValues='',foreignk='') %} {# Initialize an empty list in the namespace #}
+
+     {# Inline constraints #}
+      {%if desiredState.config.inlineconst == true%}
+
+      {% for item in desiredState.config.constraintsspec.get('items') %}
+        {% set column_name = item.columnname.name %}
+        {% set constraint_spec = item.constspec %}
+
+       {# Create a temporary dictionary for the current item #}
+       {% set col_dict = {'name': column_name, 'constraint': constraint_spec} %}
+
+       {# Append the dictionary to the list in the namespace #}
+       {% set ns.column_constraints = ns.column_constraints + [col_dict] %}
+      {% endfor %}
+      {%endif%}
+ 
+     {# Out of line constraints#}
+      {# Primary key clause#}
+
+      {%if desiredState.config.primary == true and desiredState.config.outlineconst == true%}
+
+       {% set column = desiredState.config.primarykeycon.get('items') | map(attribute='primarykey.name')| list%}
+	 
+	      {% for r in column %}
+			   {% set ns.primarykeyValues = ns.primarykeyValues +'"'+r+'"' %}
+         {%- if not loop.last -%} {% set ns.primarykeyValues = ns.primarykeyValues +','%} {% endif %}
+        {% endfor %}
+       
+         {% set ns.primarykeyValues = 'CONSTRAINT ' + desiredState.config.primarykeyname + ' PRIMARY KEY ('+ns.primarykeyValues +')' %}
+
+     {%endif%}
+
+      {#Foreign key clause#}
+
+      {%if desiredState.config.foreignk == true%}
+      {% set fname,foreigncolumns,parenttable = desiredState.config.foreignkeycon.get('items') | map(attribute='foreignkeyname')| list,desiredState.config.foreignkeycon.get('items') | map(attribute='foreignkeycol')| list,desiredState.config.foreignkeycon.get('items') | map(attribute='parentabname')| list%}
+
+	      {% for r in fname %}
+			   
+                {% set ns.foreignkeyValues = ns.foreignkeyValues +'CONSTRAINT ' + r + ' FOREIGN KEY ('+ foreigncolumns[loop.index0] +')' + ' REFERENCES '+ parenttable[loop.index0] %}
+         {%- if not loop.last -%} {% set ns.foreignkeyValues = ns.foreignkeyValues + ' , '%} {% endif %}
+        {% endfor %}              
+     {%endif%}
+
+      {# Figure out cluster key #}
+        {% set nsVariables = namespace(finalClusterKey="") %}
+        {% if desiredState.config.clusterKey == true %}
+            {% if desiredState.config.clusterKeyExpressions == true %}
+                {% set column, expression = desiredState.config.clusterKeyConfigExpressions.get('items') | map(attribute='columnNameExpressions.name') | list, desiredState.config.clusterKeyConfigExpressions.get('items') | map(attribute='sqlExpression') | list %}
+
+                {%- set nsVariables = namespace(clusterValues=[]) %}
+
+                {% for r in column %}
+                    {% if expression[loop.index0] == "" %}
+                        {% set nsVariables.clusterValues = nsVariables.clusterValues + ['"'+r+'"'] %}
+                    {% else %}
+                        {% set nsVariables.clusterValues = nsVariables.clusterValues + [expression[loop.index0]] %}
+                    {% endif %}
+                {% endfor %}
+
+                {% set nsVariables.finalClusterKey = 'CLUSTER BY (' + nsVariables.clusterValues | join(',') + ')' %}
+
+            {% else %}
+
+                {% set column = desiredState.config.clusterKeyConfig.get('items') | map(attribute='columnName.name') | list %}
+
+                {%- set nsVariables = namespace(clusterValues=[]) %}
+
+                {% for r in column %}
+                    {% set nsVariables.clusterValues = nsVariables.clusterValues + ['"'+r+'"'] %}
+                {% endfor %}
+
+                {% set nsVariables.finalClusterKey = 'CLUSTER BY (' + nsVariables.clusterValues | join(',') + ')' %}
+
+            {% endif %}
+        {% endif %}
+
+        {# CreateSQL for Table #}
+        
+        {{ stage('Create/Alter  ' + desiredState.node.materializationType) }}
+
+	  CREATE OR ALTER {{desiredState.node.materializationType}} {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
+	 (
+        
+		{% for col in desiredState.columns %}
+    
+             {%set ns.constraint = ''%}
+             {%set ns.flag= false%}
+            {# Check if col.name matches any name in column_constraints #}
+         {% for item in ns.column_constraints %}
+            {% if item.name == col.name and ns.flag== false %}
+              {% set ns.constraint = item.constraint %}
+               {% set ns.flag = true %}  {# Stop the inner loop if match is found #}
+            {% endif %}
+         {% endfor %}
+          
+          {# Print with or without constraint #}
+            "{{ col.name }}" {{ col.dataType }}
+            {% if col.isSurrogateKey %}
+                    identity
+            {% endif %}
+            {%- if ns.constraint %} {{ ns.constraint }}{% endif %}
+            {%- if not col.nullable %} NOT NULL {% endif %}
+            {%- if col.defaultValue | length > 0 %} DEFAULT {{ col.defaultValue }}{% endif %}
+           {%- if col.description | length > 0 %} COMMENT '{{ col.description | escape }}'{% endif %}
+            {%- if not loop.last -%}, {% endif %}
+		{% endfor %}
+        {% if desiredState.config.primary == true and desiredState.config.outlineconst == true%} ,{{ns.primarykeyValues}}{%if desiredState.config.foreignk == true and desiredState.config.outlineconst == true-%},{%endif-%}{%endif%}
+         {%if desiredState.config.foreignk == true and desiredState.config.outlineconst == true %}{% if desiredState.config.primary == false%},{%endif%}{{ns.foreignkeyValues}}{%endif%}
+	   )
+
+	    {%- if desiredState.node.description | length > 0 %} COMMENT = '{{ desiredState.node.description | escape }}'{% endif %}
+	    {{nsVariables.finalClusterKey}}
+	    {%if desiredState.config.datretention != "" %}DATA_RETENTION_TIME_IN_DAYS = {{desiredState.config.datretention}}{%endif%}
+        {%if desiredState.config.maxdataretention != "" %}MAX_DATA_EXTENSION_TIME_IN_DAYS = {{desiredState.config.maxdataretention}}{%endif%}
+        {%if desiredState.config.eschemaevol == true %}ENABLE_SCHEMA_EVOLUTION = {{desiredState.config.eschemaevol}}{%endif%}
+        {%if desiredState.config.changetracking == true %}CHANGE_TRACKING = {{desiredState.config.changetracking}}{%endif%}
+        {%if desiredState.config.defaultcoallation != "" %}DEFAULT_DDL_COLLATION = {{desiredState.config.defaultcoallation}}{%endif%}
+
+    {%endif%}
+
+    {%if altertest == true %}
+         
+       {{ stage('Rename and / or Move Table') }}
+                {% set srcSchName = currentState.node.location.name %}
+                {% set cdb = currentState.storageLocations | selectattr('name', 'equalto', srcSchName) | map(attribute='database') | first %}
+                {% set csch = currentState.storageLocations | selectattr('name', 'equalto', srcSchName) | map(attribute='schema') | first %}
+
+                ALTER TABLE  "{{cdb}}"."{{csch}}"."{{currentState.node.name}}"
+                RENAME TO   {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
+    {%endif%}
+
+{%endif%}

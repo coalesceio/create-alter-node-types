@@ -3,7 +3,7 @@ id: 6a6d66f5-819a-4606-bf0f-eb867c75f24f
 name: CT_CUSTOMERS
 operation:
   config:
-    changetracking: false
+    changetracking: true
     clusterKey: false
     clusterKeyConfig:
       items:
@@ -14,23 +14,29 @@ operation:
     clusterKeyExpressions: false
     constraintsspec:
       items:
-        - {}
+        - columnname: null
+          constspec: ex. COLLATE <collate_specification>
     datretention: ""
     defaultcoallation: "'de'"
     eschemaevol: false
-    foreignk: false
+    foreignk: true
     foreignkeycon:
       items:
-        - {}
+        - foreignkeycol: null
+          foreignkeyname: null
+          parentabname: ex:`<database>`.`<schema>`.`<tablename>`
     groupByAll: false
     inlineconst: false
+    insertStrategy: UNION
     maxdataretention: ""
     orderby: false
-    outlineconst: false
-    primary: false
+    outlineconst: true
+    primary: true
     primarykeycon:
       items:
-        - {}
+        - primarykey:
+            columnCounter: 9ece12bb-6a8f-406a-8ef1-7174151054d1
+            stepCounter: 6a6d66f5-819a-4606-bf0f-eb867c75f24f
     primarykeyname: ""
     selectDistinct: false
     testsEnabled: false

@@ -3,7 +3,6 @@ id: e518b2e9-9460-4e3d-acb7-343f57d03dbd
 name: PRODUCTS_GROCERY
 operation:
   database: ""
-  dataset: ""
   deployEnabled: true
   description: ""
   locationName: SOURCE
@@ -85,12 +84,9 @@ operation:
             transform: ""
         transform: ""
         uniqueKey: false
-    join:
-      joinCondition: FROM {{ ref('SOURCE', 'PRODUCTS_GROCERY') }}
   name: PRODUCTS_GROCERY
   schema: ""
   sqlType: Source
-  table: PRODUCTS_GROCERY
   type: sourceInput
   version: 1
 type: Node

@@ -1,19 +1,19 @@
 fileVersion: 1
-id: "345"
+id: "534"
 isDisabled: false
 metadata:
   defaultStorageLocation: null
   error: null
   nodeMetadataSpec: |-
-    capitalized: Create or Alter
-    short: CT
-    tagColor: '#059659'
-    plural: Create
+    capitalized: Create or Alter Fact
+    short: CFCT
+    plural: Facts
+    tagColor: '#D9A438'
 
     deployStrategy: advanced
 
     config:
-    - groupName: Create table Options
+    - groupName: Create Table Options
       items:
       - type: materializationSelector
         default: table
@@ -27,7 +27,6 @@ metadata:
         displayName: Cluster Key
         default: false
         isRequired: false
-        enableIf: "{% if node.materializationType == 'table' or node.materializationType == 'transient table'  %} true {% else %} false {% endif %}"
 
       - type: toggleButton
         attributeName: clusterKeyExpressions
@@ -165,32 +164,29 @@ metadata:
         attributeName: datretention
         type: textBox
         isRequired: false
+        enableIf: "{% if node.materializationType == 'table' %} true {% else %} false {% endif %}"
 
       - displayName: Maximum Data Extension time(In days-'<integer>')
         attributeName: maxdataretention
         type: textBox
         isRequired: false
+        enableIf: "{% if node.materializationType == 'table' %} true {% else %} false {% endif %}"
 
-      
       - displayName: Default DDL Collation('<collation specification>')
         attributeName: defaultcoallation
         type: textBox
         isRequired: false
-        
 
-
-    - groupName: Insert data Options
+    - groupName: Insert Data Options
       items:
      
       - type: multisourceToggle
-        enableIf: "{% if node.override.create.enabled %} false {% else %} true {% endif %}" 
         
       - displayName: Multi Source Strategy
         attributeName: insertStrategy
         type: dropdownSelector
-        default: INSERT
+        default: UNION
         options:
-        - "INSERT"
         - "UNION"
         - "UNION ALL"
         isRequired: false
@@ -200,33 +196,31 @@ metadata:
         attributeName: truncateBefore
         type: toggleButton
         default: true
-        enableIf: "{% if node.materializationType == 'view' %} false {% else %} true {% endif %}"
+
+      - type: businessKeyColumns
+        isRequired: false
 
       - displayName: Enable Tests
         attributeName: testsEnabled
         type: toggleButton
         default: false
-        enableIf: "{% if node.materializationType == 'view' %} false {% else %} true {% endif %}"
 
       - displayName: Distinct
         attributeName: selectDistinct
         type: toggleButton
         default: false
-        enableIf: "{% if config.groupByAll or  node.override.create.enabled %} false {% else %} true {% endif %}"
-
+        enableIf: "{% if config.groupByAll %} false {% else %} true {% endif %}"
 
       - displayName: Group By All
         attributeName: groupByAll
         type: toggleButton
         default: false
-        enableIf: "{% if config.selectDistinct or  node.override.create.enabled %} false {% else %} true {% endif %}"
-
+        enableIf: "{% if config.selectDistinct %} false {% else %} true {% endif %}"
 
       - displayName: Order By
         attributeName: orderby
         type: toggleButton
         default: false
-        enableIf: "{% if node.materializationType == 'view' %} false {% else %} true {% endif %}"
 
       - type: tabular
         displayName: 'Sort column'
@@ -247,5 +241,5 @@ metadata:
            
         isRequired: true
         enableIf: "{% if config.orderby %} true {% else %} false {% endif %}"
-name: Create or Alter Table
+name: Create Or Alter Fact
 type: NodeType

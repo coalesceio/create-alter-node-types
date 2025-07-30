@@ -1,0 +1,153 @@
+fileVersion: 1
+id: 9a3d0833-efa8-412e-b600-5426cb2d984a
+name: CT_PRODUCTS_GROCERY1
+operation:
+  config:
+    changetracking: false
+    clusterKey: false
+    clusterKeyConfig:
+      items:
+        - {}
+    clusterKeyConfigExpressions:
+      items:
+        - {}
+    clusterKeyExpressions: false
+    constraintsspec:
+      items:
+        - {}
+    datretention: ""
+    defaultcoallation: ""
+    eschemaevol: false
+    foreignk: false
+    foreignkeycon:
+      items:
+        - {}
+    groupByAll: false
+    inlineconst: false
+    insertStrategy: UNION
+    maxdataretention: ""
+    orderby: false
+    orderbycolumn:
+      items:
+        - {}
+    outlineconst: false
+    primary: false
+    primarykeycon:
+      items:
+        - {}
+    primarykeyname: ""
+    selectDistinct: false
+    testsEnabled: false
+    truncateBefore: true
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: true
+  locationName: SOURCE
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 585041a0-4645-422b-89df-c22e5cd0c316
+          stepCounter: 9a3d0833-efa8-412e-b600-5426cb2d984a
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        name: PRODUCT_ID
+        nullable: false
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: d7d3e7de-d112-4978-872f-0e2ac2e2e398
+                stepCounter: e518b2e9-9460-4e3d-acb7-343f57d03dbd
+            transform: ""
+          - columnReferences:
+              - columnCounter: 28d3400c-5075-4c1c-b66a-c1690b14d4e7
+                stepCounter: 17657da8-486c-4431-91d4-100b48eafd57
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: c118f1d6-22c0-409e-ba2e-dd4141be6d3a
+          stepCounter: 9a3d0833-efa8-412e-b600-5426cb2d984a
+        config: {}
+        dataType: VARCHAR(255)
+        description: ""
+        name: PRODUCT_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 9b85ef94-d1f8-4119-9f46-275e15d72729
+                stepCounter: e518b2e9-9460-4e3d-acb7-343f57d03dbd
+            transform: ""
+          - columnReferences:
+              - columnCounter: 92a17494-4f92-4407-8b7c-091bc8b3d90a
+                stepCounter: 17657da8-486c-4431-91d4-100b48eafd57
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: a2819ad7-f23b-4ad5-b166-46d1795218f8
+          stepCounter: 9a3d0833-efa8-412e-b600-5426cb2d984a
+        config: {}
+        dataType: VARCHAR(100)
+        description: ""
+        name: BRAND
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 3a387eac-9afb-495f-8997-360ed1a3732f
+                stepCounter: e518b2e9-9460-4e3d-acb7-343f57d03dbd
+            transform: ""
+          - columnReferences:
+              - columnCounter: 43a308d6-9ff0-4330-b824-be11d157a135
+                stepCounter: 17657da8-486c-4431-91d4-100b48eafd57
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: c5a5ec43-4d91-4070-8b69-f682a4e460c7
+          stepCounter: 9a3d0833-efa8-412e-b600-5426cb2d984a
+        config: {}
+        dataType: VARCHAR(50)
+        description: ""
+        name: COLOUR
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: b1c4ca2c-8b79-4e51-8af5-4e4c4a9cc0bb
+                stepCounter: e518b2e9-9460-4e3d-acb7-343f57d03dbd
+            transform: ""
+          - columnReferences:
+              - columnCounter: 4a50dfe2-aec5-485b-b289-1b6d800caec3
+                stepCounter: 17657da8-486c-4431-91d4-100b48eafd57
+            transform: ""
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases: {}
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SOURCE
+            nodeName: PRODUCTS_GROCERY
+        join:
+          joinCondition: FROM {{ ref('SOURCE', 'PRODUCTS_GROCERY') }} "PRODUCTS_GROCERY"
+        name: CT_PRODUCTS_GROCERY1
+        noLinkRefs: []
+      - aliases:
+          PRODUCTS: 17657da8-486c-4431-91d4-100b48eafd57
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SOURCE
+            nodeName: PRODUCTS
+        join:
+          joinCondition: FROM {{ ref('SOURCE', 'PRODUCTS') }} "PRODUCTS"
+        name: PRO
+        noLinkRefs: []
+  name: CT_PRODUCTS_GROCERY1
+  overrideSQL: false
+  schema: ""
+  sqlType: "345"
+  type: sql
+  version: 1
+type: Node
