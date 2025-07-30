@@ -8,7 +8,7 @@ metadata:
     capitalized: Create or Alter DIM Table
     short: CDIM
     plural: Dimensions
-    tagColor: '#059659'
+    tagColor: '#333BA6'
 
     deployStrategy: advanced
 

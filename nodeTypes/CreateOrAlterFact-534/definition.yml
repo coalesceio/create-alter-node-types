@@ -8,7 +8,7 @@ metadata:
     capitalized: Create or Alter Fact
     short: CFCT
     plural: Facts
-    tagColor: '#D9A438'
+    tagColor: '#B88B2F'
 
     deployStrategy: advanced
 

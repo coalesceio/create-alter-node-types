@@ -7,7 +7,7 @@ metadata:
   nodeMetadataSpec: |+
     capitalized: Create or Alter View
     short: CV
-    tagColor: '#059659'
+    tagColor: '#A6A6A6'
     plural: Create
 
     deployStrategy: advanced
