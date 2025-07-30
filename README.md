@@ -532,3 +532,19 @@ This is executed in below stage:
 | **Create Template** | [create.sql.j2](https://github.com/coalesceio/create-alter-node-types/blob/main/nodeTypes/CreateOrAlterDimension-535/create.sql.j2) |
 | **Run Template** | [run.sql.j2](https://github.com/coalesceio/create-alter-node-types/blob/main/nodeTypes/CreateOrAlterDimension-535/run.sql.j2)
 
+### Create or Alter Fact Code
+
+| **Component** | **Link** |
+|--------------|-----------|
+| **Node definition** | [definition.yml](https://github.com/coalesceio/create-alter-node-types/blob/main/nodeTypes/CreateOrAlterFact-534/definition.yml) |
+| **Create Template** | [create.sql.j2](https://github.com/coalesceio/create-alter-node-types/blob/main/nodeTypes/CreateOrAlterFact-534/create.sql.j2) |
+| **Run Template** | [run.sql.j2](https://github.com/coalesceio/create-alter-node-types/blob/main/nodeTypes/CreateOrAlterFact-534/run.sql.j2)
+
+### Create or Alter Persistent Stage Code
+
+| **Component** | **Link** |
+|--------------|-----------|
+| **Node definition** | [definition.yml](https://github.com/coalesceio/create-alter-node-types/blob/main/nodeTypes/CreateOrAlterPersistentStage-533/definition.yml) |
+| **Create Template** | [create.sql.j2](https://github.com/coalesceio/create-alter-node-types/blob/main/nodeTypes/CreateOrAlterPersistentStage-533/create.sql.j2) |
+| **Run Template** | [run.sql.j2](https://github.com/coalesceio/create-alter-node-types/blob/main/nodeTypes/CreateOrAlterPersistentStage-533/run.sql.j2)
+
