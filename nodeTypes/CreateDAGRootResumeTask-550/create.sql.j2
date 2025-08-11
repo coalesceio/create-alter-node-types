@@ -16,6 +16,8 @@ does not permit copying or modification for any other purpose.
     {% set targetNodeDatabase = ref_no_link(desiredState.node.location.name, desiredState.node.name).split('.')[0] %} 
     {% set targetNodeSchema = ref_no_link(desiredState.node.location.name, desiredState.node.name).split('.')[1] %} 
     {%- set fqRootTaskName = targetNodeDatabase + '.' + targetNodeSchema + '.' + '"' + desiredState.config.rootTask + '"' -%}
+
+    {# This is for establishing node dependency and execution order #}
     {% set refLinkPred = "{{ ref('" + sourceStorageLocation + "', '" + desiredState.sources[0].dependencies[0].node.name + "') }}" %}
 
     {{ stage('Try Enable Root Task', true, "sql", "create") }}
