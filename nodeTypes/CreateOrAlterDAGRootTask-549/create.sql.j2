@@ -76,13 +76,13 @@ does not permit copying or modification for any other purpose.
 
         {% else %}
 
-            {{ stage('Suspend Root Task') }}
+            {{ stage('Suspend Root Task', true, "sql", "create") }}
             ALTER TASK IF EXISTS {{ fullyQualifiedTaskName }} SUSPEND
 
         {%- endif -%}
     {% endif %}
 
-    {{ stage('Create Or Alter Root Task') }}
+    {{ stage('Create Or Alter Root Task', true, "sql", "create") }}
     CREATE OR ALTER TASK 
         {{ fullyQualifiedTaskName }} 
         {{ taskType}}
