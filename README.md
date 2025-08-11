@@ -8,6 +8,7 @@ Create or Alter package includes:
 * [Create or Alter Persistent Stage](#create-or-alter-persistent-stage)
 * [Create or Alter Task](#create-or-alter-task)
 * [Create or Alter DAG Root Task](#create-or-alter-dag-root-task)
+* [Create DAG Root Resume Task](#Create-DAG-Root-Resume-Task)
 * [Code](#code)
 
 # Create or Alter table
@@ -874,20 +875,20 @@ When deployed for the first time into an environment the following stage execute
 
 | **Component** | **Link** |
 |--------------|-----------|
-| **Node definition** | [definition.yml]() |
-| **Create Template** | [create.sql.j2]() |
-| **Run Template** | [run.sql.j2]()
+| **Node definition** | [definition.yml](https://github.com/coalesceio/create-alter-node-types/blob/main/nodeTypes/CreateOrAlterTask-548/definition.yml) |
+| **Create Template** | [create.sql.j2](https://github.com/coalesceio/create-alter-node-types/blob/main/nodeTypes/CreateOrAlterTask-548/create.sql.j2) |
+| **Run Template** | [run.sql.j2](https://github.com/coalesceio/create-alter-node-types/blob/main/nodeTypes/CreateOrAlterTask-548/run.sql.j2)
 
 ### Create Or Alter DAG Root Task
 
 | **Component** | **Link** |
 |--------------|-----------|
-| **Node definition** | [definition.yml]() |
-| **Create Template** | [create.sql.j2]() |
+| **Node definition** | [definition.yml](https://github.com/coalesceio/create-alter-node-types/blob/main/nodeTypes/CreateOrAlterDAGRootTask-549/definition.yml) |
+| **Create Template** | [create.sql.j2](https://github.com/coalesceio/create-alter-node-types/blob/main/nodeTypes/CreateOrAlterDAGRootTask-549/create.sql.j2) |
 
 ### Create DAG Root Resume Task
 
 | **Component** | **Link** |
 |--------------|-----------|
-| **Node definition** | [definition.yml]() |
-| **Create Template** | [create.sql.j2]() |
+| **Node definition** | [definition.yml](https://github.com/coalesceio/create-alter-node-types/blob/main/nodeTypes/CreateDAGRootResumeTask-550/definition.yml) |
+| **Create Template** | [create.sql.j2](https://github.com/coalesceio/create-alter-node-types/blob/main/nodeTypes/CreateDAGRootResumeTask-550/create.sql.j2) |
