@@ -45,7 +45,7 @@ operation:
     schedulePeriod: "60"
     schedulePeriodOption: Predecessor
     schedulingMode: Warehouse Task
-    selectDistinct: false
+    selectDistinct: true
     serverlessSize: MEDIUM
     timeOut: 60000
     truncateBefore: true

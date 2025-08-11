@@ -4,7 +4,7 @@ name: CTSK_NATION_TABLE0
 operation:
   config:
     changetracking: true
-    clusterKey: true
+    clusterKey: false
     clusterKeyConfig:
       items:
         - columnName:
