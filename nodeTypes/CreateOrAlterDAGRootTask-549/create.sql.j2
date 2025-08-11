@@ -1,0 +1,113 @@
+{#
+    Copyright (c) 2025 Coalesce. All rights reserved.
+This script and its associated documentation are confidential and proprietary to Coalesce.
+Unauthorized reproduction, distribution, or disclosure of this material is strictly prohibited.
+Coalesce permits you to copy and modify this script for the purposes of using with Coalesce but
+does not permit copying or modification for any other purpose.  
+#}
+{# == Node Type Version        : 1  == #}
+{# == Node Type Name           : Create Or Alter DAG Root Task == #}
+{# == Node Type Description    : This node creates or alters a standalone root task that initiates a run of the DAG == #}
+
+{# Parameter Check for Deployment #}
+{% if desiredState and currentState != desiredState and desiredState.config.schedulingMode == 'Warehouse Task' %}
+     {% if desiredState.parameters == {} or 'targetTaskWarehouse' not in desiredState.parameters or desiredState.parameters.targetTaskWarehouse == '' %}
+
+         {{stage('WARNING')}}
+          /*Add parameter targetTaskWarehouse in workspace settings and deployment environment for successful execution of node.
+          The default value for the parameter is 'DEV ENVIRONMENT'.
+          For more information, refer to the documentation.*/
+	{%endif%}
+{%endif%}
+
+{% if (currentState == undefined and desiredState != undefined) or (currentState != undefined and desiredState != undefined ) and (currentState != desiredState) %}
+
+    {# Task Info #}
+    {% set taskName = desiredState.node.name  %}
+    {% set fullyQualifiedTaskName = ref_no_link(desiredState.node.location.name, taskName) %}
+
+    {# Task Type #}
+    {%- if desiredState.config.schedulingMode == 'Warehouse Task' -%} 
+        {# Can be updated during deployment via a parameter to account for different warehouse names in different deployments #}
+        {% if 'targetTaskWarehouse' in desiredState.parameters %}
+            {% if desiredState.parameters.targetTaskWarehouse == 'DEV ENVIRONMENT' %}
+                {% set taskType = 'WAREHOUSE = ' + desiredState.config.whName %}
+            {% else %}
+                {% set taskType = 'WAREHOUSE = ' + desiredState.parameters.targetTaskWarehouse %}
+            {% endif %}
+        {% endif %}
+    {%- else -%}
+        {%- set taskType = 'USER_TASK_MANAGED_INITIAL_WAREHOUSE_SIZE = ' + desiredState.config.serverlessSize -%} 
+    {%- endif -%}
+
+    {% set nsVariables = namespace() %}
+
+    {# Schedule Type #}
+    {%- if desiredState.config.schedulePeriodOption == 'Minutes' -%} 
+        {%- set nsVariables.taskWhenRun = 'SCHEDULE = ' + "'" + desiredState.config.schedulePeriod + ' MINUTE' + "'" -%} 
+    {% else %}
+        {%- set nsVariables.taskWhenRun = 'SCHEDULE = ' + "'" + 'USING CRON ' + desiredState.config.scheduleCRON+"'" %}
+    {%- endif -%}
+
+    {% if currentState != undefined %}
+
+        {# Check for Suspend and Drop depending on the change in states #}
+
+        {# Current target node mappings #}
+        {% set currentDatabase = currentState.storageLocations | selectattr('name', 'equalto', currentState.node.location.name) | map(attribute='database') | first %}
+        {% set currentSchema = currentState.storageLocations | selectattr('name', 'equalto', currentState.node.location.name) | map(attribute='schema') | first %}
+        {% set currentDatabaseSchema = currentDatabase + '.' + currentSchema %}
+
+        {# Desired target node mappings #}
+        {% set desiredDatabase = desiredState.storageLocations | selectattr('name', 'equalto', desiredState.node.location.name) | map(attribute='database') | first %}
+        {% set desiredSchema = desiredState.storageLocations | selectattr('name', 'equalto', desiredState.node.location.name) | map(attribute='schema') | first %}
+        {% set desiredDatabaseSchema = desiredDatabase + '.' + desiredSchema %}    
+
+        {% if (currentState.node.name != desiredState.node.name) or currentDatabaseSchema != desiredDatabaseSchema %}
+
+            {# Old Task Info #}
+            {% set oldTaskName = currentState.node.name  %}
+            {% set fullyQualifiedOldTaskName = ref_no_link(currentState.node.location.name, oldTaskName) %}
+
+            {{ stage('Suspend Root Task') }}
+            ALTER TASK IF EXISTS {{ fullyQualifiedOldTaskName }} SUSPEND
+            {{ stage('Drop Root Task') }}
+            DROP TASK IF EXISTS {{ fullyQualifiedOldTaskName }}
+
+        {% else %}
+
+            {{ stage('Suspend Root Task') }}
+            ALTER TASK IF EXISTS {{ fullyQualifiedTaskName }} SUSPEND
+
+        {%- endif -%}
+    {% endif %}
+
+    {{ stage('Create Or Alter Root Task') }}
+    CREATE OR ALTER TASK 
+        {{ fullyQualifiedTaskName }} 
+        {{ taskType}}
+        {% if desiredState.config.timeOut != '' %}
+            USER_TASK_TIMEOUT_MS = {{ desiredState.config.timeOut }}
+        {% endif %}
+        {% if desiredState.node.description != '' %}
+            COMMENT = '{{ desiredState.node.description }}'
+        {% endif %}
+        {{ nsVariables.taskWhenRun }} 
+        {% if nsVariables.poll != 'WHEN ' %}
+            {{ nsVariables.poll }}
+        {% endif %}
+    AS 
+        {{desiredState.config.tskSql }} 
+
+{% elif desiredState == undefined and currentState != undefined %}
+
+    {# Task Info #}
+    {% set taskName = currentState.node.name  %}
+    {% set fullyQualifiedTaskName = ref_no_link(currentState.node.location.name, taskName) %}
+
+    {{ stage('Suspend Root Task') }}
+        ALTER TASK IF EXISTS {{ fullyQualifiedTaskName }} SUSPEND
+    {{ stage('Drop Root Task') }}
+        DROP TASK IF EXISTS {{ fullyQualifiedTaskName }} 
+
+{% endif %}

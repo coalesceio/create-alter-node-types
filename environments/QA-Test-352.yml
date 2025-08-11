@@ -1,0 +1,11 @@
+fileVersion: 1
+id: "352"
+mappingDefinitions:
+  SOURCE:
+    database: TANVI_DEV
+    schema: SOURCE
+  TARGET:
+    database: TANVI_DEV
+    schema: MAIN_QA
+name: QA - Test
+type: Environment

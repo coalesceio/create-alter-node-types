@@ -1,0 +1,125 @@
+fileVersion: 1
+id: 4c54aeaf-3685-4f51-879a-209f565efcf3
+name: CRR_NATION_TABLE1
+operation:
+  config:
+    rootTask: CRT_NODE_Root1
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: TARGET
+  materializationType: task
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 775858ed-fc2c-4ac8-949c-c6a26fe8ef0f
+          stepCounter: 4c54aeaf-3685-4f51-879a-209f565efcf3
+        config: {}
+        dagResumeTS: true
+        dataType: timestamp_ntz
+        defaultValue: ""
+        description: ""
+        name: DAG_RESUME_TIMESTAMP
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: current_timestamp()::timestamp_ntz
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 7651f516-d204-4f0e-b94a-f9394eeeb1c5
+          stepCounter: 4c54aeaf-3685-4f51-879a-209f565efcf3
+        config: {}
+        dagResumeTS: true
+        dataType: string
+        defaultValue: ""
+        description: ""
+        name: DAG_ROOT_TASK_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: desiredState.config.rootTask
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 8f2a014b-01ac-4cba-b6e3-cce83c28bcd4
+          stepCounter: 4c54aeaf-3685-4f51-879a-209f565efcf3
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        name: N_NATIONKEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 833d0d25-8ce4-4eec-8fe0-4bd1bd425414
+                stepCounter: 603222f6-cdc7-4c74-b298-3236b6a2aad9
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: cc2fbdd8-d94a-4c45-a8a8-0c704b72ccce
+          stepCounter: 4c54aeaf-3685-4f51-879a-209f565efcf3
+        config: {}
+        dataType: VARCHAR(25)
+        description: ""
+        name: N_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 004dfc47-89c7-4bae-9960-84a642aa6f09
+                stepCounter: 603222f6-cdc7-4c74-b298-3236b6a2aad9
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: d404fb46-dd00-41a7-851d-736bbd4a7f4d
+          stepCounter: 4c54aeaf-3685-4f51-879a-209f565efcf3
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        name: N_REGIONKEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 409d9c8c-bd57-4bba-ba0e-21c212d7e0e5
+                stepCounter: 603222f6-cdc7-4c74-b298-3236b6a2aad9
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 9dcc3b1d-9943-4a34-a33c-26575eebe936
+          stepCounter: 4c54aeaf-3685-4f51-879a-209f565efcf3
+        config: {}
+        dataType: VARCHAR(152)
+        description: ""
+        name: N_COMMENT
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 30fd224b-aa9e-44ba-ae86-5964cf7c9828
+                stepCounter: 603222f6-cdc7-4c74-b298-3236b6a2aad9
+            transform: ""
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases: {}
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: TARGET
+            nodeName: CTSK_NATION_TABLE1
+        join:
+          joinCondition: FROM {{ ref('TARGET', 'CTSK_NATION_TABLE1') }} "CTSK_NATION_TABLE1"
+        name: CRR_NATION_TABLE1
+        noLinkRefs: []
+  name: CRR_NATION_TABLE1
+  overrideSQL: false
+  schema: ""
+  sqlType: "550"
+  type: sql
+  version: 1
+type: Node

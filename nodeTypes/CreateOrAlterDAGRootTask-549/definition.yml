@@ -1,0 +1,101 @@
+fileVersion: 1
+id: "549"
+isDisabled: false
+metadata:
+  defaultStorageLocation: null
+  error: null
+  nodeMetadataSpec: |-
+    capitalized: Create Or Alter DAG Root Task
+    short: CRT
+    plural: Tasks
+    tagColor: "#AB251A"
+
+    deployStrategy: advanced
+
+    config:
+    - groupName: Scheduling Options
+      # Schedule mode-specifies whether a warehouse or serverless compute is used to run the task #
+      items:
+      - displayName: Scheduling Mode
+        attributeName: schedulingMode
+        type: dropdownSelector
+        default: Warehouse Task
+        options:
+          - Warehouse Task
+          - Serverless Task
+        isRequired: true
+
+      # Warehouse name you want the task to run #
+      - type: label
+        attributeName: note2
+        displayName: "NOTE: Ensure the parameter targetTaskWarehouse is added in Workspace and Deployment Environment for successful creation of Stream.\nFor more information, refer the documentation."
+        enableIf: "{%- if (parameters == {} or parameters.targetTaskWarehouse == '' ) and config.schedulingMode == 'Warehouse Task'-%} true {%- else -%} false {%- endif -%}"
+
+      - displayName: Select Warehouse on which to run task
+        attributeName: whName
+        type: textBox
+        default: '<WAREHOUSE_NAME>'
+        isRequired: false
+        enableIf: "{% if config.schedulingMode == 'Warehouse Task' %} true {% else %} false {% endif %}"
+
+      - displayName: Select initial serverless Warehouse size
+        attributeName: serverlessSize
+        type: dropdownSelector
+        default: 'MEDIUM'
+        options:
+          - XSMALL
+          - SMALL
+          - MEDIUM
+          - LARGE
+          - XLARGE
+          - XXLARGE
+        isRequired: false
+        enableIf: "{% if config.schedulingMode == 'Serverless Task' %} true {% else %} false {% endif %}"
+
+        # Way to schedule the task to run #
+      - displayName: Task Schedule
+        attributeName: schedulePeriodOption
+        type: dropdownSelector
+        default: Minutes
+        options:
+          - Minutes
+          - CRON
+        isRequired: true
+
+      - displayName: Enter task schedule using minutes
+        attributeName: schedulePeriod
+        type: textBox
+        default: '60'
+        isRequired: false
+        enableIf: "{% if config.schedulePeriodOption == 'Minutes' %} true {% else %} false {% endif %}"
+
+      - displayName: Enter task schedule using CRON
+        attributeName: scheduleCRON
+        type: textBox
+        default: '5 0-23 * * * America/Los_Angeles'
+        isRequired: false
+        enableIf: "{% if config.schedulePeriodOption == 'CRON' %} true {% else %} false {% endif %}"
+
+      - displayName: Root task SQL
+        attributeName: tskSql
+        type: textBox
+        default: 'select current_timestamp()'
+        isRequired: true
+
+      - displayName: Task Time Out (0 - 604800000) mlSec
+        attributeName: timeOut
+        type: textBox
+        default: 60000
+        isRequired: false
+
+    - groupName: Hidden Config
+      enableIf: "false"
+      items:
+      - displayName: Type
+        type: materializationSelector
+        default: task
+        options:
+        - task
+        isRequired: false
+name: Create Or Alter DAG Root Task
+type: NodeType
