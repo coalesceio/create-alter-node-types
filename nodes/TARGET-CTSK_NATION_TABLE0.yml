@@ -1,0 +1,146 @@
+fileVersion: 1
+id: 8b6a925b-007b-4e5b-bcc6-f5c500b6b625
+name: CTSK_NATION_TABLE0
+operation:
+  config:
+    changetracking: true
+    clusterKey: true
+    clusterKeyConfig:
+      items:
+        - columnName:
+            columnCounter: d33578f2-775e-4aca-bde5-0e1403ba7d10
+            stepCounter: 8b6a925b-007b-4e5b-bcc6-f5c500b6b625
+    clusterKeyConfigExpressions:
+      items:
+        - {}
+    clusterKeyExpressions: false
+    constraintsspec:
+      items:
+        - {}
+    datretention: "46"
+    defaultcoallation: ""
+    devMode: false
+    eschemaevol: true
+    flagSrcStream: false
+    foreignk: true
+    foreignkeycon:
+      items:
+        - foreignkeycol: N_REGIONKEY
+          foreignkeyname: NATION_FK
+          parentabname: "\"TANVI_DEV\".\"SOURCE\".\"REGION_PK\""
+    groupByAll: false
+    inlineconst: false
+    insertStrategy: UNION
+    maxdataretention: "50"
+    multiStreamBehavior: AND
+    orderby: true
+    orderbycolumn:
+      items:
+        - sortColName:
+            columnCounter: 1fbe12e4-1a3b-477c-b432-771d4c44fb08
+            stepCounter: 8b6a925b-007b-4e5b-bcc6-f5c500b6b625
+          sortOrder: desc
+    outlineconst: true
+    predTask: DATA_TRANSFORMATION_ROOT_TASK
+    primary: true
+    primarykeycon:
+      items:
+        - primarykey:
+            columnCounter: d33578f2-775e-4aca-bde5-0e1403ba7d10
+            stepCounter: 8b6a925b-007b-4e5b-bcc6-f5c500b6b625
+    primarykeyname: NATION_PK
+    rootTask: DATA_TRANSFORMATION_ROOT_TASK
+    scheduleCRON: 5 0-23 * * * America/Los_Angeles
+    schedulePeriod: "60"
+    schedulePeriodOption: Minutes
+    schedulingMode: Serverless Task
+    selectDistinct: true
+    serverlessSize: MEDIUM
+    timeOut: 60000
+    truncateBefore: true
+    whName: <WAREHOUSE_NAME>
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: TARGET
+  materializationType: task
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: d33578f2-775e-4aca-bde5-0e1403ba7d10
+          stepCounter: 8b6a925b-007b-4e5b-bcc6-f5c500b6b625
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        name: N_NATIONKEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: c11f9d9f-7d46-4066-9b94-22474b490e36
+                stepCounter: 63cb683e-7be3-4979-a4d3-28cc60aa3344
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1fbe12e4-1a3b-477c-b432-771d4c44fb08
+          stepCounter: 8b6a925b-007b-4e5b-bcc6-f5c500b6b625
+        config: {}
+        dataType: VARCHAR(25)
+        description: ""
+        name: N_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 273206a8-5452-4172-9445-3a2abbcdfe19
+                stepCounter: 63cb683e-7be3-4979-a4d3-28cc60aa3344
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 8732eb31-a4de-41a5-a650-56f0735a94fa
+          stepCounter: 8b6a925b-007b-4e5b-bcc6-f5c500b6b625
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        name: N_REGIONKEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: f030fb96-9770-4b57-96d9-4a047f0def2b
+                stepCounter: 63cb683e-7be3-4979-a4d3-28cc60aa3344
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 8fc0a4c8-c3ff-449d-8ae8-711d2ff61251
+          stepCounter: 8b6a925b-007b-4e5b-bcc6-f5c500b6b625
+        config: {}
+        dataType: VARCHAR(152)
+        description: ""
+        name: N_COMMENT
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: ab7c1675-d355-48d2-b3ef-c5e24c7c6b66
+                stepCounter: 63cb683e-7be3-4979-a4d3-28cc60aa3344
+            transform: ""
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases: {}
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SOURCE
+            nodeName: NATION
+        join:
+          joinCondition: FROM {{ ref('SOURCE', 'NATION') }} "NATION"
+        name: CTSK_NATION_TABLE0
+        noLinkRefs: []
+  name: CTSK_NATION_TABLE0
+  overrideSQL: false
+  schema: ""
+  sqlType: "548"
+  type: sql
+  version: 1
+type: Node

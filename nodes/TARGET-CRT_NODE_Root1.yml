@@ -1,0 +1,40 @@
+fileVersion: 1
+id: 83719c79-103b-4789-be97-e024b5a8ccf9
+name: CRT_NODE_Root1
+operation:
+  config:
+    scheduleCRON: 5 0-23 * * * America/Los_Angeles
+    schedulePeriod: "60"
+    schedulePeriodOption: Minutes
+    schedulingMode: Warehouse Task
+    serverlessSize: MEDIUM
+    timeOut: 60000
+    tskSql: select current_timestamp()
+    whName: <WAREHOUSE_NAME>
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: TARGET
+  materializationType: task
+  metadata:
+    appliedNodeTests: []
+    columns: []
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases: {}
+        customSQL:
+          customSQL: ""
+        dependencies: []
+        join:
+          joinCondition: ""
+        name: CRT_NODE_Root1
+        noLinkRefs: []
+  name: CRT_NODE_Root1
+  overrideSQL: false
+  schema: ""
+  sqlType: "549"
+  type: sql
+  version: 1
+type: Node

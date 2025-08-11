@@ -1,0 +1,142 @@
+fileVersion: 1
+id: 603222f6-cdc7-4c74-b298-3236b6a2aad9
+name: CTSK_NATION_TABLE1
+operation:
+  config:
+    changetracking: false
+    clusterKey: false
+    clusterKeyConfig:
+      items:
+        - {}
+    clusterKeyConfigExpressions:
+      items:
+        - {}
+    clusterKeyExpressions: false
+    constraintsspec:
+      items:
+        - {}
+    datretention: ""
+    defaultcoallation: ""
+    devMode: false
+    eschemaevol: false
+    flagSrcStream: true
+    foreignk: false
+    foreignkeycon:
+      items:
+        - {}
+    groupByAll: false
+    inlineconst: false
+    insertStrategy: UNION
+    maxdataretention: ""
+    multiStreamBehavior: AND
+    orderby: false
+    orderbycolumn:
+      items:
+        - {}
+    outlineconst: false
+    predTask: CRT_NODE_Root1
+    primary: false
+    primarykeycon:
+      items:
+        - {}
+    primarykeyname: ""
+    rootTask: CRT_NODE_Root1
+    scheduleCRON: 5 0-23 * * * America/Los_Angeles
+    schedulePeriod: "60"
+    schedulePeriodOption: Predecessor
+    schedulingMode: Warehouse Task
+    selectDistinct: false
+    serverlessSize: MEDIUM
+    timeOut: 60000
+    truncateBefore: true
+    whName: <WAREHOUSE_NAME>
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: TARGET
+  materializationType: task
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 833d0d25-8ce4-4eec-8fe0-4bd1bd425414
+          stepCounter: 603222f6-cdc7-4c74-b298-3236b6a2aad9
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        name: N_NATIONKEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: c11f9d9f-7d46-4066-9b94-22474b490e36
+                stepCounter: 63cb683e-7be3-4979-a4d3-28cc60aa3344
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 004dfc47-89c7-4bae-9960-84a642aa6f09
+          stepCounter: 603222f6-cdc7-4c74-b298-3236b6a2aad9
+        config: {}
+        dataType: VARCHAR(25)
+        description: ""
+        name: N_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 273206a8-5452-4172-9445-3a2abbcdfe19
+                stepCounter: 63cb683e-7be3-4979-a4d3-28cc60aa3344
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 409d9c8c-bd57-4bba-ba0e-21c212d7e0e5
+          stepCounter: 603222f6-cdc7-4c74-b298-3236b6a2aad9
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        name: N_REGIONKEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: f030fb96-9770-4b57-96d9-4a047f0def2b
+                stepCounter: 63cb683e-7be3-4979-a4d3-28cc60aa3344
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 30fd224b-aa9e-44ba-ae86-5964cf7c9828
+          stepCounter: 603222f6-cdc7-4c74-b298-3236b6a2aad9
+        config: {}
+        dataType: VARCHAR(152)
+        description: ""
+        name: N_COMMENT
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: ab7c1675-d355-48d2-b3ef-c5e24c7c6b66
+                stepCounter: 63cb683e-7be3-4979-a4d3-28cc60aa3344
+            transform: ""
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases:
+          NATION: 63cb683e-7be3-4979-a4d3-28cc60aa3344
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SOURCE
+            nodeName: NATION
+          - locationName: TARGET
+            nodeName: CRT_NODE_Root1
+        join:
+          joinCondition: |-
+            FROM {{ ref('SOURCE', 'NATION') }} "NATION"
+            /* FROM {{ ref('TARGET', 'CRT_NODE_Root1') }} "CRT_NODE_Root1" */
+        name: CTSK_NATION_TABLE1
+        noLinkRefs: []
+  name: CTSK_NATION_TABLE1
+  overrideSQL: false
+  schema: ""
+  sqlType: "548"
+  type: sql
+  version: 1
+type: Node
