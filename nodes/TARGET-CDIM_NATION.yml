@@ -3,7 +3,7 @@ id: 10a67411-25cc-43fa-8bcf-5b8a3127ec4c
 name: CDIM_NATION
 operation:
   config:
-    changetracking: false
+    changetracking: true
     clusterKey: true
     clusterKeyConfig:
       items:

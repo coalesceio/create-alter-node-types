@@ -3,7 +3,7 @@ id: 2c43898f-dfa4-4a81-a0b0-f23f9c05f7d8
 name: CPSTG_NATION
 operation:
   config:
-    changetracking: false
+    changetracking: true
     clusterKey: true
     clusterKeyConfig:
       items:

@@ -3,7 +3,7 @@ id: daa8fd69-c3fe-461d-84b1-08cb44009566
 name: CFCT_NATION
 operation:
   config:
-    changetracking: false
+    changetracking: true
     clusterKey: true
     clusterKeyConfig:
       items:

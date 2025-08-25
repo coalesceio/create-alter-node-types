@@ -3,7 +3,7 @@ id: 5f2ae83c-a232-4e98-988a-a62a3d8a066b
 name: CT_NATION
 operation:
   config:
-    changetracking: false
+    changetracking: true
     clusterKey: true
     clusterKeyConfig:
       items:
