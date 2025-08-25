@@ -35,7 +35,7 @@ operation:
     groupByAll: false
     inlineconst: true
     insertStrategy: UNION
-    maxdataretention: ""
+    maxdataretention: "45"
     orderby: false
     orderbycolumn:
       items:

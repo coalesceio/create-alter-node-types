@@ -33,7 +33,7 @@ operation:
     groupByAll: false
     inlineconst: true
     insertStrategy: INSERT
-    maxdataretention: ""
+    maxdataretention: "20"
     orderby: false
     orderbycolumn:
       items:
