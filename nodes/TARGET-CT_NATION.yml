@@ -21,10 +21,10 @@ operation:
             columnCounter: 71427128-3aa5-4e6f-ae65-5d90d8276f7f
             stepCounter: 5f2ae83c-a232-4e98-988a-a62a3d8a066b
           constspec: NOT NULL
-    datretention: ""
+    datretention: "90"
     defaultcoallation: ""
     eschemaevol: true
-    foreignk: true
+    foreignk: false
     foreignkeycon:
       items:
         - foreignkeycol: sdf
@@ -38,13 +38,11 @@ operation:
     orderbycolumn:
       items:
         - {}
-    outlineconst: true
+    outlineconst: false
     primary: true
     primarykeycon:
       items:
-        - primarykey:
-            columnCounter: 71427128-3aa5-4e6f-ae65-5d90d8276f7f
-            stepCounter: 5f2ae83c-a232-4e98-988a-a62a3d8a066b
+        - {}
     primarykeyname: PK_NATION
     selectDistinct: false
     testsEnabled: false

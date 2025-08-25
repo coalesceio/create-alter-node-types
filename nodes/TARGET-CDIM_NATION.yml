@@ -50,7 +50,7 @@ operation:
     orderbycolumn:
       items:
         - {}
-    outlineconst: true
+    outlineconst: false
     primary: true
     primarykeycon:
       items:

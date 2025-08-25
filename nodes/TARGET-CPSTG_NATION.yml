@@ -23,7 +23,7 @@ operation:
             columnCounter: 8c0f8495-ed92-4fe0-bca2-c2e27c723151
             stepCounter: 2c43898f-dfa4-4a81-a0b0-f23f9c05f7d8
           constspec: NOT NULL
-    datretention: ""
+    datretention: "90"
     defaultcoallation: ""
     eschemaevol: true
     foreignk: true
@@ -40,7 +40,7 @@ operation:
     orderbycolumn:
       items:
         - {}
-    outlineconst: true
+    outlineconst: false
     primary: true
     primarykeycon:
       items:
