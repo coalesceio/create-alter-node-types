@@ -98,7 +98,7 @@ operation:
         dataType: VARCHAR(152)
         description: ""
         name: N_COMMENT
-        nullable: true
+        nullable: false
         sourceColumnReferences:
           - columnReferences:
               - columnCounter: 54561999-2cef-4a56-a934-8eb59fcbefab
