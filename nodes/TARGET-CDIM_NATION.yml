@@ -19,7 +19,10 @@ operation:
     clusterKeyExpressions: false
     constraintsspec:
       items:
-        - {}
+        - columnname:
+            columnCounter: 0376a508-73de-434f-9310-13d155ef1e6e
+            stepCounter: 10a67411-25cc-43fa-8bcf-5b8a3127ec4c
+          constspec: NOT NULL
     customZeroKeyValues:
       items:
         - {}
@@ -31,7 +34,7 @@ operation:
       items:
         - {}
     groupByAll: false
-    inlineconst: false
+    inlineconst: true
     insertStrategy: UNION
     insertZeroKey: false
     insertZeroKeyAdvanced: false

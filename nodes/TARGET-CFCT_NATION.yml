@@ -19,7 +19,10 @@ operation:
     clusterKeyExpressions: false
     constraintsspec:
       items:
-        - {}
+        - columnname:
+            columnCounter: 322ca9a3-f44a-4989-8902-c735d7e05cec
+            stepCounter: daa8fd69-c3fe-461d-84b1-08cb44009566
+          constspec: NOT NULL
     datretention: ""
     defaultcoallation: ""
     eschemaevol: true
@@ -28,7 +31,7 @@ operation:
       items:
         - {}
     groupByAll: false
-    inlineconst: false
+    inlineconst: true
     insertStrategy: UNION
     maxdataretention: ""
     orderby: false
