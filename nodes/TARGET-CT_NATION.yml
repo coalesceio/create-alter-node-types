@@ -23,7 +23,7 @@ operation:
           constspec: NOT NULL
     datretention: "90"
     defaultcoallation: ""
-    eschemaevol: true
+    eschemaevol: false
     foreignk: false
     foreignkeycon:
       items:
@@ -44,7 +44,7 @@ operation:
       items:
         - {}
     primarykeyname: PK_NATION
-    selectDistinct: false
+    selectDistinct: true
     testsEnabled: false
     truncateBefore: true
   database: ""
