@@ -131,20 +131,6 @@ operation:
               - columnCounter: 54561999-2cef-4a56-a934-8eb59fcbefab
                 stepCounter: aee5565e-5677-4fd9-bfac-e3f6ad68f45f
             transform: ""
-      - appliedColumnTests: {}
-        columnReference:
-          columnCounter: bd63253a-5aeb-483d-8670-0e4b764b6223
-          stepCounter: 10a67411-25cc-43fa-8bcf-5b8a3127ec4c
-        config: {}
-        dataType: VARCHAR(25)
-        description: ""
-        name: ""
-        nullable: true
-        sourceColumnReferences:
-          - columnReferences:
-              - columnCounter: e642959f-cb06-46b8-b323-771a7c43b202
-                stepCounter: aee5565e-5677-4fd9-bfac-e3f6ad68f45f
-            transform: ""
       - acceptedValues:
           strictMatch: true
           values: []
