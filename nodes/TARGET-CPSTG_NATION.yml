@@ -7,14 +7,16 @@ operation:
     clusterKey: true
     clusterKeyConfig:
       items:
-        - {}
+        - columnName:
+            columnCounter: ab014b88-b57e-4b39-b826-bddf4a6adbc8
+            stepCounter: 2c43898f-dfa4-4a81-a0b0-f23f9c05f7d8
     clusterKeyConfigExpressions:
       items:
         - columnNameExpressions:
             columnCounter: ab014b88-b57e-4b39-b826-bddf4a6adbc8
             stepCounter: 2c43898f-dfa4-4a81-a0b0-f23f9c05f7d8
           sqlExpression: trunc(N_COMMENT, -5)
-    clusterKeyExpressions: true
+    clusterKeyExpressions: false
     constraintsspec:
       items:
         - {}

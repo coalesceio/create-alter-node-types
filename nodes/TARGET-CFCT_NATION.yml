@@ -16,7 +16,7 @@ operation:
             columnCounter: fa1fd99b-3e56-4b4e-b56d-0e1c032a7091
             stepCounter: daa8fd69-c3fe-461d-84b1-08cb44009566
           sqlExpression: trunc(N_COMMENT, -5)
-    clusterKeyExpressions: true
+    clusterKeyExpressions: false
     constraintsspec:
       items:
         - {}
