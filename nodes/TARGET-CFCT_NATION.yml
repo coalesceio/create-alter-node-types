@@ -38,12 +38,14 @@ operation:
     orderbycolumn:
       items:
         - {}
-    outlineconst: false
-    primary: false
+    outlineconst: true
+    primary: true
     primarykeycon:
       items:
-        - {}
-    primarykeyname: ""
+        - primarykey:
+            columnCounter: 322ca9a3-f44a-4989-8902-c735d7e05cec
+            stepCounter: daa8fd69-c3fe-461d-84b1-08cb44009566
+    primarykeyname: PK_NATION
     selectDistinct: false
     testsEnabled: false
     truncateBefore: true
