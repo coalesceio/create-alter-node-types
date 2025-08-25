@@ -26,10 +26,12 @@ operation:
     datretention: ""
     defaultcoallation: ""
     eschemaevol: true
-    foreignk: false
+    foreignk: true
     foreignkeycon:
       items:
-        - {}
+        - foreignkeycol: sffsd
+          foreignkeyname: sfgv
+          parentabname: sf
     groupByAll: false
     inlineconst: true
     insertStrategy: UNION

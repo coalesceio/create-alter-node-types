@@ -24,10 +24,12 @@ operation:
     datretention: ""
     defaultcoallation: ""
     eschemaevol: true
-    foreignk: false
+    foreignk: true
     foreignkeycon:
       items:
-        - {}
+        - foreignkeycol: sdf
+          foreignkeyname: ascf
+          parentabname: adf
     groupByAll: false
     inlineconst: true
     insertStrategy: INSERT
