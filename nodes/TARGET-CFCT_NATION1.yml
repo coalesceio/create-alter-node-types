@@ -121,14 +121,15 @@ operation:
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
-      - aliases: {}
+      - aliases:
+          STG_NATION: b6ecc1f0-4a57-4288-ad97-5c242d82b27d
         customSQL:
           customSQL: ""
         dependencies:
           - locationName: TARGET
-            nodeName: STG_NATION
+            nodeName: STG_NATION_NC
         join:
-          joinCondition: FROM {{ ref('TARGET', 'STG_NATION') }} "STG_NATION"
+          joinCondition: FROM {{ ref('TARGET', 'STG_NATION_NC') }} "STG_NATION" WHERE TEST =0
         name: CFCT_NATION1
         noLinkRefs: []
   name: CFCT_NATION1
