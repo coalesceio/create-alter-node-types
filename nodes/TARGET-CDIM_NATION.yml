@@ -51,7 +51,7 @@ operation:
     truncateBefore: true
   database: ""
   deployEnabled: true
-  description: ""
+  description: Table Description
   isMultisource: false
   locationName: TARGET
   materializationType: table
