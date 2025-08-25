@@ -1,0 +1,140 @@
+fileVersion: 1
+id: 538a0788-0474-4393-8b06-f31fa9dccc67
+name: CT_NATION
+operation:
+  config:
+    changetracking: false
+    clusterKey: false
+    clusterKeyConfig:
+      items:
+        - {}
+    clusterKeyConfigExpressions:
+      items:
+        - {}
+    clusterKeyExpressions: false
+    constraintsspec:
+      items:
+        - {}
+    datretention: ""
+    defaultcoallation: ""
+    eschemaevol: false
+    foreignk: false
+    foreignkeycon:
+      items:
+        - {}
+    groupByAll: false
+    inlineconst: false
+    insertStrategy: INSERT
+    maxdataretention: ""
+    orderby: false
+    orderbycolumn:
+      items:
+        - {}
+    outlineconst: false
+    primary: false
+    primarykeycon:
+      items:
+        - {}
+    primarykeyname: ""
+    selectDistinct: false
+    testsEnabled: false
+    truncateBefore: true
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: TARGET
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: bf7064a1-9dc3-4870-af18-5db95f9cb29d
+          stepCounter: 538a0788-0474-4393-8b06-f31fa9dccc67
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        name: N_NATIONKEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 032dda0c-eb37-411e-93b6-97e4b3bb2f70
+                stepCounter: aee5565e-5677-4fd9-bfac-e3f6ad68f45f
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 5e8b59de-9620-4228-9893-779043f3ace5
+          stepCounter: 538a0788-0474-4393-8b06-f31fa9dccc67
+        config: {}
+        dataType: VARCHAR(25)
+        description: ""
+        name: N_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 2dcb2fef-300e-4f79-bf4d-e779a55596e3
+                stepCounter: aee5565e-5677-4fd9-bfac-e3f6ad68f45f
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: a88baba0-63e9-4ba7-bbbb-7fdeaa6c32a7
+          stepCounter: 538a0788-0474-4393-8b06-f31fa9dccc67
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        name: N_REGIONKEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: a3abf471-70cd-4857-bf28-0f74fbd8926b
+                stepCounter: aee5565e-5677-4fd9-bfac-e3f6ad68f45f
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 29b83313-d66a-40e4-9ba1-e42381aebfd5
+          stepCounter: 538a0788-0474-4393-8b06-f31fa9dccc67
+        config: {}
+        dataType: VARCHAR(152)
+        description: ""
+        name: N_COMMENT
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 54561999-2cef-4a56-a934-8eb59fcbefab
+                stepCounter: aee5565e-5677-4fd9-bfac-e3f6ad68f45f
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 2d92c018-0673-4d8c-9fa1-80b66575fe7a
+          stepCounter: 538a0788-0474-4393-8b06-f31fa9dccc67
+        config: {}
+        dataType: VARCHAR(25)
+        description: ""
+        name: NEW_COL
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: e642959f-cb06-46b8-b323-771a7c43b202
+                stepCounter: aee5565e-5677-4fd9-bfac-e3f6ad68f45f
+            transform: ""
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases: {}
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SOURCE
+            nodeName: NATION
+        join:
+          joinCondition: FROM {{ ref('SOURCE', 'NATION') }} "NATION"
+        name: CT_NATION
+        noLinkRefs: []
+  name: CT_NATION
+  overrideSQL: false
+  schema: ""
+  sqlType: "345"
+  type: sql
+  version: 1
+type: Node

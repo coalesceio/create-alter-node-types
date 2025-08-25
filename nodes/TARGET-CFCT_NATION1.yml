@@ -1,0 +1,140 @@
+fileVersion: 1
+id: 15e972c1-23c7-4ff5-95d3-79dee45b5093
+name: CFCT_NATION1
+operation:
+  config:
+    changetracking: false
+    clusterKey: false
+    clusterKeyConfig:
+      items:
+        - {}
+    clusterKeyConfigExpressions:
+      items:
+        - {}
+    clusterKeyExpressions: false
+    constraintsspec:
+      items:
+        - {}
+    datretention: ""
+    defaultcoallation: ""
+    eschemaevol: false
+    foreignk: false
+    foreignkeycon:
+      items:
+        - {}
+    groupByAll: false
+    inlineconst: false
+    insertStrategy: UNION
+    maxdataretention: ""
+    orderby: false
+    orderbycolumn:
+      items:
+        - {}
+    outlineconst: false
+    primary: false
+    primarykeycon:
+      items:
+        - {}
+    primarykeyname: ""
+    selectDistinct: false
+    testsEnabled: false
+    truncateBefore: true
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: TARGET
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 9b6a293e-8bd1-47b0-a16c-68ff2d05b73c
+          stepCounter: 15e972c1-23c7-4ff5-95d3-79dee45b5093
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        name: N_NATIONKEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 18e5cc34-4dd9-4315-a253-97a9b356d66b
+                stepCounter: fee5e733-8933-42fc-8652-8c987f85a7e3
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 7fc2402f-a081-438b-b93b-33e77f3f1567
+          stepCounter: 15e972c1-23c7-4ff5-95d3-79dee45b5093
+        config: {}
+        dataType: VARCHAR(25)
+        description: ""
+        name: N_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: c0d2f115-16c3-4f94-adfc-b375c5bb082c
+                stepCounter: fee5e733-8933-42fc-8652-8c987f85a7e3
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 3892bb07-910d-42c0-aff0-4d9cbcde1634
+          stepCounter: 15e972c1-23c7-4ff5-95d3-79dee45b5093
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        name: N_REGIONKEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5a595521-52d8-4786-89f3-30a277d71504
+                stepCounter: fee5e733-8933-42fc-8652-8c987f85a7e3
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 2ac0e432-528f-4dd2-a25e-ae2365d1ca16
+          stepCounter: 15e972c1-23c7-4ff5-95d3-79dee45b5093
+        config: {}
+        dataType: VARCHAR(152)
+        description: ""
+        name: N_COMMENT
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 64a7533b-9778-41b3-9cbc-9e68b0166d26
+                stepCounter: fee5e733-8933-42fc-8652-8c987f85a7e3
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: f76ab039-bd9b-4ed8-9b2c-ee5e67efcaab
+          stepCounter: 15e972c1-23c7-4ff5-95d3-79dee45b5093
+        config: {}
+        dataType: VARCHAR(25)
+        description: ""
+        name: NEW_COL
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 6b6287d6-a5db-4b98-9387-a81d3184105a
+                stepCounter: fee5e733-8933-42fc-8652-8c987f85a7e3
+            transform: ""
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases: {}
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: TARGET
+            nodeName: STG_NATION
+        join:
+          joinCondition: FROM {{ ref('TARGET', 'STG_NATION') }} "STG_NATION"
+        name: CFCT_NATION1
+        noLinkRefs: []
+  name: CFCT_NATION1
+  overrideSQL: false
+  schema: ""
+  sqlType: "534"
+  type: sql
+  version: 1
+type: Node
