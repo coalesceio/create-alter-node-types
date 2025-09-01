@@ -92,7 +92,7 @@ operation:
           - columnReferences:
               - columnCounter: 2dcb2fef-300e-4f79-bf4d-e779a55596e3
                 stepCounter: aee5565e-5677-4fd9-bfac-e3f6ad68f45f
-            transform: ""
+            transform: UPPER(N_NAME)
       - appliedColumnTests: {}
         columnReference:
           columnCounter: c25dad68-d8d5-43a7-9810-63b7d9e96bd1
@@ -240,14 +240,15 @@ operation:
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
-      - aliases: {}
+      - aliases:
+          NATION: aee5565e-5677-4fd9-bfac-e3f6ad68f45f
         customSQL:
           customSQL: ""
         dependencies:
           - locationName: SOURCE
             nodeName: NATION
         join:
-          joinCondition: FROM {{ ref('SOURCE', 'NATION') }} "NATION"
+          joinCondition: FROM {{ ref('SOURCE', 'NATION') }} "NATION" WHERE "N_NATIONKEY" = 0
         name: CPSTG_NATION
         noLinkRefs: []
   name: CPSTG_NATION

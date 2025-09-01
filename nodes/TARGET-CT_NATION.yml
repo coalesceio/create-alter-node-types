@@ -75,7 +75,7 @@ operation:
           - columnReferences:
               - columnCounter: 2dcb2fef-300e-4f79-bf4d-e779a55596e3
                 stepCounter: aee5565e-5677-4fd9-bfac-e3f6ad68f45f
-            transform: ""
+            transform: UPPER(N_NAME)
       - appliedColumnTests: {}
         columnReference:
           columnCounter: 34597c52-581f-464d-9947-c415f1e19312
@@ -121,14 +121,15 @@ operation:
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
-      - aliases: {}
+      - aliases:
+          NATION: aee5565e-5677-4fd9-bfac-e3f6ad68f45f
         customSQL:
           customSQL: ""
         dependencies:
           - locationName: SOURCE
             nodeName: NATION
         join:
-          joinCondition: FROM {{ ref('SOURCE', 'NATION') }} "NATION"
+          joinCondition: FROM {{ ref('SOURCE', 'NATION') }} "NATION" WHERE "N_NATIONKEY" = 0
         name: CT_NATION
         noLinkRefs: []
   name: CT_NATION
