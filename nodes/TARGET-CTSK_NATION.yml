@@ -1,5 +1,5 @@
 fileVersion: 1
-id: 7f8bac91-7109-411e-a33e-293f8ef44370
+id: 0fe8e36f-c31a-4246-bef5-d504428892e9
 name: CTSK_NATION
 operation:
   config:
@@ -61,8 +61,8 @@ operation:
     columns:
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 72676614-ba4f-4803-9c47-a8a3ebfb7696
-          stepCounter: 7f8bac91-7109-411e-a33e-293f8ef44370
+          columnCounter: bd2c9daf-2406-4f0b-9172-17f2b19c6684
+          stepCounter: 0fe8e36f-c31a-4246-bef5-d504428892e9
         config: {}
         dataType: NUMBER(38,0)
         description: ""
@@ -75,8 +75,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 72f8b77d-3946-4a4c-a323-a5a93aaa7327
-          stepCounter: 7f8bac91-7109-411e-a33e-293f8ef44370
+          columnCounter: 1840abc4-056b-4ed3-9eca-a5347ecf9cf3
+          stepCounter: 0fe8e36f-c31a-4246-bef5-d504428892e9
         config: {}
         dataType: VARCHAR(25)
         description: ""
@@ -89,8 +89,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: b5e8ae28-9ee3-4519-b6ae-866d31f5345b
-          stepCounter: 7f8bac91-7109-411e-a33e-293f8ef44370
+          columnCounter: 8d946488-3c1a-471c-9219-67b2ff6f777d
+          stepCounter: 0fe8e36f-c31a-4246-bef5-d504428892e9
         config: {}
         dataType: NUMBER(38,0)
         description: ""
@@ -103,8 +103,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 50c2d10b-7729-429f-be87-423aa25b6fd8
-          stepCounter: 7f8bac91-7109-411e-a33e-293f8ef44370
+          columnCounter: 39621e75-bc01-4b33-a70f-8c95e5ab8b45
+          stepCounter: 0fe8e36f-c31a-4246-bef5-d504428892e9
         config: {}
         dataType: VARCHAR(152)
         description: ""
@@ -117,8 +117,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 97a62c7d-4361-4f87-96a7-045890d9aef7
-          stepCounter: 7f8bac91-7109-411e-a33e-293f8ef44370
+          columnCounter: b956533d-1a73-4dda-a12b-ace10d518025
+          stepCounter: 0fe8e36f-c31a-4246-bef5-d504428892e9
         config: {}
         dataType: VARCHAR(25)
         description: ""

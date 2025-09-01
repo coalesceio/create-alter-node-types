@@ -1,5 +1,5 @@
 fileVersion: 1
-id: 5ef6a94d-641f-4c35-8c75-2b1024a4dcbf
+id: 51f6c1e1-a612-42e0-a69e-2b328d13fccc
 name: CFCT_NATION
 operation:
   config:
@@ -50,8 +50,8 @@ operation:
     columns:
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 0f1d9d77-92cc-4c80-9901-f2adcdcfa665
-          stepCounter: 5ef6a94d-641f-4c35-8c75-2b1024a4dcbf
+          columnCounter: 6c496309-d27f-4532-9967-2322954ce81b
+          stepCounter: 51f6c1e1-a612-42e0-a69e-2b328d13fccc
         config: {}
         dataType: NUMBER(38,0)
         description: ""
@@ -64,8 +64,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 7c0d8102-09c7-498b-85ca-4d80b5d8a1cf
-          stepCounter: 5ef6a94d-641f-4c35-8c75-2b1024a4dcbf
+          columnCounter: 22ff2be9-5fcd-496c-84d8-22cb637f1e83
+          stepCounter: 51f6c1e1-a612-42e0-a69e-2b328d13fccc
         config: {}
         dataType: VARCHAR(25)
         description: ""
@@ -78,8 +78,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 67adb33d-2eff-4a73-835c-5241daf06c9d
-          stepCounter: 5ef6a94d-641f-4c35-8c75-2b1024a4dcbf
+          columnCounter: 1fe5a39b-8d27-4bbb-8169-2beca8d47145
+          stepCounter: 51f6c1e1-a612-42e0-a69e-2b328d13fccc
         config: {}
         dataType: NUMBER(38,0)
         description: ""
@@ -92,8 +92,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 7c93aa75-4ab8-40da-9251-acfda0123152
-          stepCounter: 5ef6a94d-641f-4c35-8c75-2b1024a4dcbf
+          columnCounter: 726a3de3-de2a-4536-bc37-b46ad73dc917
+          stepCounter: 51f6c1e1-a612-42e0-a69e-2b328d13fccc
         config: {}
         dataType: VARCHAR(152)
         description: ""
@@ -106,8 +106,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 2f61851c-88c4-44b5-9c1a-b18479d0aedb
-          stepCounter: 5ef6a94d-641f-4c35-8c75-2b1024a4dcbf
+          columnCounter: 8564f3f5-a607-463d-af69-5822ac3b28dc
+          stepCounter: 51f6c1e1-a612-42e0-a69e-2b328d13fccc
         config: {}
         dataType: VARCHAR(25)
         description: ""
