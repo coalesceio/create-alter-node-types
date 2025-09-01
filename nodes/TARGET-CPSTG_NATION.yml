@@ -81,20 +81,6 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 3499a2e7-6bbe-4975-8234-4984915f7532
-          stepCounter: ee02e41e-1ae8-44b9-b005-22cd22223e97
-        config: {}
-        dataType: VARCHAR(25)
-        description: ""
-        name: N_NAME
-        nullable: true
-        sourceColumnReferences:
-          - columnReferences:
-              - columnCounter: 2dcb2fef-300e-4f79-bf4d-e779a55596e3
-                stepCounter: aee5565e-5677-4fd9-bfac-e3f6ad68f45f
-            transform: ""
-      - appliedColumnTests: {}
-        columnReference:
           columnCounter: 2f13048e-cf06-49fe-9c32-639578a9f7ba
           stepCounter: ee02e41e-1ae8-44b9-b005-22cd22223e97
         config: {}
@@ -117,9 +103,7 @@ operation:
         name: N_COMMENT
         nullable: true
         sourceColumnReferences:
-          - columnReferences:
-              - columnCounter: 54561999-2cef-4a56-a934-8eb59fcbefab
-                stepCounter: aee5565e-5677-4fd9-bfac-e3f6ad68f45f
+          - columnReferences: []
             transform: ""
       - appliedColumnTests: {}
         columnReference:
@@ -237,6 +221,20 @@ operation:
         sourceColumnReferences:
           - columnReferences: []
             transform: CAST(CURRENT_TIMESTAMP AS TIMESTAMP)
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 3499a2e7-6bbe-4975-8234-4984915f7532
+          stepCounter: ee02e41e-1ae8-44b9-b005-22cd22223e97
+        config: {}
+        dataType: VARCHAR(25)
+        description: ""
+        name: N_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 5e8b59de-9620-4228-9893-779043f3ace5
+                stepCounter: 538a0788-0474-4393-8b06-f31fa9dccc67
+            transform: ""
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:

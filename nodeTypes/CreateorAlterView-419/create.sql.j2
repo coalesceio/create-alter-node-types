@@ -2,13 +2,11 @@
     Copyright (c) 2023 Coalesce. All rights reserved.
 This script and its associated documentation are confidential and proprietary to Coalesce.
 Unauthorized reproduction, distribution, or disclosure of this material is strictly prohibited.
-Coalesce permits you to copy and modify this script for the purposes of using with Coalsce but
+Coalesce permits you to copy and modify this script for the purposes of using with Coalesce but
 does not permit copying or modification for any other purpose.  
 #}
-{# == Node Type Version        : 1  == #}
 {# == Node Type Name           : Create or Alter View == #}
 {# == Node Type Description    : This node loads data creates and alters view== #}
-
 
 {% if desiredState == undefined %}
 
@@ -16,113 +14,112 @@ does not permit copying or modification for any other purpose.
     {% set targetObjectDatabase = ref_no_link(currentState.node.location.name, currentState.node.name).split('.')[0] %} 
     {% set targetObjectSchema = ref_no_link(currentState.node.location.name, currentState.node.name).split('.')[1] %} 
     {% set fullyQualifiedTargetObjectName = ref_no_link(currentState.node.location.name, currentState.node.name) %}
-    
-       {{ stage('Drop View' , true, "sql", "drop") }}
-       DROP VIEW IF EXISTS {{ fullyQualifiedTargetObjectName }}
+
+    {{ stage('Drop View') }}
+    DROP VIEW IF EXISTS {{ fullyQualifiedTargetObjectName }}
 
 {% elif currentState == undefined or (currentState != undefined and desiredState != currentState) %}
-
-       
-            {%if currentState !=undefined%} 
+    {%if currentState != undefined%} 
    
-                   {% set ns = namespace( storageLocationTest= true,descolchanges = 0,othercolchanges = 0,clusterTest = false,colchanges=0,nsCurrentDepStorageLocations="",nsCurrentSourceStorageLocations="",nsDesiredDepStorageLocations="",nsDesiredSourceStorageLocations="",sourcestorageLocationTest=true ) %}
-		   ## Node
-           {% set nodeNameTest = currentState.node.name == desiredState.node.name %}		   
-		   {% set joinTest = currentState.join == desiredState.join %}
-           {% set distst = currentState.config.selectDistinct == desiredState.config.selectDistinct %}        
-           {% set groupAlltst = currentState.config.groupByAll == desiredState.config.groupByAll %}
+        {% set ns = namespace( storageLocationTest= true, descolchanges = 0, othercolchanges = 0, clusterTest = false,colchanges=0, nsCurrentDepStorageLocations="", nsCurrentSourceStorageLocations="", nsDesiredDepStorageLocations="",nsDesiredSourceStorageLocations="", sourcestorageLocationTest=true, joinTest=true ) %}
+		## Node
+	   
+        {% set distst = currentState.config.selectDistinct == desiredState.config.selectDistinct %}        
+        {% set groupAlltst = currentState.config.groupByAll == desiredState.config.groupByAll %}
 
-            {# Current State Source Storage Location Info #}
-            {% for source in currentState.sources %}
-                {% for dep in source.dependencies %}
-                    {% set depSourceLocation = dep.node.location.name %}
-                    {% if loop.first %}
-                        {% set ns.nsCurrentDepStorageLocations = depSourceLocation %}
-                    {% else %}
-                        {% set ns.nsCurrentDepStorageLocations = ns.nsCurrentDepStorageLocations + ',' + depSourceLocation %}
-                    {% endif %}
-                {% endfor %}
-                
+        {# Current State Source Storage Location Info #}
+        {% for source in currentState.sources %}
+            {% for dep in source.dependencies %}
+                {% set depSourceLocation = dep.node.location.name %}
                 {% if loop.first %}
-                    {% set ns.nsCurrentSourceStorageLocations = ns.nsCurrentDepStorageLocations %}
+                    {% set ns.nsCurrentDepStorageLocations = depSourceLocation %}
                 {% else %}
-                    {% set ns.nsCurrentSourceStorageLocations = ns.nsCurrentSourceStorageLocations + ',' + ns.nsCurrentDepStorageLocations %}
+                    {% set ns.nsCurrentDepStorageLocations = ns.nsCurrentDepStorageLocations + ',' + depSourceLocation %}
                 {% endif %}
             {% endfor %}
-
             
-            {% set currentStorageLocations = (ns.nsCurrentSourceStorageLocations).split(',') | list %}
-            {% set currentUniqueStorageLocations = currentStorageLocations | unique | sort | list %}
-
-            
-            {# Desired State Source Storage Location Info #}
-            {% for source in desiredState.sources %}
-                {% for dep in source.dependencies %}
-                    {% set depSourceLocation = dep.node.location.name %}
-                    {% if loop.first %}
-                        {% set ns.nsDesiredDepStorageLocations = depSourceLocation %}
-                    {% else %}
-                        {% set ns.nnsDesiredDepStorageLocations = ns.nsDesiredDepStorageLocations + ',' + depSourceLocation %}
-                    {% endif %}
-                {% endfor %}
-                
-                {% if loop.first %}
-                    {% set ns.nsDesiredSourceStorageLocations = ns.nsDesiredDepStorageLocations %}
-                {% else %}
-                    {% set ns.nsDesiredSourceStorageLocations = ns.nsDesiredSourceStorageLocations + ',' + ns.nsDesiredDepStorageLocations %}
-                {% endif %}
-            {% endfor %}
-
-           
-            {% set desiredStorageLocations = (ns.nsDesiredSourceStorageLocations).split(',') | list %}
-            {% set desiredUniqueStorageLocations = desiredStorageLocations | unique | sort | list %}
-
-            {# Source storage location Test  #}
-            {% for name in desiredUniqueStorageLocations if ns.sourcestorageLocationTest == true %}
-                {# Current mappings #}
-                {% set currentDatabase = currentState.storageLocations | selectattr('name', 'equalto', name) | map(attribute='database') | first %}
-                {% set currentSchema = currentState.storageLocations | selectattr('name', 'equalto', name) | map(attribute='schema') | first %}
-                {% set currentDatabaseSchema = currentDatabase + '.' + currentSchema %}
-                
-                {# Desired mappings #}
-                {% set desiredDatabase = desiredState.storageLocations | selectattr('name', 'equalto', name) | map(attribute='database') | first %}
-                {% set desiredSchema = desiredState.storageLocations | selectattr('name', 'equalto', name) | map(attribute='schema') | first %}
-                {% set desiredDatabaseSchema = desiredDatabase + '.' + desiredSchema %}
-
-                {% if currentDatabaseSchema != desiredDatabaseSchema %}
-                    {% set ns.sourcestorageLocationTest = false %}
-                {% endif %}
-            {% endfor %}
-
-          {#Multi source#}
-			{% set mulsrcTest = currentState.config.mstoggle == desiredState.config.mstoggle %}
-            {% set mulsrcstraTest = currentState.config.insertStrategy == desiredState.config.insertStrategy %}
-            
-            {% if 
-                mulsrcTest == false or
-                mulsrcstraTest == false %}
-
-                {% set msrcTest = false %}
+            {% if loop.first %}
+                {% set ns.nsCurrentSourceStorageLocations = ns.nsCurrentDepStorageLocations %}
             {% else %}
-                {% set msrcTest = true %}
+                {% set ns.nsCurrentSourceStorageLocations = ns.nsCurrentSourceStorageLocations + ',' + ns.nsCurrentDepStorageLocations %}
             {% endif %}
+        {% endfor %}
 
-          {# Test to see if the transform in a column has changed #}
-          {% set desiredTransformArray = desiredState.sources | map(attribute='columns') | first | map(attribute='transform') | list -%}
-          {# Current Namespace Variables Transform #}
-          {% set currentTransformArray = currentState.sources | map(attribute='columns') | first | map(attribute='transform') | list -%}
+        {% set currentStorageLocations = (ns.nsCurrentSourceStorageLocations).split(',') | list %}
+        {% set currentUniqueStorageLocations = currentStorageLocations | unique | sort | list %}
+        
+        {# Desired State Source Storage Location Info #}
+        {% for source in desiredState.sources %}
+            {% for dep in source.dependencies %}
+                {% set depSourceLocation = dep.node.location.name %}
+                {% if loop.first %}
+                    {% set ns.nsDesiredDepStorageLocations = depSourceLocation %}
+                {% else %}
+                    {% set ns.nnsDesiredDepStorageLocations = ns.nsDesiredDepStorageLocations + ',' + depSourceLocation %}
+                {% endif %}
+            {% endfor %}
+            
+            {% if loop.first %}
+                {% set ns.nsDesiredSourceStorageLocations = ns.nsDesiredDepStorageLocations %}
+            {% else %}
+                {% set ns.nsDesiredSourceStorageLocations = ns.nsDesiredSourceStorageLocations + ',' + ns.nsDesiredDepStorageLocations %}
+            {% endif %}
+        {% endfor %}
+           
+        {% set desiredStorageLocations = (ns.nsDesiredSourceStorageLocations).split(',') | list %}
+        {% set desiredUniqueStorageLocations = desiredStorageLocations | unique | sort | list %}
 
+        {# Source storage location Test  #}
+        {% for name in desiredUniqueStorageLocations if ns.sourcestorageLocationTest == true %}
+            {# Current mappings #}
+            {% set currentDatabase = currentState.storageLocations | selectattr('name', 'equalto', name) | map(attribute='database') | first %}
+            {% set currentSchema = currentState.storageLocations | selectattr('name', 'equalto', name) | map(attribute='schema') | first %}
+            {% set currentDatabaseSchema = currentDatabase + '.' + currentSchema %}
+            
+            {# Desired mappings #}
+            {% set desiredDatabase = desiredState.storageLocations | selectattr('name', 'equalto', name) | map(attribute='database') | first %}
+            {% set desiredSchema = desiredState.storageLocations | selectattr('name', 'equalto', name) | map(attribute='schema') | first %}
+            {% set desiredDatabaseSchema = desiredDatabase + '.' + desiredSchema %}
 
-          {% set columnsTransformTest = currentTransformArray == desiredTransformArray %}
+            {% if currentDatabaseSchema != desiredDatabaseSchema %}
+                {% set ns.sourcestorageLocationTest = false %}
+            {% endif %}
+        {% endfor %}
 
+        {#Multi source#}
+        {% set mulsrcTest = currentState.config.mstoggle == desiredState.config.mstoggle %}
+        {% set mulsrcstraTest = currentState.config.insertStrategy == desiredState.config.insertStrategy %}
+        
+        {% if 
+            mulsrcTest == false or
+            mulsrcstraTest == false %}
 
-            {#Target location Test  #}
-            {%if currentState.storageLocations|length == 0%}          
-              {% set currentDatabase = currentState.storageLocations | selectattr('name', 'equalto', currentState.node.location.name) | map(attribute='database') | string %}
-              {% set currentSchema = currentState.storageLocations | selectattr('name', 'equalto', currentState.node.location.name) | map(attribute='schema') | string %}
-               {% set currentDatabaseSchema = currentDatabase + '.' + currentSchema %}
+            {% set msrcTest = false %}
+        {% else %}
+            {% set msrcTest = true %}
+        {% endif %}
+
+        {# Test to see if the transform in a column has changed #}
+        {% set desiredTransformArray = desiredState.sources | map(attribute='columns') | first | map(attribute='transform') | list -%}
+        {# Current Namespace Variables Transform #}
+        {% set currentTransformArray = currentState.sources | map(attribute='columns') | first | map(attribute='transform') | list -%}
+
+        {% set columnsTransformTest = currentTransformArray == desiredTransformArray %}
+
+        {# Test to see if the sourceLinks in a column has changed #}
+        {% set desiredLinkArray = desiredState.sources | map(attribute='columns') | first | map(attribute='sourceColumns') | list -%}
+        {# Current Namespace Variables Transform #}
+        {% set currentLinkArray = currentState.sources | map(attribute='columns') | first | map(attribute='sourceColumns') | list -%}
+
+        {% set columnsLinkTest = desiredLinkArray == currentLinkArray %}
+
+        {#Target location Test  #}
+        {%if currentState.storageLocations|length == 0%}          
+            {% set currentDatabase = currentState.storageLocations | selectattr('name', 'equalto', currentState.node.location.name) | map(attribute='database') | string %}
+            {% set currentSchema = currentState.storageLocations | selectattr('name', 'equalto', currentState.node.location.name) | map(attribute='schema') | string %}
+            {% set currentDatabaseSchema = currentDatabase + '.' + currentSchema %}
                
-            {%else %}   
+        {%else %}   
             {# Current target node mappings #}
             {% set currentDatabase = currentState.storageLocations | selectattr('name', 'equalto', currentState.node.location.name) | map(attribute='database') | first %}
             {% set currentSchema = currentState.storageLocations | selectattr('name', 'equalto', currentState.node.location.name) | map(attribute='schema') | first %}
@@ -134,9 +131,9 @@ does not permit copying or modification for any other purpose.
             {% set desiredSchema = desiredState.storageLocations | selectattr('name', 'equalto', desiredState.node.location.name) | map(attribute='schema') | first %}
             {% set desiredDatabaseSchema = desiredDatabase + '.' + desiredSchema %}           
             
-             {% if currentDatabaseSchema != desiredDatabaseSchema %}
-                {% set ns.storageLocationTest = false %}
-             {% endif %}
+            {% if currentDatabaseSchema != desiredDatabaseSchema %}
+            {% set ns.storageLocationTest = false %}
+            {% endif %}
 
 		    {#Add columns#}
             {% for addDesCol in desiredState.columns %}
@@ -144,7 +141,6 @@ does not permit copying or modification for any other purpose.
                 {% set ns.colchanges = ns.colchanges + 1 %}
                 {% endif %}
             {% endfor %}
-			
 			
 			{# Rename Columns #}
             {% for renameCurCol in currentState.columns %}
@@ -155,7 +151,6 @@ does not permit copying or modification for any other purpose.
                     {% endif %}
                 {% endif %}
             {% endfor %}
-
              
 			{# Drop Columns #}
             {% for dropCurCol in currentState.columns %}
@@ -167,7 +162,7 @@ does not permit copying or modification for any other purpose.
             {#Column level changes test#}
 			{% for alterCurCol in currentState.columns %}        
                 {% if alterCurCol.id in desiredState.columns | map(attribute="id") %}
-                     {% set currentColumnName = currentState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='name') | first %}
+                    {% set currentColumnName = currentState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='name') | first %}
                     {% set currentDescription = currentState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='description') | first %}
                     {% set currentDatatype = currentState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='dataType') | first %}
                     {% set currentNullable = currentState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='nullable') | first %}
@@ -177,67 +172,97 @@ does not permit copying or modification for any other purpose.
                     {% set desiredDescription = desiredState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='description') | first %}
                     {% set desiredDatatype = desiredState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='dataType') | first %}
                     {% set desiredNullable = desiredState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='nullable') | first %}
-                    {% set desiredDefaultValue = desiredState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='defaultValue') | first %}
-                        
+                    {% set desiredDefaultValue = desiredState.columns | selectattr('id', "equalto", alterCurCol.id) | map(attribute='defaultValue') | first %}  
 
-                   {% set datatypeTest = currentDatatype == desiredDatatype %}
-                   {% set nullableTest = currentNullable == desiredNullable %}
-                   {% set defaultValueTest = currentDefaultValue == desiredDefaultValue %}
-                   {% set descriptionTest = currentDescription == desiredDescription %}
-                   {% set columnnameTest = currentColumnName == desiredColumnName %}
+                    {% set datatypeTest = currentDatatype == desiredDatatype %}
+                    {% set nullableTest = currentNullable == desiredNullable %}
+                    {% set defaultValueTest = currentDefaultValue == desiredDefaultValue %}
+                    {% set descriptionTest = currentDescription == desiredDescription %}
+                    {% set columnnameTest = currentColumnName == desiredColumnName %}
 
                     {% if (descriptionTest == false) %}
                         {% set ns.descolchanges = ns.descolchanges + 1 %}
                     {%endif%} 														
                     {%if (datatypeTest == false or nullableTest == false or defaultValueTest == false or columnnameTest == false )%} 
                        {% set ns.othercolchanges = ns.othercolchanges + 1 %}                                      
-                     {%endif%} 																										
+                    {%endif%} 																										
                 {%endif%}    
             {% endfor %}
-         
     
-           {#Config level changes #}
-		  
-		   {%set securetst = currentState.config.secureOption == desiredState.config.secureOption%}
-		   {%set chngtracktst = currentState.config.changetracking == desiredState.config.changetracking%}
-		   	
+            {#Config level changes #}
+            {%set securetst = currentState.config.secureOption == desiredState.config.secureOption%}
+            {%set chngtracktst = currentState.config.changetracking == desiredState.config.changetracking%}
+
+            {% set sourcesTest = currentState.sources | count == desiredState.sources | count %}
+
+            {% if sourcesTest %}
+                {% for src in desiredState.sources %}
+                    {% set matchingSource = currentState.sources | selectattr('name', 'equalto', src.name) | first %}
+                    {% if matchingSource %}
+
+                        {% set desiredStateSources = src.join | replace("{{", '"{{"') | replace("}}", '"}}"') %}
+                        {% set currentStateSources = matchingSource.join | replace("{{", '"{{"') | replace("}}", '"}}"') %}
+                        {# Same number of sources — compare join transformations #}
+                        {% if desiredStateSources != currentStateSources %}
+                            {% set ns.joinTest = false %}
+                        {% endif %}
+                    {% else %}
+                        {% set ns.joinTest = false %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+	   	
+            {%set chngtracktst = currentState.config.changetracking == desiredState.config.changetracking%}
+          
             {% if 
-            chngtracktst == false or
-            securetst == false or 
-			ns.othercolchanges > 0 or 
-			ns.descolchanges > 0 or 
-			ns.colchanges > 0 or 
-			joinTest == false or 
-			columnsTransformTest == false or
-            distst == false or
-            groupAlltst == false or 
-            ns.sourcestorageLocationTest == false or
-            msrcTest == false%}    
+                chngtracktst == false or
+                securetst == false or 
+                sourcesTest == false or
+                ns.othercolchanges > 0 or 
+                ns.descolchanges > 0 or 
+                ns.colchanges > 0 or 
+                ns.joinTest == false or 
+                columnsLinkTest == false or
+                columnsTransformTest == false or
+                distst == false or
+                groupAlltst == false or 
+                ns.sourcestorageLocationTest == false or
+                msrcTest == false%}    
 
             {% set createTest = true %}
-          {% else %}
+        {% else %}
             {% set createTest = false %}
-         {% endif %}      
-		 
+        {% endif %}
 
         {%if createTest == false and (ns.storageLocationTest == false or currentState.node.name != desiredState.node.name)  %}    
            {%set altertest = true %}		   
-	     {%endif%}
+	    {%endif%}
 
-                {%if ns.othercolchanges > 0 or ns.descolchanges > 0 or ns.colchanges > 0 or joinTest == false or columnsTransformTest == false or distst == false or groupAlltst == false %}
-                     {{ stage('Drop View' + ' ' + ref_no_link(currentState.node.location.name, currentState.node.name), true, "sql", "drop") }}
+        {# Dropping the view before recreating for specific cases #}
+        {% if ns.othercolchanges > 0 or
+            ns.descolchanges > 0 or
+            ns.colchanges > 0 or
+            ns.joinTest == false or
+            columnsTransformTest == false or
+            columnsLinkTest == false or
+            distst == false or
+            groupAlltst == false or
+            msrcTest == false or
+            sourcesTest == false %}
+        
+            {{ stage('Drop View', true, "sql", "drop") }}
 
-                      DROP VIEW IF EXISTS {{ ref_no_link(currentState.node.location.name, currentState.node.name) }}
-                     
-                {%endif%}
+            DROP VIEW IF EXISTS {{ ref_no_link(currentState.node.location.name, currentState.node.name) }}
+                
+        {%endif%}
     {%endif%}
 
     {%if currentState == undefined  or createTest == true%}
        
-       {# CreateSQL for View #}
+        {# CreateSQL for View #}
         {{ stage('Create/Alter View') }}
 
-	     CREATE OR ALTER {% if desiredState.config.secureOption %} SECURE {% endif %} VIEW {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
+	    CREATE OR ALTER {% if desiredState.config.secureOption %} SECURE {% endif %} VIEW {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
         (
             {% for col in desiredState.columns %}
                 "{{ col.name }}"
@@ -261,7 +286,7 @@ does not permit copying or modification for any other purpose.
             {{ source.join }}
             {% if desiredState.config.groupByAll %}
 		       Group By All
-	         {% endif %}
+	        {% endif %}
             {% if not loop.last %}
                 {% if desiredState.config.insertStrategy in ['UNION', 'UNION ALL'] %}
                     {{ desiredState.config.insertStrategy }}
@@ -270,18 +295,17 @@ does not permit copying or modification for any other purpose.
                 {% endif %}
             {% endif %}
         {% endfor %}
-     {%endif%}
+    {%endif%}
 
-        {%if altertest == true %}
-         
-                {{ stage('Rename and / or Move View', true, "sql", "alter") }}
-                {% set srcSchName = currentState.node.location.name %}
-                {% set cdb = currentState.storageLocations | selectattr('name', 'equalto', srcSchName) | map(attribute='database') | first %}
-                {% set csch = currentState.storageLocations | selectattr('name', 'equalto', srcSchName) | map(attribute='schema') | first %}
+    {%if altertest == true %}
+        
+        {{ stage('Rename and / or Move View') }}
+        {% set srcSchName = currentState.node.location.name %}
+        {% set cdb = currentState.storageLocations | selectattr('name', 'equalto', srcSchName) | map(attribute='database') | first %}
+        {% set csch = currentState.storageLocations | selectattr('name', 'equalto', srcSchName) | map(attribute='schema') | first %}
 
-                ALTER VIEW "{{cdb}}"."{{csch}}"."{{currentState.node.name}}"
-                RENAME TO   {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
-       {%endif%}
-	
+        ALTER VIEW "{{cdb}}"."{{csch}}"."{{currentState.node.name}}"
+        RENAME TO   {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
+    {%endif%}
 
 {%endif%}

@@ -1,6 +1,6 @@
 fileVersion: 1
 id: fee5e733-8933-42fc-8652-8c987f85a7e3
-name: STG_NATION_NC
+name: STG_NATION
 operation:
   config:
     insertStrategy: INSERT
@@ -98,9 +98,9 @@ operation:
             nodeName: NATION
         join:
           joinCondition: FROM {{ ref('SOURCE', 'NATION') }} "NATION"
-        name: STG_NATION_NC
+        name: STG_NATION
         noLinkRefs: []
-  name: STG_NATION_NC
+  name: STG_NATION
   overrideSQL: false
   schema: ""
   sqlType: Stage
