@@ -103,6 +103,24 @@ When the Create or Alter table node is redeployed with any changes in table or c
 
 If the nodes are redeployed with no changes compared to previous deployment,then no stages are executed
 
+### Redeployment with only metadata changes
+
+Sometimes, changes to config can result in metadata changes from node edits, DML changes, or storage updates. A few cases are listed below:
+
+1. Changes in business keys
+2. Changes to change tracking keys
+3. Changes in join clauses
+4. Transformations made at column level
+5. Changing DML options like DISTINCT, ORDER BY, GROUP BY ALL
+
+And many more. Most of the time, specific ‘is’ and ‘was’ values will be displayed to specifically show what changed.
+
+The following stages are executed:
+
+| **Stage** | **Description** |
+|-----------|----------------|
+| **Metadata Update \| Business Keys \| Change Tracking \| Distinct \| Transformation \| Join** | A dummy statement would execute with specific changes listed in comments|
+
 ### Create Or Alter Tables Undeployment
 
 If a Create or Alter table node of materialization type table/transient table are deleted from a Workspace, that Workspace is committed to Git and that commit deployed to a higher level environment then the table in the target environment will be dropped.
@@ -188,7 +206,7 @@ Change in view definition like change in columns,add or drop columns,change in d
 
 If the nodes are redeployed with no changes compared to previous deployment,then no stages are executed
 
-### Create Or Alter Tables Undeployment
+### Create Or Alter View Undeployment
 
 If a Create or Alter view node are deleted from a Workspace, that Workspace is committed to Git and that commit deployed to a higher level environment then the table in the target environment will be dropped.
 
@@ -296,6 +314,24 @@ When the Create or Alter table node is redeployed with any changes in table or c
 
 If the nodes are redeployed with no changes compared to previous deployment, then no stages are executed
 
+### Redeployment with only metadata changes
+
+Sometimes, changes to config can result in metadata changes from node edits, DML changes, or storage updates. A few cases are listed below:
+
+1. Changes in business keys
+2. Changes to change tracking keys
+3. Changes in join clauses
+4. Transformations made at column level
+5. Changing DML options like DISTINCT, ORDER BY, GROUP BY ALL
+
+And many more. Most of the time, specific ‘is’ and ‘was’ values will be displayed to specifically show what changed.
+
+The following stages are executed:
+
+| **Stage** | **Description** |
+|-----------|----------------|
+| **Metadata Update \| Business Keys \| Change Tracking \| Distinct \| Transformation \| Join** | A dummy statement would execute with specific changes listed in comments|
+
 ### Create Or Alter Tables Undeployment
 
 If a Create or Alter table node of materialization type table/transient table are deleted from a Workspace, that Workspace is committed to Git and that commit deployed to a higher level environment then the table in the target environment will be dropped.
@@ -399,6 +435,24 @@ When the Create or Alter table node is redeployed with any changes in table or c
 ### Redeployment with no changes 
 
 If the nodes are redeployed with no changes compared to previous deployment, then no stages are executed
+
+### Redeployment with only metadata changes
+
+Sometimes, changes to config can result in metadata changes from node edits, DML changes, or storage updates. A few cases are listed below:
+
+1. Changes in business keys
+2. Changes to change tracking keys
+3. Changes in join clauses
+4. Transformations made at column level
+5. Changing DML options like DISTINCT, ORDER BY, GROUP BY ALL
+
+And many more. Most of the time, specific ‘is’ and ‘was’ values will be displayed to specifically show what changed.
+
+The following stages are executed:
+
+| **Stage** | **Description** |
+|-----------|----------------|
+| **Metadata Update \| Business Keys \| Change Tracking \| Distinct \| Transformation \| Join** | A dummy statement would execute with specific changes listed in comments|
 
 ### Create Or Alter Tables Undeployment
 
@@ -504,6 +558,24 @@ When the Create or Alter table node is redeployed with any changes in table or c
 ### Redeployment with no changes 
 
 If the nodes are redeployed with no changes compared to previous deployment, then no stages are executed
+
+### Redeployment with only metadata changes
+
+Sometimes, changes to config can result in metadata changes from node edits, DML changes, or storage updates. A few cases are listed below:
+
+1. Changes in business keys
+2. Changes to change tracking keys
+3. Changes in join clauses
+4. Transformations made at column level
+5. Changing DML options like DISTINCT, ORDER BY, GROUP BY ALL
+
+And many more. Most of the time, specific ‘is’ and ‘was’ values will be displayed to specifically show what changed.
+
+The following stages are executed:
+
+| **Stage** | **Description** |
+|-----------|----------------|
+| **Metadata Update \| Business Keys \| Change Tracking \| Distinct \| Transformation \| Join** | A dummy statement would execute with specific changes listed in comments|
 
 ### Create Or Alter Tables Undeployment
 
@@ -654,6 +726,24 @@ Subsequent deployments with changes in table like add or drop column and change 
 | **Suspend Task** | Suspend task |
 | **Create Task** | Create Or Alter task with new schedule |
 | **Resume Task** | Resumes task with new schedule |
+
+### Redeployment with only metadata changes
+
+Sometimes, changes to config can result in metadata changes from node edits, DML changes, or storage updates when the **DEV_MODE** is **ON**. A few cases are listed below:
+
+1. Changes in business keys
+2. Changes to change tracking keys
+3. Changes in join clauses
+4. Transformations made at column level
+5. Changing DML options like DISTINCT, ORDER BY, GROUP BY ALL
+
+And many more. Most of the time, specific ‘is’ and ‘was’ values will be displayed to specifically show what changed.
+
+The following stages are executed:
+
+| **Stage** | **Description** |
+|-----------|----------------|
+| **Metadata Update \| Business Keys \| Change Tracking \| Distinct \| Transformation \| Join** | A dummy statement would execute with specific changes listed in comments|
 
 ### Create or Alter Task Undeployment
 
