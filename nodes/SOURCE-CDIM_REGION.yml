@@ -238,14 +238,15 @@ operation:
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
-      - aliases: {}
+      - aliases:
+          CT_REGION: 3b24406a-8754-443d-82e0-7cc8fd91af3b
         customSQL:
           customSQL: ""
         dependencies:
           - locationName: TARGET
-            nodeName: CT_REGION
+            nodeName: CT_REGION_C
         join:
-          joinCondition: FROM {{ ref('TARGET', 'CT_REGION') }} "CT_REGION"
+          joinCondition: FROM {{ ref('TARGET', 'CT_REGION_C') }} "CT_REGION"
         name: CDIM_REGION
         noLinkRefs: []
   name: CDIM_REGION

@@ -28,7 +28,6 @@ operation:
         - {}
     groupByAll: false
     inlineconst: false
-    insertStrategy: null
     maxdataretention: ""
     orderby: false
     outlineconst: true

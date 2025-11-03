@@ -1,6 +1,6 @@
 fileVersion: 1
 id: 3b24406a-8754-443d-82e0-7cc8fd91af3b
-name: CT_REGION
+name: CT_REGION_C
 operation:
   config:
     changetracking: true
@@ -109,9 +109,9 @@ operation:
             nodeName: REGION
         join:
           joinCondition: FROM {{ ref('SOURCE', 'REGION') }} "REGION"
-        name: CT_REGION
+        name: CT_REGION_C
         noLinkRefs: []
-  name: CT_REGION
+  name: CT_REGION_C
   overrideSQL: false
   schema: ""
   sqlType: "345"
