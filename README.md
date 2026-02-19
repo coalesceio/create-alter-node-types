@@ -11,6 +11,24 @@ Create or Alter package includes:
 * [Create DAG Root Resume Task](#Create-DAG-Root-Resume-Task)
 * [Code](#code)
 
+## Brief summary
+
+The Create or Alter package is a suite of Coalesce node types designed to streamline the management of Snowflake objects by leveraging Snowflake’s CREATE OR ALTER syntax. This approach simplifies the deployment lifecycle by automatically determining whether to create a new object or modify an existing one based on the defined configuration.
+
+### Key Components
+The package supports several essential data modeling and orchestration objects:
+* Data Structures: Tables, Views, Dimensions, Facts, and Persistent Stages.
+* Orchestration: Tasks, DAG Root Tasks, and Resume Task nodes for managing complex Directed Acyclic Graphs (DAGs) within Snowflake.
+Core Functionality
+* Automated Deployment: It handles initial creation, redeployment (applying changes like adding columns or updating metadata), and undeployment (dropping objects) across different environments.
+* Configuration Management: Users can toggle advanced Snowflake features through a UI, such as clustering keys, change tracking, schema evolution, data retention time, and inline/out-of-line constraints.
+* Task Orchestration: It includes specific logic to manage Snowflake Tasks, allowing users to define schedules (Cron or interval), warehouse sizes, and predecessor dependencies. It specifically handles the suspension and resumption of root tasks during deployments to ensure DAG integrity.
+* Change Handling: The package is designed to detect changes in metadata or configuration and execute the appropriate DDL (e.g., ALTER TABLE for column additions or DROP/CREATE for materialization type changes).
+
+### Primary Benefit
+
+The main advantage of this package is declarative state management. Instead of writing manual migration scripts, users define the desired state of their Snowflake environment, and the package automates the SQL required to reach that state.
+
 # Create or Alter table
 
 The [Create or alter table](https://docs.snowflake.com/en/sql-reference/sql/create-table#create-or-alter-table) creates table if it doesn’t exist, or alters it according to the table definition. 
