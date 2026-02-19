@@ -279,6 +279,10 @@ Create Or Alter has two configuration groups:
 | **Truncate Before** | Toggle: True/False<br/>This determines whether a table will be overwritten each time a task executes.<br/>**True**: Uses INSERT OVERWRITE<br/>**False**: Uses INSERT to append data |
 | **Enable tests** | Toggle: True/False<br/>Determines if tests are enabled |
 | **Business key** | Required column for both Type 1 and Type 2 Dimensions<br/>Note: Geometry and Geography data type columns are not supported as business key columns. |
+| **Last Modified Comparison** | **True**:When enabled we can do timestamp based CDC<br/>**False**:Regular CDC based on Change tracking columns is done |
+| **Last Modified Column(Enabled for Last Modified Comparison)** | Timestamp/Incremental ID column can be chosen.Based on which CDC is done |
+| **Treat Null as Current timestamp(Enabled for Last Modified Comparison)** | Records with NULL timestamp are updated in target|
+| **Type 2 Dimension(Enabled for Last Modified Comparison)** |CDC is based on timestamp/ID column chosen above.Change tracking columns are not enabled for this scenario|
 | **Change tracking** | Required column for Type 2. If not chosen, treated as type 1|
 | **Distinct** | Toggle: True/False<br/>**True**: Group by All is invisible.<br/>DISTINCT data is chosen for processing.<br/>**False**: Group by All is visible. |
 | **Group by All** | Toggle: True/False<br/>**True**: DISTINCT is invisible<br/>Data grouped by all columns<br/>**False**: DISTINCT is visible |
@@ -405,6 +409,9 @@ Create Or Alter has two configuration groups:
 | **Truncate Before** | Toggle: True/False<br/>This determines whether a table will be overwritten each time a task executes.<br/>**True**: Uses INSERT OVERWRITE<br/>**False**: Uses INSERT to append data |
 | **Enable tests** | Toggle: True/False<br/>Determines if tests are enabled |
 | **Business key** | Required column for Fact table creation.<br/>Note: Geometry and Geography data type columns are not supported as business key columns. |
+| **Last Modified Comparison** | **True**:When enabled we can do timestamp based CDC<br/>**False**:Regular CDC based on Change tracking columns is done |
+| **Last Modified Column(Enabled for Last Modified Comparison)** | Timestamp/Incremental ID column can be chosen.Based on which CDC is done |
+| **Treat Null as Current timestamp(Enabled for Last Modified Comparison)**| Records with NULL timestamp are updated in target|
 | **Distinct** | Toggle: True/False<br/>**True**: Group by All is invisible.<br/>DISTINCT data is chosen for processing.<br/>**False**: Group by All is visible. |
 | **Group by All** | Toggle: True/False<br/>**True**: DISTINCT is invisible<br/>Data grouped by all columns<br/>**False**: DISTINCT is visible |
 | **Order By** | Toggle: True/False<br/>**True**: Sort column and sort order drop down are visible and are required to form order by clause.<br/>**False**: Sort options invisible |
@@ -527,6 +534,10 @@ Create Or Alter has two configuration groups:
 | **Truncate Before** | Toggle: True/False<br/>This determines whether a table will be overwritten each time a task executes.<br/>**True**: Uses INSERT OVERWRITE<br/>**False**: Uses INSERT to append data |
 | **Enable tests** | Toggle: True/False<br/>Determines if tests are enabled |
 | **Business key** | Required column for both Type 1 and Type 2.<br/>Note: Geometry and Geography data type columns are not supported as business key columns. |
+| **Last Modified Comparison** | **True**:When enabled we can do timestamp based CDC<br/>**False**:Regular CDC based on Change tracking columns is done |
+| **Last Modified Column(Enabled for Last Modified Comparison)** | Timestamp/Incremental ID column can be chosen.Based on which CDC is done |
+| **Treat Null as Current timestamp(Enabled for Last Modified Comparison)**| Records with NULL timestamp are updated in target|
+| **Type 2 Dimension(Enabled for Last Modified Comparison)**|CDC is based on timestamp/ID column chosen above.Change tracking columns are not enabled for this scenario|
 | **Change tracking** | Required column for Type 2. If not chosen, treated as type 1|
 | **Distinct** | Toggle: True/False<br/>**True**: Group by All is invisible.<br/>DISTINCT data is chosen for processing.<br/>**False**: Group by All is visible. |
 | **Group by All** | Toggle: True/False<br/>**True**: DISTINCT is invisible<br/>Data grouped by all columns<br/>**False**: DISTINCT is visible |
