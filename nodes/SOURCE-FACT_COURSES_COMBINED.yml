@@ -1,0 +1,149 @@
+fileVersion: 1
+id: c77376a1-28a8-48cc-a8fa-caae07c084fd
+name: FACT_COURSES_COMBINED
+operation:
+  config:
+    changetracking: false
+    clusterKey: false
+    clusterKeyConfig:
+      items:
+        - {}
+    clusterKeyConfigExpressions:
+      items:
+        - {}
+    clusterKeyExpressions: false
+    constraintsspec:
+      items:
+        - {}
+    datretention: ""
+    defaultcoallation: ""
+    eschemaevol: false
+    foreignk: false
+    foreignkeycon:
+      items:
+        - {}
+    groupByAll: true
+    inlineconst: false
+    insertStrategy: UNION
+    lastModifiedColumn:
+      columnCounter: 019c75ae-aaa4-73e6-b11a-d794c9caf4e1
+      stepCounter: c77376a1-28a8-48cc-a8fa-caae07c084fd
+    lastModifiedComparison: true
+    maxdataretention: ""
+    orderby: false
+    orderbycolumn:
+      items:
+        - {}
+    outlineconst: false
+    primary: false
+    primarykeycon:
+      items:
+        - {}
+    primarykeyname: ""
+    selectDistinct: false
+    testsEnabled: false
+    treatNullAsCurrentTimestamp: false
+    truncateBefore: true
+  database: ""
+  deployEnabled: true
+  description: Fact table combining IT and SC courses
+  isMultisource: true
+  locationName: SOURCE
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 019c75ae-aaa4-73e6-b11a-d794c9caf4e1
+          stepCounter: c77376a1-28a8-48cc-a8fa-caae07c084fd
+        config: {}
+        dataType: NUMBER
+        description: ""
+        isBusinessKey: true
+        name: COURSE_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 3ffa6388-8fc2-4c98-8024-8da0f3631f88
+                stepCounter: 0eaea7b8-09c1-4b90-ae63-a0c92cebff22
+            transform: ""
+          - columnReferences:
+              - columnCounter: 1fc22531-d61f-495d-b9e1-927049e545a3
+                stepCounter: 16a1769c-425d-4935-b468-bf5508cd36b2
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 019c75ae-aaa4-73e6-b11a-db0551a3263f
+          stepCounter: c77376a1-28a8-48cc-a8fa-caae07c084fd
+        config: {}
+        dataType: VARCHAR
+        description: ""
+        isBusinessKey: false
+        name: COURSE_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 3cbfa28b-a359-44dd-833a-212729428026
+                stepCounter: 0eaea7b8-09c1-4b90-ae63-a0c92cebff22
+            transform: ""
+          - columnReferences:
+              - columnCounter: 7f723211-a499-4cea-a308-e22862fe8c34
+                stepCounter: 16a1769c-425d-4935-b468-bf5508cd36b2
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 019c75ae-aaa4-73e6-b11a-de83988da899
+          stepCounter: c77376a1-28a8-48cc-a8fa-caae07c084fd
+        config: {}
+        dataType: VARCHAR
+        description: ""
+        isBusinessKey: false
+        name: INSTRUCTOR
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: ffb10a05-aadb-459c-b131-d3867ab7f713
+                stepCounter: 0eaea7b8-09c1-4b90-ae63-a0c92cebff22
+            transform: ""
+          - columnReferences:
+              - columnCounter: a7636c5d-a258-440c-97e7-a90648e530f3
+                stepCounter: 16a1769c-425d-4935-b468-bf5508cd36b2
+            transform: ""
+    cteString: ""
+    description: ""
+    destinationName: ""
+    enabledColumnTestIDs: []
+    materializationOption: ""
+    sourceMapping:
+      - aliases:
+          COURSES_IT: 0eaea7b8-09c1-4b90-ae63-a0c92cebff22
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SOURCE
+            nodeName: COURSES_IT
+        join:
+          joinCondition: FROM {{ ref('SOURCE', 'COURSES_IT') }} COURSES_IT
+        name: FACT_COURSES_COMBINED
+        noLinkRefs: []
+      - aliases:
+          COURSES_SC: 16a1769c-425d-4935-b468-bf5508cd36b2
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SOURCE
+            nodeName: COURSES_SC
+        join:
+          joinCondition: |-
+            FROM {{ ref('SOURCE', 'COURSES_SC') }} "COURSES_SC"
+            where "COURSES_SC"."COURSE_ID" = 102
+        name: NEW_SOURCE
+        noLinkRefs: []
+  name: FACT_COURSES_COMBINED
+  overrideSQL: false
+  schema: ""
+  sqlType: "534"
+  type: sql
+  version: 1
+type: Node

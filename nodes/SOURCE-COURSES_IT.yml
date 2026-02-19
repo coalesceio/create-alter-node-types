@@ -1,0 +1,73 @@
+fileVersion: 1
+id: 0eaea7b8-09c1-4b90-ae63-a0c92cebff22
+name: COURSES_IT
+operation:
+  database: ""
+  deployEnabled: true
+  description: ""
+  locationName: SOURCE
+  metadata:
+    columns:
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 3ffa6388-8fc2-4c98-8024-8da0f3631f88
+          stepCounter: 0eaea7b8-09c1-4b90-ae63-a0c92cebff22
+        config: {}
+        dataType: NUMBER(38,0)
+        defaultValue: ""
+        description: ""
+        name: COURSE_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 3cbfa28b-a359-44dd-833a-212729428026
+          stepCounter: 0eaea7b8-09c1-4b90-ae63-a0c92cebff22
+        config: {}
+        dataType: VARCHAR(16777216)
+        defaultValue: ""
+        description: ""
+        name: COURSE_NAME
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: ffb10a05-aadb-459c-b131-d3867ab7f713
+          stepCounter: 0eaea7b8-09c1-4b90-ae63-a0c92cebff22
+        config: {}
+        dataType: VARCHAR(16777216)
+        defaultValue: ""
+        description: ""
+        name: INSTRUCTOR
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+  name: COURSES_IT
+  schema: ""
+  sqlType: Source
+  type: sourceInput
+  version: 1
+type: Node
