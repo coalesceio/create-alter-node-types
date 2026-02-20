@@ -1,0 +1,104 @@
+fileVersion: 1
+id: afff5618-4d64-4763-8aab-1555b920ccd3
+name: LEGACY_DATA
+operation:
+  config:
+    insertStrategy: INSERT
+    postSQL: ""
+    preSQL: ""
+    testsEnabled: true
+    truncateBefore: true
+  database: ""
+  deployEnabled: true
+  description: Legacy customer data filtered for active records
+  isMultisource: false
+  locationName: SOURCE
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 019c7483-c5b2-7329-b7a8-9a9d88e7dc35
+          stepCounter: afff5618-4d64-4763-8aab-1555b920ccd3
+        config: {}
+        dataType: VARCHAR
+        description: ""
+        name: SOURCE_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: RLC.LEGACY_ID
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 019c7483-c5b2-7329-b7a8-9e6c15f2e0b5
+          stepCounter: afff5618-4d64-4763-8aab-1555b920ccd3
+        config: {}
+        dataType: VARCHAR
+        description: ""
+        name: SOURCE_SYSTEM
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: "'LEGACY'"
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 019c7483-c5b2-7329-b7a8-a32d417d9193
+          stepCounter: afff5618-4d64-4763-8aab-1555b920ccd3
+        config: {}
+        dataType: VARCHAR
+        description: ""
+        name: FULL_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: RLC.FULL_NAME
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 019c7483-c5b2-7329-b7a8-a5a4c3c02e23
+          stepCounter: afff5618-4d64-4763-8aab-1555b920ccd3
+        config: {}
+        dataType: VARCHAR
+        description: ""
+        name: EMAIL_ADDRESS
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: RLC.EMAIL_ADDRESS
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 019c7483-c5b2-7329-b7a8-a80b61a4689b
+          stepCounter: afff5618-4d64-4763-8aab-1555b920ccd3
+        config: {}
+        dataType: TIMESTAMP
+        description: ""
+        name: CREATED_AT
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: RLC.CREATED_AT
+    cteString: ""
+    description: ""
+    destinationName: ""
+    enabledColumnTestIDs: []
+    materializationOption: ""
+    sourceMapping:
+      - aliases: {}
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SOURCE
+            nodeName: RAW_LEGACY_CUSTOMERS
+        join:
+          joinCondition: |-
+            FROM {{ ref('SOURCE', 'RAW_LEGACY_CUSTOMERS') }} RLC
+            WHERE RLC.IS_ACTIVE = TRUE
+        name: LEGACY_DATA
+        noLinkRefs: []
+  name: LEGACY_DATA
+  overrideSQL: false
+  schema: ""
+  sqlType: Stage
+  type: sql
+  version: 1
+type: Node
