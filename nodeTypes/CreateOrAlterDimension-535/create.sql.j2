@@ -28,9 +28,9 @@ does not permit copying or modification for any other purpose.
     {% set fullyQualifiedTargetObjectName = ref_no_link(currentState.node.location.name, currentState.node.name) %}
     
        {{ stage('Drop ' + currentState.node.materializationType) }}
-       {{ stage('Drop ' + currentState.node.materializationType) }}
+       
        {%- set materialization = dropMaterialization(currentState.node.materializationType) %}
-       DROP {{materialization}} IF EXISTS {{ fullyQualifiedTargetObjectName }}
+       DROP {{materialization}} IF EXISTS {{ ref_no_link(currentState.node.location.name, currentState.node.name) }}
 
 {% elif currentState == undefined or (currentState != undefined and desiredState != currentState) %}
 
@@ -717,7 +717,7 @@ does not permit copying or modification for any other purpose.
                 {% set _ = nsMetaVariables.insertZeroKeyDiff.append({
                     "Config": "Default Surrogate Key Value",
                     "is": desiredState.config.insertZeroKeySurrogateKey | replace('/*', '/ *') | replace('*/', '* /'),
-                    "was": currentState.config.insertZeroKeySurrogateKey | | default(false) |replace('/*', '/ *') | replace('*/', '* /')
+                    "was": currentState.config.insertZeroKeySurrogateKey | default(false) |replace('/*', '/ *') | replace('*/', '* /')
                 }) %}
                 {% endif %}
 
