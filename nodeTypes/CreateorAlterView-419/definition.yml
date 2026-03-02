@@ -4,14 +4,13 @@ isDisabled: false
 metadata:
   defaultStorageLocation: null
   error: null
-  nodeMetadataSpec: |+
+  nodeMetadataSpec: |-
     capitalized: Create or Alter View
     short: CV
     tagColor: '#A6A6A6'
     plural: Create
 
     deployStrategy: advanced
-
 
     config:
     - groupName: Create View Options
@@ -32,6 +31,7 @@ metadata:
         - type: toggleButton
           attributeName: selectDistinct
           displayName: Distinct
+          default: false
           enableIf: "{% if config.groupByAll %} false {% else %} true {% endif %}"
 
         - displayName: Group By All
@@ -48,11 +48,9 @@ metadata:
           type: dropdownSelector
           default: UNION
           options:
-          - "UNION"
-          - "UNION ALL" 
+            - "UNION"
+            - "UNION ALL"
           isRequired: false
           enableIf: "{% if node.isMultisource %} true {% else %} false {% endif %}"
-
-
 name: Create or Alter View
 type: NodeType
