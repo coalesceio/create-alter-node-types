@@ -3,42 +3,42 @@ id: bdfc4188-7654-4fe5-80f2-08716e597e04
 name: EXT_DATA
 operation:
   config:
-    autoRefresh: false
-    cloudProvider: AWS
-    compression: NONE
-    ddlCaseInsensitive: false
-    emptyfield: true
-    encoding: UTF8
-    escapeenclosed: \134
-    escapeval: ""
-    fieldDelim: ","
-    fieldEnclosed: \042
-    fileFormatLoc: ""
-    fileFormatName: ""
-    fileFormatType: File Format Values
-    fileNames: ""
-    filePattern: .*order.*[.]json
-    fileType: JSON
-    inferschema: false
-    integration: ""
-    mulline: true
-    nullchar: ('\N')
-    parsehdr: true
-    parsehdr1: true
-    partby:
+    changetracking: false
+    clusterKey: false
+    clusterKeyConfig:
       items:
         - {}
-    partclause: false
-    recDelim: |+
-
-    replaceinvalidcharacters: true
-    skipBlankLines: false
-    skipHeader: "1"
-    snsTopic: arn:aws:sns:us-east-1:121674918127:prod-emea-s3-notification
-    stageName: spstagesample/
-    stageStorageLocationName: TGT_NEW
-    stripouterarray: true
-    trimSpace: false
+    clusterKeyConfigExpressions:
+      items:
+        - {}
+    clusterKeyExpressions: false
+    constraintsspec:
+      items:
+        - {}
+    datretention: ""
+    defaultcoallation: ""
+    eschemaevol: false
+    foreignk: false
+    foreignkeycon:
+      items:
+        - {}
+    groupByAll: false
+    inlineconst: false
+    insertStrategy: INSERT
+    maxdataretention: ""
+    orderby: false
+    orderbycolumn:
+      items:
+        - {}
+    outlineconst: false
+    primary: false
+    primarykeycon:
+      items:
+        - {}
+    primarykeyname: ""
+    selectDistinct: false
+    testsEnabled: false
+    truncateBefore: true
   database: ""
   deployEnabled: true
   description: ""
@@ -113,7 +113,7 @@ operation:
   name: EXT_DATA
   overrideSQL: false
   schema: ""
-  sqlType: ED:::298
+  sqlType: "345"
   type: sql
   version: 1
 type: Node

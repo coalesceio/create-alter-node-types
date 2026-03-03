@@ -3,13 +3,7 @@ id: b4f42067-93a4-4411-8a44-ca966b85f421
 name: WRK_ORD
 operation:
   config:
-    asofColumn:
-      items:
-        - {}
-    asofJoin: true
-    asofJoinMain: false
-    asofJoinON: false
-    asofJoinUSING: false
+    changetracking: false
     clusterKey: false
     clusterKeyConfig:
       items:
@@ -18,14 +12,30 @@ operation:
       items:
         - {}
     clusterKeyExpressions: false
+    constraintsspec:
+      items:
+        - {}
+    datretention: ""
+    defaultcoallation: ""
+    eschemaevol: false
+    foreignk: false
+    foreignkeycon:
+      items:
+        - {}
     groupByAll: false
+    inlineconst: false
     insertStrategy: INSERT
+    maxdataretention: ""
     orderby: false
     orderbycolumn:
       items:
         - {}
-    postSQL: ""
-    preSQL: ""
+    outlineconst: false
+    primary: false
+    primarykeycon:
+      items:
+        - {}
+    primarykeyname: ""
     selectDistinct: false
     testsEnabled: false
     truncateBefore: true
@@ -195,7 +205,7 @@ operation:
   name: WRK_ORD
   overrideSQL: false
   schema: ""
-  sqlType: "179"
+  sqlType: "345"
   type: sql
   version: 1
 type: Node

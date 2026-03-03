@@ -3,10 +3,7 @@ id: 4fb452b1-b879-4340-89ba-edb5749d24d0
 name: DT_DIM_CUSTOMER
 operation:
   config:
-    advanceWarehouse: false
-    backfill: false
-    backfillSource: ""
-    backfillSourceSchema: ""
+    changetracking: false
     clusterKey: false
     clusterKeyConfig:
       items:
@@ -15,69 +12,42 @@ operation:
       items:
         - {}
     clusterKeyExpressions: false
-    cpygrants: false
-    downstreamOption: false
-    immutabilityConstraint: false
-    immutableExpression: ""
-    initialize: ON_CREATE
-    initializeWarehouseSize: ""
-    lagSpecification:
-      items:
-        - lagPeriod: Minutes
-          lagValue: "6000"
-    orderBy:
-      items:
-        - colName:
-            columnCounter: d43d3899-2d8f-459e-83e9-63f9f54fa733
-            stepCounter: 4fb452b1-b879-4340-89ba-edb5749d24d0
-    orderByDateTime:
+    constraintsspec:
       items:
         - {}
-    orderseq:
+    datretention: ""
+    defaultcoallation: ""
+    eschemaevol: false
+    foreignk: false
+    foreignkeycon:
       items:
         - {}
-    partitionBy:
-      items:
-        - partColName:
-            columnCounter: 1ac89c4d-ff61-4504-baf7-f940ff6c17dc
-            stepCounter: 4fb452b1-b879-4340-89ba-edb5749d24d0
-    recordVersioning: Datetime Column
-    recordorderBy:
+    groupByAll: false
+    inlineconst: false
+    insertStrategy: INSERT
+    maxdataretention: ""
+    orderby: false
+    orderbycolumn:
       items:
         - {}
-    refreshWarehouseSize: ""
-    refresh_mode: AUTO
-    timeTravel: false
-    timeTravelreference: ""
-    timeTraveltype: ""
-    timeTravelvalue: ""
-    warehouseName: dev_wh_xs
+    outlineconst: false
+    primary: false
+    primarykeycon:
+      items:
+        - {}
+    primarykeyname: ""
+    selectDistinct: false
+    testsEnabled: false
+    truncateBefore: true
   database: ""
   deployEnabled: true
   description: ""
   isMultisource: false
   locationName: SOURCE
-  materializationType: dynamic table
+  materializationType: table
   metadata:
     appliedNodeTests: []
     columns:
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
-        columnReference:
-          columnCounter: 901bbcc5-0147-4b3e-9241-65d532e58863
-          stepCounter: 4fb452b1-b879-4340-89ba-edb5749d24d0
-        config: {}
-        dataType: STRING
-        defaultValue: ""
-        description: ""
-        isSurrogateKey: true
-        name: DT_DIM_CUSTOMER_KEY
-        nullable: true
-        sourceColumnReferences:
-          - columnReferences: []
-            transform: "{{ dimensionHistoryPk() }}"
       - appliedColumnTests: {}
         columnReference:
           columnCounter: 1ac89c4d-ff61-4504-baf7-f940ff6c17dc
@@ -209,40 +179,6 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: aa7d018e-09de-4f12-a5a9-bc8df1973742
-          stepCounter: 4fb452b1-b879-4340-89ba-edb5749d24d0
-        config: {}
-        dataType: TIMESTAMP
-        defaultValue: ""
-        description: ""
-        isSystemStartDate: true
-        name: RECORD_START_TIME
-        nullable: true
-        sourceColumnReferences:
-          - columnReferences: []
-            transform: "{%if config.recordVersioning not in ('Integer Column')%}{{order_by_col()}}{%else%} {{order_by_col_int()}}{%endif%}"
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
-        columnReference:
-          columnCounter: 9a347895-63b3-43c9-bb44-efdac5da10f9
-          stepCounter: 4fb452b1-b879-4340-89ba-edb5749d24d0
-        config: {}
-        dataType: TIMESTAMP
-        defaultValue: ""
-        description: ""
-        isSystemEndDate: true
-        name: RECORD_END_TIME
-        nullable: true
-        sourceColumnReferences:
-          - columnReferences: []
-            transform: LEAD({%if config.recordVersioning not in ('Integer Column')%}{{order_by_col()}}{%else%}{{order_by_col_int()}} {%endif%}) OVER (PARTITION BY {{ partition_by() }} ORDER BY {{ order_by_col() }} asc)
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
-        columnReference:
           columnCounter: 019b6e4b-a85c-4fe0-b6a9-f964a494e01d
           stepCounter: 4fb452b1-b879-4340-89ba-edb5749d24d0
         config: {}
@@ -289,7 +225,7 @@ operation:
   name: DT_DIM_CUSTOMER
   overrideSQL: false
   schema: ""
-  sqlType: DT:::350
+  sqlType: "345"
   type: sql
   version: 1
 type: Node

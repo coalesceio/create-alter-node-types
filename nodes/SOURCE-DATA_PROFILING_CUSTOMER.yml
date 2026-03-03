@@ -3,30 +3,48 @@ id: 4c8cc23d-66e0-4a59-8253-617500c69cc8
 name: DATA_PROFILING_CUSTOMER
 operation:
   config:
-    flagSrcStream: true
-    isRowCount: true
-    multiStreamBehavior: AND
-    predTask: DATA_TRANSFORMATION_ROOT_TASK
-    rootTask: DATA_TRANSFORMATION_ROOT_TASK
-    sampleMode: Sample
-    sampleOption: Fixed Row
-    samplePercent: "10"
-    sampleRows: "1000"
-    scheduleCRON: 5 0-23 * * * America/Los_Angeles
-    schedulePeriod: "60"
-    schedulePeriodOption: Predecessor
-    schedulingMode: Warehouse Task
-    serverlessSize: MEDIUM
-    taskSchedule: false
+    changetracking: false
+    clusterKey: false
+    clusterKeyConfig:
+      items:
+        - {}
+    clusterKeyConfigExpressions:
+      items:
+        - {}
+    clusterKeyExpressions: false
+    constraintsspec:
+      items:
+        - {}
+    datretention: ""
+    defaultcoallation: ""
+    eschemaevol: false
+    foreignk: false
+    foreignkeycon:
+      items:
+        - {}
+    groupByAll: false
+    inlineconst: false
+    insertStrategy: INSERT
+    maxdataretention: ""
+    orderby: false
+    orderbycolumn:
+      items:
+        - {}
+    outlineconst: false
+    primary: false
+    primarykeycon:
+      items:
+        - {}
+    primarykeyname: ""
+    selectDistinct: false
     testsEnabled: false
     truncateBefore: true
-    whName: <WAREHOUSE_NAME>
   database: ""
   deployEnabled: true
   description: ""
   isMultisource: false
   locationName: SOURCE
-  materializationType: task
+  materializationType: table
   metadata:
     appliedNodeTests: []
     columns:
@@ -160,40 +178,6 @@ operation:
               - columnCounter: 723f9aa5-3a1a-4be1-8061-add20c29f78a
                 stepCounter: 6ab2d31c-39ef-4f98-b56d-a1836a1beb57
             transform: ""
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
-        columnReference:
-          columnCounter: cf597387-b2f2-46a2-a6ff-bf9170b67a0f
-          stepCounter: 4c8cc23d-66e0-4a59-8253-617500c69cc8
-        config: {}
-        dataType: VARCHAR
-        defaultValue: ""
-        description: ""
-        isSystemUpdateDate: true
-        name: PROFILE_METRIC
-        nullable: true
-        sourceColumnReferences:
-          - columnReferences: []
-            transform: "NULL"
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
-        columnReference:
-          columnCounter: 137157c0-471b-42e2-8193-5fae614ad5d6
-          stepCounter: 4c8cc23d-66e0-4a59-8253-617500c69cc8
-        config: {}
-        dataType: TIMESTAMP
-        defaultValue: ""
-        description: ""
-        isSystemCreateDate: true
-        name: SYSTEM_CREATE_DATE
-        nullable: true
-        sourceColumnReferences:
-          - columnReferences: []
-            transform: CAST(CURRENT_TIMESTAMP AS TIMESTAMP)
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
@@ -211,7 +195,7 @@ operation:
   name: DATA_PROFILING_CUSTOMER
   overrideSQL: false
   schema: ""
-  sqlType: DQ:::416
+  sqlType: "345"
   type: sql
   version: 1
 type: Node

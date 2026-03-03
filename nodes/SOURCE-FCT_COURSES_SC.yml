@@ -3,9 +3,42 @@ id: 2fa9021d-1dbc-4b52-9722-728072244530
 name: FCT_COURSES_SC
 operation:
   config:
-    postSQL: ""
-    preSQL: ""
+    changetracking: false
+    clusterKey: false
+    clusterKeyConfig:
+      items:
+        - {}
+    clusterKeyConfigExpressions:
+      items:
+        - {}
+    clusterKeyExpressions: false
+    constraintsspec:
+      items:
+        - {}
+    datretention: ""
+    defaultcoallation: ""
+    eschemaevol: false
+    foreignk: false
+    foreignkeycon:
+      items:
+        - {}
+    groupByAll: false
+    inlineconst: false
+    insertStrategy: INSERT
+    maxdataretention: ""
+    orderby: false
+    orderbycolumn:
+      items:
+        - {}
+    outlineconst: false
+    primary: false
+    primarykeycon:
+      items:
+        - {}
+    primarykeyname: ""
+    selectDistinct: false
     testsEnabled: true
+    truncateBefore: true
   database: ""
   deployEnabled: true
   description: ""
@@ -57,40 +90,6 @@ operation:
               - columnCounter: a7636c5d-a258-440c-97e7-a90648e530f3
                 stepCounter: 16a1769c-425d-4935-b468-bf5508cd36b2
             transform: ""
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
-        columnReference:
-          columnCounter: 8e57c051-a6a4-406c-8c8b-8471afb053ec
-          stepCounter: 2fa9021d-1dbc-4b52-9722-728072244530
-        config: {}
-        dataType: TIMESTAMP
-        defaultValue: ""
-        description: ""
-        isSystemCreateDate: true
-        name: SYSTEM_CREATE_DATE
-        nullable: true
-        sourceColumnReferences:
-          - columnReferences: []
-            transform: CAST(CURRENT_TIMESTAMP AS TIMESTAMP)
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
-        columnReference:
-          columnCounter: 16e043a1-933d-4641-ad70-d1fbbe6e3b4f
-          stepCounter: 2fa9021d-1dbc-4b52-9722-728072244530
-        config: {}
-        dataType: TIMESTAMP
-        defaultValue: ""
-        description: ""
-        isSystemUpdateDate: true
-        name: SYSTEM_UPDATE_DATE
-        nullable: true
-        sourceColumnReferences:
-          - columnReferences: []
-            transform: CAST(CURRENT_TIMESTAMP AS TIMESTAMP)
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
@@ -108,7 +107,7 @@ operation:
   name: FCT_COURSES_SC
   overrideSQL: false
   schema: ""
-  sqlType: Fact
+  sqlType: "345"
   type: sql
   version: 1
 type: Node

@@ -3,10 +3,7 @@ id: 9b53c8c4-aa8e-4ee9-9f4a-79af4466173f
 name: DT_WRK_ORDERS
 operation:
   config:
-    advanceWarehouse: false
-    backfill: false
-    backfillSource: ""
-    backfillSourceSchema: ""
+    changetracking: false
     clusterKey: false
     clusterKeyConfig:
       items:
@@ -15,32 +12,39 @@ operation:
       items:
         - {}
     clusterKeyExpressions: false
-    cpygrants: false
-    downstreamOption: false
-    groupByAll: false
-    immutabilityConstraint: false
-    immutableExpression: ""
-    initialize: ON_CREATE
-    initializeWarehouseSize: ""
-    insertStrategy: UNION ALL
-    lagSpecification:
+    constraintsspec:
       items:
-        - lagPeriod: Minutes
-          lagValue: "6000"
-    refreshWarehouseSize: ""
-    refresh_mode: AUTO
+        - {}
+    datretention: ""
+    defaultcoallation: ""
+    eschemaevol: false
+    foreignk: false
+    foreignkeycon:
+      items:
+        - {}
+    groupByAll: false
+    inlineconst: false
+    insertStrategy: UNION ALL
+    maxdataretention: ""
+    orderby: false
+    orderbycolumn:
+      items:
+        - {}
+    outlineconst: false
+    primary: false
+    primarykeycon:
+      items:
+        - {}
+    primarykeyname: ""
     selectDistinct: false
-    timeTravel: false
-    timeTravelreference: ""
-    timeTraveltype: ""
-    timeTravelvalue: ""
-    warehouseName: dev_wh_xs
+    testsEnabled: false
+    truncateBefore: true
   database: ""
   deployEnabled: true
   description: ""
   isMultisource: false
   locationName: SOURCE
-  materializationType: dynamic table
+  materializationType: table
   metadata:
     appliedNodeTests: []
     columns:
@@ -201,7 +205,7 @@ operation:
   name: DT_WRK_ORDERS
   overrideSQL: false
   schema: ""
-  sqlType: DT:::347
+  sqlType: "345"
   type: sql
   version: 1
 type: Node

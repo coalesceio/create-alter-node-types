@@ -3,31 +3,42 @@ id: 7424af1d-6120-468c-8f9e-39a61860d1fb
 name: PVT_STUDENT_PERFORMANCE
 operation:
   config:
-    Colvol1: ""
-    aggfunc:
+    changetracking: false
+    clusterKey: false
+    clusterKeyConfig:
       items:
         - {}
-    aggfunc1:
-      items:
-        - funcname1: AVG
-    defaultval: ""
-    defvalue: false
-    excolval: false
-    exlcol:
+    clusterKeyConfigExpressions:
       items:
         - {}
-    inferPivot: false
-    samKeyColval: false
-    sincol: true
-    subqueryval1: ""
-    tabKeyColumn:
+    clusterKeyExpressions: false
+    constraintsspec:
       items:
-        - keyColTextBox: SUBJECT
-    tabValueColumn:
+        - {}
+    datretention: ""
+    defaultcoallation: ""
+    eschemaevol: false
+    foreignk: false
+    foreignkeycon:
       items:
-        - valColTextBox: SCORE
+        - {}
+    groupByAll: false
+    inlineconst: false
+    insertStrategy: INSERT
+    maxdataretention: ""
+    orderby: false
+    orderbycolumn:
+      items:
+        - {}
+    outlineconst: false
+    primary: false
+    primarykeycon:
+      items:
+        - {}
+    primarykeyname: ""
+    selectDistinct: false
     testsEnabled: false
-    trunc: false
+    truncateBefore: true
   database: ""
   deployEnabled: true
   description: ""
@@ -120,7 +131,7 @@ operation:
   name: PVT_STUDENT_PERFORMANCE
   overrideSQL: false
   schema: ""
-  sqlType: fn:::409
+  sqlType: "345"
   type: sql
   version: 1
 type: Node
