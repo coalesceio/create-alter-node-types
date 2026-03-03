@@ -1,0 +1,240 @@
+fileVersion: 1
+id: 344a9d94-e10a-4755-b13d-5f6f986d87b5
+name: DIM_COURSES_IT
+operation:
+  config:
+    clusterKey: false
+    clusterKeyConfig:
+      items:
+        - {}
+    clusterKeyConfigExpressions:
+      items:
+        - {}
+    clusterKeyExpressions: false
+    customZeroKeyValues:
+      items:
+        - {}
+    deleteStrategy: NO DELETE
+    excludeMergeList:
+      items:
+        - {}
+    excludeMergeToggle: false
+    groupByAll: false
+    insertStrategy: UNION ALL
+    insertZeroKey: false
+    insertZeroKeyAdvanced: false
+    insertZeroKeyBol: "TRUE"
+    insertZeroKeyDate: 01-01-1900
+    insertZeroKeyStr: UNKNOWN
+    insertZeroKeySurrogateKey: "0"
+    insertZeroKeyTimestamp: "1900-01-01 00:00:00.000"
+    lastModifiedComparison: false
+    orderby: false
+    orderbycolumn:
+      items:
+        - {}
+    postSQL: ""
+    preSQL: ""
+    primary: false
+    primaryKeyCol:
+      items:
+        - {}
+    primaryKeyName: ""
+    selectDistinct: false
+    testsEnabled: false
+    treatNullAsCurrentTimestamp: false
+    truncateBefore: false
+    type2Dimension: false
+    updateStrategy: MERGE
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: SOURCE
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: dec86233-55ae-4014-bb95-34716e7c7526
+          stepCounter: 344a9d94-e10a-4755-b13d-5f6f986d87b5
+        config: {}
+        dataType: NUMBER
+        defaultValue: ""
+        description: ""
+        isSurrogateKey: true
+        name: DIM_COURSES_IT_KEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 298e4ce7-0cba-4851-8a70-656d53dfe555
+          stepCounter: 344a9d94-e10a-4755-b13d-5f6f986d87b5
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        isBusinessKey: true
+        name: COURSE_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 3ffa6388-8fc2-4c98-8024-8da0f3631f88
+                stepCounter: 0eaea7b8-09c1-4b90-ae63-a0c92cebff22
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 0e584acb-5fe8-4f2c-b510-0d45a18b9d7a
+          stepCounter: 344a9d94-e10a-4755-b13d-5f6f986d87b5
+        config: {}
+        dataType: VARCHAR(16777216)
+        description: ""
+        name: COURSE_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 3cbfa28b-a359-44dd-833a-212729428026
+                stepCounter: 0eaea7b8-09c1-4b90-ae63-a0c92cebff22
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 40b4a758-da00-4e37-a907-f0867bd4346f
+          stepCounter: 344a9d94-e10a-4755-b13d-5f6f986d87b5
+        config: {}
+        dataType: VARCHAR(16777216)
+        description: ""
+        name: INSTRUCTOR
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: ffb10a05-aadb-459c-b131-d3867ab7f713
+                stepCounter: 0eaea7b8-09c1-4b90-ae63-a0c92cebff22
+            transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 8740af1f-cac0-4b4e-97ed-f940ba2cb75e
+          stepCounter: 344a9d94-e10a-4755-b13d-5f6f986d87b5
+        config: {}
+        dataType: NUMBER
+        defaultValue: ""
+        description: ""
+        isSystemVersion: true
+        name: SYSTEM_VERSION
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: e9536908-94a4-4ef6-8524-e04c0bb180d7
+          stepCounter: 344a9d94-e10a-4755-b13d-5f6f986d87b5
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ""
+        description: ""
+        isSystemCurrentFlag: true
+        name: SYSTEM_CURRENT_FLAG
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 7ff142dc-e64e-4722-b4d1-7191fa1a4dac
+          stepCounter: 344a9d94-e10a-4755-b13d-5f6f986d87b5
+        config: {}
+        dataType: TIMESTAMP
+        defaultValue: ""
+        description: ""
+        isSystemStartDate: true
+        name: SYSTEM_START_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CAST(CURRENT_TIMESTAMP AS TIMESTAMP)
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: ef9d22d3-527e-406b-afe2-caf046a2516c
+          stepCounter: 344a9d94-e10a-4755-b13d-5f6f986d87b5
+        config: {}
+        dataType: TIMESTAMP
+        defaultValue: ""
+        description: ""
+        isSystemEndDate: true
+        name: SYSTEM_END_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CAST('2999-12-31 00:00:00' AS TIMESTAMP)
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 61b75059-557f-4984-9c00-9bceb777e8e3
+          stepCounter: 344a9d94-e10a-4755-b13d-5f6f986d87b5
+        config: {}
+        dataType: TIMESTAMP
+        defaultValue: ""
+        description: ""
+        isSystemCreateDate: true
+        name: SYSTEM_CREATE_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CAST(CURRENT_TIMESTAMP AS TIMESTAMP)
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 7188b770-4ae0-49d0-9e6b-d1f91d971f5c
+          stepCounter: 344a9d94-e10a-4755-b13d-5f6f986d87b5
+        config: {}
+        dataType: TIMESTAMP
+        defaultValue: ""
+        description: ""
+        isSystemUpdateDate: true
+        name: SYSTEM_UPDATE_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CAST(CURRENT_TIMESTAMP AS TIMESTAMP)
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases:
+          COURSES_IT: 0eaea7b8-09c1-4b90-ae63-a0c92cebff22
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SOURCE
+            nodeName: COURSES_IT
+        join:
+          joinCondition: FROM {{ ref('SOURCE', 'COURSES_IT') }} "COURSES_IT"
+        name: DIM_COURSES_IT
+        noLinkRefs: []
+  name: DIM_COURSES_IT
+  overrideSQL: false
+  schema: ""
+  sqlType: "388"
+  type: sql
+  version: 1
+type: Node
