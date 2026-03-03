@@ -8,7 +8,7 @@ mappingDefinitions:
     database: ANANDHIS_DEV
     schema: TARGET_ACC
   TGT_NEW:
-    database: ""
-    schema: ""
+    database: ANANDHIS_DEV
+    schema: TARGET
 name: TST-QA
 type: Environment
