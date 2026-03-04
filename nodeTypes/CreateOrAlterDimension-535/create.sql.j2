@@ -30,7 +30,7 @@ does not permit copying or modification for any other purpose.
        {{ stage('Drop ' + currentState.node.materializationType) }}
        
        {%- set materialization = dropMaterialization(currentState.node.materializationType) %}
-       DROP {{materialization}} IF EXISTS {{ ref_no_link(currentState.node.location.name, currentState.node.name) }}
+       DROP {{materialization}} {{ ref_no_link(currentState.node.location.name, currentState.node.name) }}
 
 {% elif currentState == undefined or (currentState != undefined and desiredState != currentState) %}
 
@@ -236,13 +236,13 @@ does not permit copying or modification for any other purpose.
 
             {{ stage('Drop ' + currentState.node.materializationType) }}
             {%- set materialization = dropMaterialization(currentState.node.materializationType) %}
-            DROP {{materialization}} IF EXISTS {{ fullyQualifiedTargetObjectName }}
+            DROP {{materialization}} {{ fullyQualifiedTargetObjectName }}
 					 
         {%endif%}
 
     {%endif%}
 
-    {%if currentState == undefined  or createTest == true%}
+    {%if currentState == undefined  or createTest == true %}
 
         {% set ns = namespace(column_constraints=[],constraint='',flag=false,primarykeyValues='',foreignkeyValues='',foreignk='') %} {# Initialize an empty list in the namespace #}
 

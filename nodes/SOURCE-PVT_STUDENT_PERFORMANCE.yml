@@ -1,44 +1,33 @@
 fileVersion: 1
-id: 7424af1d-6120-468c-8f9e-39a61860d1fb
+id: f80248a8-88d8-4725-b5e3-ffa4dc05c091
 name: PVT_STUDENT_PERFORMANCE
 operation:
   config:
-    changetracking: false
-    clusterKey: false
-    clusterKeyConfig:
+    Colvol1: ""
+    aggfunc:
       items:
         - {}
-    clusterKeyConfigExpressions:
+    aggfunc1:
+      items:
+        - funcname1: AVG
+    defaultval: ""
+    defvalue: false
+    excolval: false
+    exlcol:
       items:
         - {}
-    clusterKeyExpressions: false
-    constraintsspec:
+    inferPivot: false
+    samKeyColval: false
+    sincol: true
+    subqueryval1: ""
+    tabKeyColumn:
       items:
-        - {}
-    datretention: ""
-    defaultcoallation: ""
-    eschemaevol: false
-    foreignk: false
-    foreignkeycon:
+        - keyColTextBox: SUBJECT
+    tabValueColumn:
       items:
-        - {}
-    groupByAll: false
-    inlineconst: false
-    insertStrategy: INSERT
-    maxdataretention: ""
-    orderby: false
-    orderbycolumn:
-      items:
-        - {}
-    outlineconst: false
-    primary: false
-    primarykeycon:
-      items:
-        - {}
-    primarykeyname: ""
-    selectDistinct: false
+        - valColTextBox: SCORE
     testsEnabled: false
-    truncateBefore: true
+    trunc: false
   database: ""
   deployEnabled: true
   description: ""
@@ -50,8 +39,8 @@ operation:
     columns:
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 6bcb848a-617e-4b32-87b6-bf3931b442de
-          stepCounter: 7424af1d-6120-468c-8f9e-39a61860d1fb
+          columnCounter: 59888b89-4146-448c-9273-4dbcf42f4d89
+          stepCounter: f80248a8-88d8-4725-b5e3-ffa4dc05c091
         config: {}
         dataType: NUMBER(38,0)
         description: ""
@@ -64,8 +53,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 46aaf86a-30d7-41ef-bd7b-543b6661c90f
-          stepCounter: 7424af1d-6120-468c-8f9e-39a61860d1fb
+          columnCounter: f5f50ae2-4f90-4d27-8ad9-e5ab6c305527
+          stepCounter: f80248a8-88d8-4725-b5e3-ffa4dc05c091
         config: {}
         dataType: VARCHAR(16777216)
         description: ""
@@ -76,44 +65,34 @@ operation:
               - columnCounter: 45ee652e-9215-483b-be6f-20e50bd17a38
                 stepCounter: a1607a1a-93ba-451a-8e46-f0fa832241cc
             transform: ""
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
+      - appliedColumnTests: {}
         columnReference:
-          columnCounter: b58a8cb2-1c59-4d0f-9ef2-d0c844ecc197
-          stepCounter: 7424af1d-6120-468c-8f9e-39a61860d1fb
+          columnCounter: 85dd11a3-dd9f-468b-a477-2992b08b8991
+          stepCounter: f80248a8-88d8-4725-b5e3-ffa4dc05c091
         config: {}
-        dataType: NUMBER(38,6)
-        defaultValue: ""
+        dataType: VARCHAR(16777216)
         description: ""
-        name: "'English'"
+        name: SUBJECT
         nullable: true
-        primaryKey: false
         sourceColumnReferences:
-          - columnReferences: []
+          - columnReferences:
+              - columnCounter: aebd5627-318d-4d73-a56f-92f67f4dd75d
+                stepCounter: a1607a1a-93ba-451a-8e46-f0fa832241cc
             transform: ""
-        transform: ""
-        uniqueKey: false
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
+      - appliedColumnTests: {}
         columnReference:
-          columnCounter: 07cd436b-6081-4ac3-8683-5270e5414008
-          stepCounter: 7424af1d-6120-468c-8f9e-39a61860d1fb
+          columnCounter: 6c8fc4b3-c147-4025-84ee-a62be40d7e2f
+          stepCounter: f80248a8-88d8-4725-b5e3-ffa4dc05c091
         config: {}
-        dataType: NUMBER(38,6)
-        defaultValue: ""
+        dataType: NUMBER(38,0)
         description: ""
-        name: "'Math'"
+        name: SCORE
         nullable: true
-        primaryKey: false
         sourceColumnReferences:
-          - columnReferences: []
+          - columnReferences:
+              - columnCounter: 1284ccfe-1bd6-4ece-8093-7e65d8fc1e54
+                stepCounter: a1607a1a-93ba-451a-8e46-f0fa832241cc
             transform: ""
-        transform: ""
-        uniqueKey: false
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
@@ -131,7 +110,7 @@ operation:
   name: PVT_STUDENT_PERFORMANCE
   overrideSQL: false
   schema: ""
-  sqlType: "345"
+  sqlType: fn:::409
   type: sql
   version: 1
 type: Node

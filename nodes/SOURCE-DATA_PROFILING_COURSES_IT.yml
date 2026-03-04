@@ -1,0 +1,130 @@
+fileVersion: 1
+id: b6c27057-a380-40e9-8108-cf9eac1445ae
+name: DATA_PROFILING_COURSES_IT
+operation:
+  config:
+    flagSrcStream: true
+    isRowCount: false
+    multiStreamBehavior: AND
+    predTask: DATA_TRANSFORMATION_ROOT_TASK
+    rootTask: DATA_TRANSFORMATION_ROOT_TASK
+    sampleMode: Sample
+    sampleOption: Fixed Row
+    samplePercent: "10"
+    sampleRows: "1000"
+    scheduleCRON: 5 0-23 * * * America/Los_Angeles
+    schedulePeriod: "60"
+    schedulePeriodOption: Predecessor
+    schedulingMode: Warehouse Task
+    serverlessSize: MEDIUM
+    taskSchedule: false
+    testsEnabled: false
+    truncateBefore: true
+    whName: <WAREHOUSE_NAME>
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: SOURCE
+  materializationType: task
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 732ef902-fcc4-441a-afbe-32294d906ba3
+          stepCounter: b6c27057-a380-40e9-8108-cf9eac1445ae
+        config:
+          isDistinctCount: true
+        dataType: NUMBER(38,0)
+        description: ""
+        name: COURSE_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 3ffa6388-8fc2-4c98-8024-8da0f3631f88
+                stepCounter: 0eaea7b8-09c1-4b90-ae63-a0c92cebff22
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 559c2294-2da4-4082-9d11-6ff05a1e4999
+          stepCounter: b6c27057-a380-40e9-8108-cf9eac1445ae
+        config: {}
+        dataType: VARCHAR(16777216)
+        description: ""
+        name: COURSE_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 3cbfa28b-a359-44dd-833a-212729428026
+                stepCounter: 0eaea7b8-09c1-4b90-ae63-a0c92cebff22
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 9115cd82-ed6b-4001-a794-145474dccb9c
+          stepCounter: b6c27057-a380-40e9-8108-cf9eac1445ae
+        config: {}
+        dataType: VARCHAR(16777216)
+        description: ""
+        name: INSTRUCTOR
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: ffb10a05-aadb-459c-b131-d3867ab7f713
+                stepCounter: 0eaea7b8-09c1-4b90-ae63-a0c92cebff22
+            transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: d205f771-400f-49ea-8bf9-cfb81f39c2cc
+          stepCounter: b6c27057-a380-40e9-8108-cf9eac1445ae
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ""
+        description: ""
+        isSystemUpdateDate: true
+        name: PROFILE_METRIC
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: "NULL"
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: edd6aacc-12c3-4a61-b567-69e80f869082
+          stepCounter: b6c27057-a380-40e9-8108-cf9eac1445ae
+        config: {}
+        dataType: TIMESTAMP
+        defaultValue: ""
+        description: ""
+        isSystemCreateDate: true
+        name: SYSTEM_CREATE_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CAST(CURRENT_TIMESTAMP AS TIMESTAMP)
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases:
+          COURSES_IT: 0eaea7b8-09c1-4b90-ae63-a0c92cebff22
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SOURCE
+            nodeName: COURSES_IT
+        join:
+          joinCondition: FROM {{ ref('SOURCE', 'COURSES_IT') }} "COURSES_IT"
+        name: DATA_PROFILING_COURSES_IT
+        noLinkRefs: []
+  name: DATA_PROFILING_COURSES_IT
+  overrideSQL: false
+  schema: ""
+  sqlType: DQ:::416
+  type: sql
+  version: 1
+type: Node

@@ -1,9 +1,8 @@
 fileVersion: 1
-id: 3cd2fe05-7d61-4006-9404-6f1f0aa7c6f6
-name: PSTG_CUSTOMER
+id: 32a0c865-adb2-4618-ba1f-1f7825b61434
+name: MV_CUSTOMER
 operation:
   config:
-    changetracking: false
     clusterKey: false
     clusterKeyConfig:
       items:
@@ -12,50 +11,24 @@ operation:
       items:
         - {}
     clusterKeyExpressions: false
-    constraintsspec:
-      items:
-        - {}
-    datretention: ""
-    defaultcoallation: ""
-    eschemaevol: false
-    foreignk: false
-    foreignkeycon:
-      items:
-        - {}
-    groupByAll: false
-    inlineconst: false
-    insertStrategy: INSERT
-    maxdataretention: ""
-    orderby: false
-    orderbycolumn:
-      items:
-        - {}
-    outlineconst: false
-    primary: false
-    primarykeycon:
-      items:
-        - {}
-    primarykeyname: ""
+    secureOption: false
     selectDistinct: false
-    testsEnabled: true
-    truncateBefore: true
   database: ""
   deployEnabled: true
   description: ""
   isMultisource: false
   locationName: SOURCE
-  materializationType: table
+  materializationType: Materialized View
   metadata:
     appliedNodeTests: []
     columns:
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 1f859483-4701-42a6-bf05-c2b9321f45eb
-          stepCounter: 3cd2fe05-7d61-4006-9404-6f1f0aa7c6f6
+          columnCounter: 060e792a-2d09-49f3-91db-b4c9a269e234
+          stepCounter: 32a0c865-adb2-4618-ba1f-1f7825b61434
         config: {}
         dataType: NUMBER(38,0)
         description: ""
-        isBusinessKey: true
         name: C_CUSTKEY
         nullable: true
         sourceColumnReferences:
@@ -65,8 +38,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: dea414ad-931a-42f4-aa84-bef2db59106f
-          stepCounter: 3cd2fe05-7d61-4006-9404-6f1f0aa7c6f6
+          columnCounter: 2470a8fa-d28a-4ea2-9eef-18e56b1820de
+          stepCounter: 32a0c865-adb2-4618-ba1f-1f7825b61434
         config: {}
         dataType: VARCHAR(25)
         description: ""
@@ -79,8 +52,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 5fc33bd4-534d-4209-af1f-71b7014b9b8a
-          stepCounter: 3cd2fe05-7d61-4006-9404-6f1f0aa7c6f6
+          columnCounter: 9944b1a3-9cd4-411d-9db0-6ec803db8eab
+          stepCounter: 32a0c865-adb2-4618-ba1f-1f7825b61434
         config: {}
         dataType: VARCHAR(40)
         description: ""
@@ -93,8 +66,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: adfe0f90-e614-4476-a515-89adab2122f6
-          stepCounter: 3cd2fe05-7d61-4006-9404-6f1f0aa7c6f6
+          columnCounter: fe5eb999-07b0-4d9f-88e1-b61101e7f46a
+          stepCounter: 32a0c865-adb2-4618-ba1f-1f7825b61434
         config: {}
         dataType: NUMBER(38,0)
         description: ""
@@ -107,8 +80,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 9b0cdaec-4d1f-47ab-acb3-b99455d99781
-          stepCounter: 3cd2fe05-7d61-4006-9404-6f1f0aa7c6f6
+          columnCounter: f5b1dce1-8526-48e0-a578-187cf0818c41
+          stepCounter: 32a0c865-adb2-4618-ba1f-1f7825b61434
         config: {}
         dataType: VARCHAR(15)
         description: ""
@@ -121,8 +94,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 7dfdd6c7-52ca-487f-90ef-2c9af392d820
-          stepCounter: 3cd2fe05-7d61-4006-9404-6f1f0aa7c6f6
+          columnCounter: 41a1ac74-f4d4-43d7-841b-971a00cd6ae0
+          stepCounter: 32a0c865-adb2-4618-ba1f-1f7825b61434
         config: {}
         dataType: NUMBER(12,2)
         description: ""
@@ -135,8 +108,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 77ed85a0-2206-4a06-b062-ca32550aacb6
-          stepCounter: 3cd2fe05-7d61-4006-9404-6f1f0aa7c6f6
+          columnCounter: a2a62825-3237-4335-9c6f-abadf863fc8f
+          stepCounter: 32a0c865-adb2-4618-ba1f-1f7825b61434
         config: {}
         dataType: VARCHAR(10)
         description: ""
@@ -149,8 +122,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 8a30d5e1-66c9-4eb2-a4d0-b841185934e8
-          stepCounter: 3cd2fe05-7d61-4006-9404-6f1f0aa7c6f6
+          columnCounter: 551daf34-dff7-4481-a60f-5abb58694d88
+          stepCounter: 32a0c865-adb2-4618-ba1f-1f7825b61434
         config: {}
         dataType: VARCHAR(117)
         description: ""
@@ -163,8 +136,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 4d5564aa-708e-48f8-a5a9-8368a7e6cf46
-          stepCounter: 3cd2fe05-7d61-4006-9404-6f1f0aa7c6f6
+          columnCounter: 4634f7f9-04bb-4c19-b067-f7c1f96d2f6c
+          stepCounter: 32a0c865-adb2-4618-ba1f-1f7825b61434
         config: {}
         dataType: TIMESTAMP_LTZ(9)
         description: ""
@@ -187,12 +160,12 @@ operation:
             nodeName: CUSTOMER
         join:
           joinCondition: FROM {{ ref('SOURCE', 'CUSTOMER') }} "CUSTOMER"
-        name: PSTG_CUSTOMER
+        name: MV_CUSTOMER
         noLinkRefs: []
-  name: PSTG_CUSTOMER
+  name: MV_CUSTOMER
   overrideSQL: false
   schema: ""
-  sqlType: "345"
+  sqlType: MV:::178
   type: sql
   version: 1
 type: Node

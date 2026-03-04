@@ -1,44 +1,24 @@
 fileVersion: 1
-id: b4f42067-93a4-4411-8a44-ca966b85f421
-name: WRK_ORD
+id: 2e7c3c3a-2b34-43fd-9364-373f6a6e66c0
+name: ML_FCSTS_ORDERS
 operation:
   config:
-    changetracking: false
-    clusterKey: false
-    clusterKeyConfig:
-      items:
-        - {}
-    clusterKeyConfigExpressions:
-      items:
-        - {}
-    clusterKeyExpressions: false
-    constraintsspec:
-      items:
-        - {}
-    datretention: ""
-    defaultcoallation: ""
-    eschemaevol: false
-    foreignk: false
-    foreignkeycon:
-      items:
-        - {}
-    groupByAll: false
-    inlineconst: false
-    insertStrategy: INSERT
-    maxdataretention: ""
-    orderby: false
-    orderbycolumn:
-      items:
-        - {}
-    outlineconst: false
-    primary: false
-    primarykeycon:
-      items:
-        - {}
-    primarykeyname: ""
-    selectDistinct: false
-    testsEnabled: false
-    truncateBefore: true
+    Forcecreate: true
+    cobject: false
+    exvar: false
+    fcdays: "12"
+    mname: FCTS_ORDERS
+    multiseries: false
+    predictioninterval: ex:0.80(float value)
+    series_value: false
+    seriescol: ""
+    svalue: ""
+    tgtcol:
+      columnCounter: 1474bcee-5e16-4c3f-a227-313419d9f385
+      stepCounter: 2e7c3c3a-2b34-43fd-9364-373f6a6e66c0
+    tscol:
+      columnCounter: 71f2615a-e886-4f30-994f-11d322641be6
+      stepCounter: 2e7c3c3a-2b34-43fd-9364-373f6a6e66c0
   database: ""
   deployEnabled: true
   description: ""
@@ -50,8 +30,8 @@ operation:
     columns:
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 954b1b88-a6f3-4b62-b2fb-6f58a5cccf56
-          stepCounter: b4f42067-93a4-4411-8a44-ca966b85f421
+          columnCounter: 1474bcee-5e16-4c3f-a227-313419d9f385
+          stepCounter: 2e7c3c3a-2b34-43fd-9364-373f6a6e66c0
         config: {}
         dataType: NUMBER(38,0)
         description: ""
@@ -64,8 +44,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 14502a5b-77a9-44b6-a21b-9f9b778c0b04
-          stepCounter: b4f42067-93a4-4411-8a44-ca966b85f421
+          columnCounter: 8a9c7824-7324-405b-bdfc-af72f4778118
+          stepCounter: 2e7c3c3a-2b34-43fd-9364-373f6a6e66c0
         config: {}
         dataType: NUMBER(38,0)
         description: ""
@@ -78,8 +58,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 1157b3ed-8d9c-45a4-b2f1-0222cdfd7b96
-          stepCounter: b4f42067-93a4-4411-8a44-ca966b85f421
+          columnCounter: adb9a477-48c2-44dd-b863-594f8c13399f
+          stepCounter: 2e7c3c3a-2b34-43fd-9364-373f6a6e66c0
         config: {}
         dataType: VARCHAR(1)
         description: ""
@@ -92,8 +72,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 4ff0c481-267f-4f05-ae8f-2f9ab85ed76f
-          stepCounter: b4f42067-93a4-4411-8a44-ca966b85f421
+          columnCounter: b546d5c9-62d9-4d6d-a670-c1ee167b1648
+          stepCounter: 2e7c3c3a-2b34-43fd-9364-373f6a6e66c0
         config: {}
         dataType: NUMBER(12,2)
         description: ""
@@ -106,8 +86,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: c61c8b74-4f1f-4d76-919c-6818b16a7702
-          stepCounter: b4f42067-93a4-4411-8a44-ca966b85f421
+          columnCounter: 70ec7221-24dc-4001-9e55-890818401ae9
+          stepCounter: 2e7c3c3a-2b34-43fd-9364-373f6a6e66c0
         config: {}
         dataType: DATE
         description: ""
@@ -120,8 +100,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 8bca0022-29b8-475f-a3cd-d4822770a613
-          stepCounter: b4f42067-93a4-4411-8a44-ca966b85f421
+          columnCounter: cd88f203-de1f-4b71-ba5a-2bee7eb1498d
+          stepCounter: 2e7c3c3a-2b34-43fd-9364-373f6a6e66c0
         config: {}
         dataType: VARCHAR(15)
         description: ""
@@ -134,8 +114,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 09207308-feda-416f-9355-97e7f4959fa6
-          stepCounter: b4f42067-93a4-4411-8a44-ca966b85f421
+          columnCounter: 02884481-b0a6-4ef6-85e3-c19810ab5e7b
+          stepCounter: 2e7c3c3a-2b34-43fd-9364-373f6a6e66c0
         config: {}
         dataType: VARCHAR(15)
         description: ""
@@ -148,8 +128,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 002354e9-e8a7-4680-809a-db1131973fdc
-          stepCounter: b4f42067-93a4-4411-8a44-ca966b85f421
+          columnCounter: 8164bf1f-b03e-47dd-ad04-7781470650cd
+          stepCounter: 2e7c3c3a-2b34-43fd-9364-373f6a6e66c0
         config: {}
         dataType: NUMBER(38,0)
         description: ""
@@ -162,8 +142,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 3321ed65-a874-47f3-b5f6-9871aef8ee54
-          stepCounter: b4f42067-93a4-4411-8a44-ca966b85f421
+          columnCounter: ec427e5f-dd51-4304-ad86-225eb4f9adfb
+          stepCounter: 2e7c3c3a-2b34-43fd-9364-373f6a6e66c0
         config: {}
         dataType: VARCHAR(79)
         description: ""
@@ -176,8 +156,8 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 6c001b07-ac74-4f18-9dbd-8e0732d5b27e
-          stepCounter: b4f42067-93a4-4411-8a44-ca966b85f421
+          columnCounter: 71f2615a-e886-4f30-994f-11d322641be6
+          stepCounter: 2e7c3c3a-2b34-43fd-9364-373f6a6e66c0
         config: {}
         dataType: TIMESTAMP_LTZ(9)
         description: ""
@@ -188,6 +168,57 @@ operation:
               - columnCounter: 9ac7b618-b78f-4924-905f-451f8e5be4f5
                 stepCounter: adf350b0-04d6-43e9-91ad-eaa90ed4b667
             transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 8ec58ee7-c261-47d6-929b-e9a6218506aa
+          stepCounter: 2e7c3c3a-2b34-43fd-9364-373f6a6e66c0
+        config: {}
+        dataType: FLOAT
+        defaultValue: ""
+        description: Generated by ML Forecast Model
+        forecast: true
+        name: FORECAST
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 33d9fd7f-1b95-4884-8282-d6d899a4705c
+          stepCounter: 2e7c3c3a-2b34-43fd-9364-373f6a6e66c0
+        config: {}
+        dataType: FLOAT
+        defaultValue: ""
+        description: Generated by ML Forecast Model
+        lower_bound: true
+        name: LOWER_BOUND
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 85f60c63-0ccf-40cf-a7fd-8f39ea92f752
+          stepCounter: 2e7c3c3a-2b34-43fd-9364-373f6a6e66c0
+        config: {}
+        dataType: FLOAT
+        defaultValue: ""
+        description: Generated by ML Forecast Model
+        name: UPPER_BOUND
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        upper_bound: true
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
@@ -199,13 +230,13 @@ operation:
           - locationName: SOURCE
             nodeName: ORDERS
         join:
-          joinCondition: FROM  {{ ref('SOURCE', 'ORDERS') }} ORDERS
-        name: WRK_ORD
+          joinCondition: FROM {{ ref('SOURCE', 'ORDERS') }} "ORDERS"
+        name: ML_FCSTS_ORDERS
         noLinkRefs: []
-  name: WRK_ORD
+  name: ML_FCSTS_ORDERS
   overrideSQL: false
   schema: ""
-  sqlType: "345"
+  sqlType: CT:::262
   type: sql
   version: 1
 type: Node
