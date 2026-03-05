@@ -1,0 +1,31 @@
+fileVersion: 1
+id: "627"
+isDisabled: false
+metadata:
+  defaultStorageLocation: null
+  error: null
+  nodeMetadataSpec: |-
+    capitalized: Create or Alter DIM Table
+    short: CDIM
+    plural: Dimensions
+    tagColor: '#333BA6'
+
+    deployStrategy: advanced
+
+    config:
+    - groupName: Create Table Options
+      items:
+      - type: materializationSelector
+        default: table
+        options:
+        - table
+        - transient table
+        isRequired: true
+        
+      - displayName: Type
+        type: textBox
+        attributeName: tsk
+        default:  "{{parameters.dmsp[0]}}"
+        isRequired: false
+name: Copy of Create Or Alter Dimension
+type: NodeType

@@ -3,31 +3,11 @@ id: f80248a8-88d8-4725-b5e3-ffa4dc05c091
 name: PVT_STUDENT_PERFORMANCE
 operation:
   config:
-    Colvol1: ""
-    aggfunc:
-      items:
-        - {}
-    aggfunc1:
-      items:
-        - funcname1: AVG
-    defaultval: ""
-    defvalue: false
-    excolval: false
-    exlcol:
-      items:
-        - {}
-    inferPivot: false
-    samKeyColval: false
-    sincol: true
-    subqueryval1: ""
-    tabKeyColumn:
-      items:
-        - keyColTextBox: SUBJECT
-    tabValueColumn:
-      items:
-        - valColTextBox: SCORE
-    testsEnabled: false
-    trunc: false
+    changetracking: false
+    groupByAll: false
+    insertStrategy: UNION
+    secureOption: false
+    selectDistinct: false
   database: ""
   deployEnabled: true
   description: ""
@@ -110,7 +90,7 @@ operation:
   name: PVT_STUDENT_PERFORMANCE
   overrideSQL: false
   schema: ""
-  sqlType: fn:::409
+  sqlType: "419"
   type: sql
   version: 1
 type: Node

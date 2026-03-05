@@ -3,14 +3,9 @@ id: 32a0c865-adb2-4618-ba1f-1f7825b61434
 name: MV_CUSTOMER
 operation:
   config:
-    clusterKey: false
-    clusterKeyConfig:
-      items:
-        - {}
-    clusterKeyConfigExpressions:
-      items:
-        - {}
-    clusterKeyExpressions: false
+    changetracking: false
+    groupByAll: false
+    insertStrategy: UNION
     secureOption: false
     selectDistinct: false
   database: ""
@@ -18,7 +13,7 @@ operation:
   description: ""
   isMultisource: false
   locationName: SOURCE
-  materializationType: Materialized View
+  materializationType: table
   metadata:
     appliedNodeTests: []
     columns:
@@ -165,7 +160,7 @@ operation:
   name: MV_CUSTOMER
   overrideSQL: false
   schema: ""
-  sqlType: MV:::178
+  sqlType: "419"
   type: sql
   version: 1
 type: Node

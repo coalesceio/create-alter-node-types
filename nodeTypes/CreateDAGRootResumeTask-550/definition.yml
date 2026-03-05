@@ -4,7 +4,7 @@ isDisabled: false
 metadata:
   defaultStorageLocation: null
   error: null
-  nodeMetadataSpec: |-
+  nodeMetadataSpec: |
     capitalized: Create DAG Root Resume Task
     short: CRR
     tagColor: "#59C937"

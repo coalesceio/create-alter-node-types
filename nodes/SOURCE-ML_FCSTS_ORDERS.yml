@@ -3,22 +3,11 @@ id: 2e7c3c3a-2b34-43fd-9364-373f6a6e66c0
 name: ML_FCSTS_ORDERS
 operation:
   config:
-    Forcecreate: true
-    cobject: false
-    exvar: false
-    fcdays: "12"
-    mname: FCTS_ORDERS
-    multiseries: false
-    predictioninterval: ex:0.80(float value)
-    series_value: false
-    seriescol: ""
-    svalue: ""
-    tgtcol:
-      columnCounter: 1474bcee-5e16-4c3f-a227-313419d9f385
-      stepCounter: 2e7c3c3a-2b34-43fd-9364-373f6a6e66c0
-    tscol:
-      columnCounter: 71f2615a-e886-4f30-994f-11d322641be6
-      stepCounter: 2e7c3c3a-2b34-43fd-9364-373f6a6e66c0
+    changetracking: false
+    groupByAll: false
+    insertStrategy: UNION
+    secureOption: false
+    selectDistinct: false
   database: ""
   deployEnabled: true
   description: ""
@@ -236,7 +225,7 @@ operation:
   name: ML_FCSTS_ORDERS
   overrideSQL: false
   schema: ""
-  sqlType: CT:::262
+  sqlType: "419"
   type: sql
   version: 1
 type: Node
