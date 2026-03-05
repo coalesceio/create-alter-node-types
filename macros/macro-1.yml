@@ -1,9 +1,6 @@
 fileVersion: 1
 id: "1"
 macroString: |-
-  {%set dsmp = ["std","abc]%}
-
-
   {# ----------------------------------------------------------------------
     Macro: buildcoldict
     Purpose: Builds a dictionary (ns.column_dict) of columns for all sources

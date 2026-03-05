@@ -69,7 +69,7 @@ does not permit copying or modification for any other purpose.
             {% endif %}
         {% endfor %}
            
-        {% set desiredStorageLocations = (ns.nsDesiredSourceStorageLocations).split(',') | list %}
+        {% set desiredStorageLocations = ns.nsDesiredSourceStorageLocations.split(',') | list %}
         {% set desiredUniqueStorageLocations = desiredStorageLocations | unique | sort | list %}
 
         {# Source storage location Test  #}

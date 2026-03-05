@@ -4,7 +4,7 @@ isDisabled: false
 metadata:
   defaultStorageLocation: null
   error: null
-  nodeMetadataSpec: |-
+  nodeMetadataSpec: |
     capitalized: Create or Alter DIM Table
     short: CDIM
     plural: Dimensions
@@ -22,10 +22,12 @@ metadata:
         - transient table
         isRequired: true
         
-      - displayName: Type
-        type: textBox
+      - displayName: '{{node.parameters.dsmp}}'
+        type: dropdownSelector
         attributeName: tsk
-        default:  "{{parameters.dmsp[0]}}"
+        default:  "standard"
+        options:
+        - "{{sample()}}"
         isRequired: false
 name: Copy of Create Or Alter Dimension
 type: NodeType
