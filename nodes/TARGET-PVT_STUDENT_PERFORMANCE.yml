@@ -3,37 +3,59 @@ id: 3af19e8f-267c-40b3-961a-c6b37a60f972
 name: PVT_STUDENT_PERFORMANCE
 operation:
   config:
-    Colvol1: ""
-    aggfunc:
+    changetracking: false
+    clusterKey: false
+    clusterKeyConfig:
       items:
         - {}
-    aggfunc1:
-      items:
-        - funcname1: MAX
-    defaultval: ""
-    defvalue: false
-    excolval: false
-    exlcol:
+    clusterKeyConfigExpressions:
       items:
         - {}
-    inferPivot: false
-    samKeyColval: false
-    sincol: true
-    subqueryval1: ""
-    tabKeyColumn:
+    clusterKeyExpressions: false
+    constraintsspec:
       items:
-        - keyColTextBox: SUBJECT
-    tabValueColumn:
+        - {}
+    datretention: ""
+    defaultcoallation: ""
+    devMode: true
+    eschemaevol: false
+    flagSrcStream: true
+    foreignk: ""
+    foreignkeycon:
       items:
-        - valColTextBox: SCORE
-    testsEnabled: false
-    trunc: false
+        - {}
+    groupByAll: false
+    inlineconst: false
+    insertStrategy: UNION
+    maxdataretention: ""
+    multiStreamBehavior: AND
+    orderby: false
+    orderbycolumn:
+      items:
+        - {}
+    outlineconst: false
+    predTask: DATA_TRANSFORMATION_ROOT_TASK
+    primary: ""
+    primarykeycon:
+      items:
+        - {}
+    primarykeyname: ""
+    rootTask: DATA_TRANSFORMATION_ROOT_TASK
+    scheduleCRON: 5 0-23 * * * America/Los_Angeles
+    schedulePeriod: "60"
+    schedulePeriodOption: Predecessor
+    schedulingMode: Warehouse Task
+    selectDistinct: false
+    serverlessSize: MEDIUM
+    timeOut: 60000
+    truncateBefore: true
+    whName: <WAREHOUSE_NAME>
   database: ""
   deployEnabled: true
   description: ""
   isMultisource: false
   locationName: TARGET
-  materializationType: table
+  materializationType: task
   metadata:
     appliedNodeTests: []
     columns:
@@ -110,7 +132,7 @@ operation:
   name: PVT_STUDENT_PERFORMANCE
   overrideSQL: false
   schema: ""
-  sqlType: fn:::409
+  sqlType: "548"
   type: sql
   version: 1
 type: Node

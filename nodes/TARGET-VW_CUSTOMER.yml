@@ -3,9 +3,32 @@ id: 2c62d361-03a0-49d0-bfcd-6939949948e3
 name: VW_CUSTOMER
 operation:
   config:
-    compcol: false
-    ntileval: ""
-    oprt: "="
+    changetracking: false
+    clusterKey: false
+    clusterKeyConfig:
+      items:
+        - {}
+    clusterKeyConfigExpressions:
+      items:
+        - {}
+    clusterKeyExpressions: false
+    constraintsspec:
+      items:
+        - {}
+    datretention: ""
+    defaultcoallation: ""
+    devMode: true
+    eschemaevol: false
+    flagSrcStream: true
+    foreignk: ""
+    foreignkeycon:
+      items:
+        - {}
+    groupByAll: false
+    inlineconst: false
+    insertStrategy: UNION
+    maxdataretention: ""
+    multiStreamBehavior: AND
     orderby: true
     orderbycolumn:
       items:
@@ -13,21 +36,29 @@ operation:
             columnCounter: 1fc218f0-d62f-412a-ac5a-9b8e7c23d21d
             stepCounter: 2c62d361-03a0-49d0-bfcd-6939949948e3
           sortOrder: desc
-    partitionBy:
+    outlineconst: false
+    predTask: DATA_TRANSFORMATION_ROOT_TASK
+    primary: ""
+    primarykeycon:
       items:
-        - partColName:
-            columnCounter: f0e204f4-cabd-4175-87b8-05ef9b43bf65
-            stepCounter: 2c62d361-03a0-49d0-bfcd-6939949948e3
-    partitionby: true
-    qualify: true
-    val: "1"
-    winfunc: ROW_NUMBER
+        - {}
+    primarykeyname: ""
+    rootTask: DATA_TRANSFORMATION_ROOT_TASK
+    scheduleCRON: 5 0-23 * * * America/Los_Angeles
+    schedulePeriod: "60"
+    schedulePeriodOption: Predecessor
+    schedulingMode: Warehouse Task
+    selectDistinct: false
+    serverlessSize: MEDIUM
+    timeOut: 60000
+    truncateBefore: true
+    whName: <WAREHOUSE_NAME>
   database: ""
   deployEnabled: true
   description: ""
   isMultisource: false
   locationName: TARGET
-  materializationType: view
+  materializationType: task
   metadata:
     appliedNodeTests: []
     columns:
@@ -174,7 +205,7 @@ operation:
   name: VW_CUSTOMER
   overrideSQL: false
   schema: ""
-  sqlType: fn:::459
+  sqlType: "548"
   type: sql
   version: 1
 type: Node

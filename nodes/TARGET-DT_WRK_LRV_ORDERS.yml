@@ -3,10 +3,7 @@ id: 015fd01c-8ed7-47a1-aff8-3ca11fc3419e
 name: DT_WRK_LRV_ORDERS
 operation:
   config:
-    advanceWarehouse: false
-    backfill: false
-    backfillSource: ""
-    backfillSourceSchema: ""
+    changetracking: false
     clusterKey: false
     clusterKeyConfig:
       items:
@@ -15,49 +12,50 @@ operation:
       items:
         - {}
     clusterKeyExpressions: false
-    cpygrants: false
-    downstreamOption: false
-    immutabilityConstraint: false
-    immutableExpression: ""
-    initialize: ON_CREATE
-    initializeWarehouseSize: ""
-    lagSpecification:
-      items:
-        - lagPeriod: Minutes
-          lagValue: "6000"
-    orderBy:
-      items:
-        - colName:
-            columnCounter: bcfe2be9-1483-4a53-80b0-99d9c6cef86c
-            stepCounter: 015fd01c-8ed7-47a1-aff8-3ca11fc3419e
-    orderByDateTime:
+    constraintsspec:
       items:
         - {}
-    orderseq:
+    datretention: ""
+    defaultcoallation: ""
+    devMode: true
+    eschemaevol: false
+    flagSrcStream: true
+    foreignk: ""
+    foreignkeycon:
       items:
         - {}
-    partitionBy:
-      items:
-        - partColName:
-            columnCounter: 2e2dbaf9-9b99-4cd9-bc82-68d2c7f69d67
-            stepCounter: 015fd01c-8ed7-47a1-aff8-3ca11fc3419e
-    recordVersioning: Datetime Column
-    recordorderBy:
+    groupByAll: false
+    inlineconst: false
+    insertStrategy: UNION
+    maxdataretention: ""
+    multiStreamBehavior: AND
+    orderby: false
+    orderbycolumn:
       items:
         - {}
-    refreshWarehouseSize: ""
-    refresh_mode: AUTO
-    timeTravel: false
-    timeTravelreference: ""
-    timeTraveltype: ""
-    timeTravelvalue: ""
-    warehouseName: dev_wh_xs
+    outlineconst: false
+    predTask: DATA_TRANSFORMATION_ROOT_TASK
+    primary: ""
+    primarykeycon:
+      items:
+        - {}
+    primarykeyname: ""
+    rootTask: DATA_TRANSFORMATION_ROOT_TASK
+    scheduleCRON: 5 0-23 * * * America/Los_Angeles
+    schedulePeriod: "60"
+    schedulePeriodOption: Predecessor
+    schedulingMode: Warehouse Task
+    selectDistinct: false
+    serverlessSize: MEDIUM
+    timeOut: 60000
+    truncateBefore: true
+    whName: <WAREHOUSE_NAME>
   database: ""
   deployEnabled: true
   description: ""
   isMultisource: false
   locationName: TARGET
-  materializationType: dynamic table
+  materializationType: task
   metadata:
     appliedNodeTests: []
     columns:
@@ -235,7 +233,7 @@ operation:
   name: DT_WRK_LRV_ORDERS
   overrideSQL: false
   schema: ""
-  sqlType: DT:::351
+  sqlType: "548"
   type: sql
   version: 1
 type: Node
