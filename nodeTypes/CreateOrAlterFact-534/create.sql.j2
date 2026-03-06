@@ -31,7 +31,7 @@ does not permit copying or modification for any other purpose.
     
        {{ stage('Drop ' + currentState.node.materializationType) }}
       {%- set materialization = dropMaterialization(currentState.node.materializationType) %}
-       DROP {{materialization}} IF EXISTS {{ fullyQualifiedTargetObjectName }}
+       DROP {{materialization}} {{ fullyQualifiedTargetObjectName }}
 
 {% elif currentState == undefined or (currentState != undefined and desiredState != currentState) %}
 
@@ -237,7 +237,7 @@ does not permit copying or modification for any other purpose.
 
            {{ stage('Drop ' + currentState.node.materializationType) }}
             {%- set materialization = dropMaterialization(currentState.node.materializationType) %}
-            DROP {{materialization}} IF EXISTS {{ ref_no_link(currentState.node.location.name, currentState.node.name) }}				 
+            DROP {{materialization}} {{ ref_no_link(currentState.node.location.name, currentState.node.name) }}				 
 								 
         {%endif%}
 
