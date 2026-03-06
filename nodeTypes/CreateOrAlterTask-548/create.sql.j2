@@ -8,6 +8,18 @@ does not permit copying or modification for any other purpose.
 {# == Node Type Name           : Create Or Alter Task == #}
 {# == Node Type Description    : This node creates or alters a table and a task to insert data into the table and schedules the task == #}
 
+{%if desiredState and currenState!= undefined and currentState.node.nodeType != desiredState.node.nodeType%}
+    
+    {%- set warningMsg = getNodeTypeSwitchWarning() | default('') %}
+
+        {# Warning display - Node type changes can impact related tasks, streams, or services. #}
+        {%- if warningMsg | trim | length > 0 -%}
+            {{ stage('Warning! Node Type Switching Detected', false) }}
+            {{ warningMsg }}
+            select 1=0
+        {%- endif -%}
+{%endif%}
+
 {# == Determine schedulingMode == #} 
 {% if desiredState != undefined and desiredState.config.schedulingMode != '' %} 
     {% set schedulingMode = desiredState.config.schedulingMode %} 

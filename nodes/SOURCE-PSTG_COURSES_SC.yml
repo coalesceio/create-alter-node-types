@@ -1,0 +1,220 @@
+fileVersion: 1
+id: 367c1fb0-daee-471d-a703-d30a66e6f32a
+name: PSTG_COURSES_SC
+operation:
+  config:
+    clusterKey: false
+    clusterKeyConfig:
+      items:
+        - {}
+    clusterKeyConfigExpressions:
+      items:
+        - {}
+    clusterKeyExpressions: false
+    groupByAll: false
+    insertStrategy: UNION ALL
+    lastModifiedComparison: false
+    orderby: false
+    orderbycolumn:
+      items:
+        - {}
+    postSQL: ""
+    preSQL: ""
+    selectDistinct: false
+    testsEnabled: false
+    treatNullAsCurrentTimestamp: false
+    truncateBefore: false
+    type2Dimension: false
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: SOURCE
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 72328fc0-0691-449c-97ab-2536edbccdf4
+          stepCounter: 367c1fb0-daee-471d-a703-d30a66e6f32a
+        config: {}
+        dataType: NUMBER
+        defaultValue: ""
+        description: ""
+        isSurrogateKey: true
+        name: PSTG_COURSES_SC_KEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 5bd449fe-c76a-41a0-b415-91b7115fcd6a
+          stepCounter: 367c1fb0-daee-471d-a703-d30a66e6f32a
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        isBusinessKey: true
+        name: COURSE_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 1fc22531-d61f-495d-b9e1-927049e545a3
+                stepCounter: 16a1769c-425d-4935-b468-bf5508cd36b2
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 766d0931-41ea-490b-99c1-a50e94153b31
+          stepCounter: 367c1fb0-daee-471d-a703-d30a66e6f32a
+        config: {}
+        dataType: VARCHAR(16777216)
+        description: ""
+        isChangeTracking: true
+        name: COURSE_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 7f723211-a499-4cea-a308-e22862fe8c34
+                stepCounter: 16a1769c-425d-4935-b468-bf5508cd36b2
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 57c7434a-a906-423d-b5e3-4f833199f467
+          stepCounter: 367c1fb0-daee-471d-a703-d30a66e6f32a
+        config: {}
+        dataType: VARCHAR(16777216)
+        description: ""
+        name: INSTRUCTOR
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: a7636c5d-a258-440c-97e7-a90648e530f3
+                stepCounter: 16a1769c-425d-4935-b468-bf5508cd36b2
+            transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: a6d5f707-fa1d-434f-bea0-ea8bf6ad5146
+          stepCounter: 367c1fb0-daee-471d-a703-d30a66e6f32a
+        config: {}
+        dataType: NUMBER
+        defaultValue: ""
+        description: ""
+        isSystemVersion: true
+        name: SYSTEM_VERSION
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: c59d942b-1ad2-46cd-b4da-8a727cdf60c4
+          stepCounter: 367c1fb0-daee-471d-a703-d30a66e6f32a
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ""
+        description: ""
+        isSystemCurrentFlag: true
+        name: SYSTEM_CURRENT_FLAG
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6f678596-76e6-4848-a013-651d76f7afc8
+          stepCounter: 367c1fb0-daee-471d-a703-d30a66e6f32a
+        config: {}
+        dataType: TIMESTAMP
+        defaultValue: ""
+        description: ""
+        isSystemStartDate: true
+        name: SYSTEM_START_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CAST(CURRENT_TIMESTAMP AS TIMESTAMP)
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 02e28cfa-57a8-4fc6-b655-5bd41442ac47
+          stepCounter: 367c1fb0-daee-471d-a703-d30a66e6f32a
+        config: {}
+        dataType: TIMESTAMP
+        defaultValue: ""
+        description: ""
+        isSystemEndDate: true
+        name: SYSTEM_END_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CAST('2999-12-31 00:00:00' AS TIMESTAMP)
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 534dffb6-9bbb-4fba-a779-00ce4e0c68cb
+          stepCounter: 367c1fb0-daee-471d-a703-d30a66e6f32a
+        config: {}
+        dataType: TIMESTAMP
+        defaultValue: ""
+        description: ""
+        isSystemCreateDate: true
+        name: SYSTEM_CREATE_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CAST(CURRENT_TIMESTAMP AS TIMESTAMP)
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 73db8b6a-c6bc-4e10-b2e3-4811b782deb1
+          stepCounter: 367c1fb0-daee-471d-a703-d30a66e6f32a
+        config: {}
+        dataType: TIMESTAMP
+        defaultValue: ""
+        description: ""
+        isSystemUpdateDate: true
+        name: SYSTEM_UPDATE_DATE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: CAST(CURRENT_TIMESTAMP AS TIMESTAMP)
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases:
+          COURSES_SC: 16a1769c-425d-4935-b468-bf5508cd36b2
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SOURCE
+            nodeName: COURSES_SC
+        join:
+          joinCondition: FROM {{ ref('SOURCE', 'COURSES_SC') }} "COURSES_SC"
+        name: PSTG_COURSES_SC
+        noLinkRefs: []
+  name: PSTG_COURSES_SC
+  overrideSQL: false
+  schema: ""
+  sqlType: BNA:::391
+  type: sql
+  version: 1
+type: Node

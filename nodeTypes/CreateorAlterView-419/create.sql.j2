@@ -8,6 +8,19 @@ does not permit copying or modification for any other purpose.
 {# == Node Type Name           : Create or Alter View == #}
 {# == Node Type Description    : This node loads data creates and alters view== #}
 
+
+{%if desiredState and currenState!= undefined and currentState.node.nodeType != desiredState.node.nodeType%} 
+   
+    {%- set warningMsg = getNodeTypeSwitchWarning() | default('') %}
+
+        {# Warning display - Node type changes can impact related tasks, streams, or services. #}
+        {%- if warningMsg | trim | length > 0 -%}
+            {{ stage('Warning! Node Type Switching Detected', false) }}
+            {{ warningMsg }}
+            select 1=0
+        {%- endif -%}
+{%endif%}		
+
 {% if desiredState == undefined %}
 
     {# View Name #}
@@ -15,7 +28,6 @@ does not permit copying or modification for any other purpose.
     {% set targetObjectSchema = ref_no_link(currentState.node.location.name, currentState.node.name).split('.')[1] %} 
     {% set fullyQualifiedTargetObjectName = ref_no_link(currentState.node.location.name, currentState.node.name) %}
 	
-
     {{ stage('Drop ' + ref_no_link(currentState.node.location.name, currentState.node.name)) }}
     {%- set materialization = dropMaterialization(currentState.node.materializationType) %}
     DROP {{ materialization }} {{ ref_no_link(currentState.node.location.name, currentState.node.name) }}
