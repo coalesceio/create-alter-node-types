@@ -1,0 +1,129 @@
+fileVersion: 1
+id: 3c545870-0ab2-4f2f-99da-099f47aecf8c
+name: CFCT_NATION
+operation:
+  config:
+    changetracking: false
+    clusterKey: false
+    clusterKeyConfig:
+      items:
+        - {}
+    clusterKeyConfigExpressions:
+      items:
+        - {}
+    clusterKeyExpressions: false
+    constraintsspec:
+      items:
+        - {}
+    datretention: ""
+    defaultcoallation: ""
+    eschemaevol: false
+    foreignk: false
+    foreignkeycon:
+      items:
+        - {}
+    groupByAll: false
+    inlineconst: false
+    insertStrategy: UNION
+    lastModifiedComparison: false
+    maxdataretention: ""
+    orderby: false
+    orderbycolumn:
+      items:
+        - {}
+    outlineconst: false
+    primary: false
+    primarykeycon:
+      items:
+        - {}
+    primarykeyname: ""
+    selectDistinct: false
+    testsEnabled: false
+    treatNullAsCurrentTimestamp: false
+    truncateBefore: true
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: SOURCE
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: c535fc9d-693a-4b2b-b8c2-3a374f7d010e
+          stepCounter: 3c545870-0ab2-4f2f-99da-099f47aecf8c
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        name: N_NATIONKEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: c11f9d9f-7d46-4066-9b94-22474b490e36
+                stepCounter: 63cb683e-7be3-4979-a4d3-28cc60aa3344
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6defa5b1-60da-4512-b83e-44845da32d3d
+          stepCounter: 3c545870-0ab2-4f2f-99da-099f47aecf8c
+        config: {}
+        dataType: VARCHAR(25)
+        description: ""
+        name: N_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 273206a8-5452-4172-9445-3a2abbcdfe19
+                stepCounter: 63cb683e-7be3-4979-a4d3-28cc60aa3344
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 76ab6541-99a3-4dbf-86d5-ffe801d05613
+          stepCounter: 3c545870-0ab2-4f2f-99da-099f47aecf8c
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        name: N_REGIONKEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: f030fb96-9770-4b57-96d9-4a047f0def2b
+                stepCounter: 63cb683e-7be3-4979-a4d3-28cc60aa3344
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 349d0136-7eff-4454-bcb3-c7bd7f428d6d
+          stepCounter: 3c545870-0ab2-4f2f-99da-099f47aecf8c
+        config: {}
+        dataType: VARCHAR(152)
+        description: ""
+        name: N_COMMENT
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: ab7c1675-d355-48d2-b3ef-c5e24c7c6b66
+                stepCounter: 63cb683e-7be3-4979-a4d3-28cc60aa3344
+            transform: ""
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases:
+          NATION: 63cb683e-7be3-4979-a4d3-28cc60aa3344
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SOURCE
+            nodeName: NATION
+        join:
+          joinCondition: FROM {{ ref('SOURCE', 'NATION') }} "NATION"
+        name: CFCT_NATION
+        noLinkRefs: []
+  name: CFCT_NATION
+  overrideSQL: false
+  schema: ""
+  sqlType: "534"
+  type: sql
+  version: 1
+type: Node

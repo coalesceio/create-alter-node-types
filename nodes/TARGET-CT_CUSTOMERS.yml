@@ -3,7 +3,7 @@ id: 6a6d66f5-819a-4606-bf0f-eb867c75f24f
 name: CT_CUSTOMERS
 operation:
   config:
-    changetracking: true
+    changetracking: false
     clusterKey: false
     clusterKeyConfig:
       items:
@@ -16,7 +16,7 @@ operation:
       items:
         - columnname: null
           constspec: ex. COLLATE <collate_specification>
-    datretention: ""
+    datretention: "'2'"
     defaultcoallation: "'de'"
     eschemaevol: false
     foreignk: true
@@ -28,9 +28,9 @@ operation:
     groupByAll: false
     inlineconst: false
     insertStrategy: UNION
-    maxdataretention: ""
+    maxdataretention: "'2'"
     orderby: false
-    outlineconst: true
+    outlineconst: false
     primary: true
     primarykeycon:
       items:

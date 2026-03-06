@@ -132,7 +132,7 @@ macroString: |-
   {% endmacro %}
 
 
-  ##########################
+  {##########################
   Purpose: Determines the correct Snowflake DROP object syntax based on the materialization type.
    
   Input: materialization (string): The Snowflake object type to be dropped
