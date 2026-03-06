@@ -108,11 +108,13 @@ metadata:
       - type: toggleButton
         displayName: Primary key
         attributeName: primary
+        default: ''
         enableIf: "{% if (config.outlineconst) %} true {% else %} false {% endif %}"
 
       - type: textBox
         displayName: Primary key Name
         attributeName: primarykeyname
+        default: ''
         enableIf: "{% if (config.outlineconst and config.primary) %} true {% else %} false {% endif %}"
 
       - type: tabular   
@@ -130,6 +132,7 @@ metadata:
       - type: toggleButton
         displayName: Foreign key
         attributeName: foreignk
+        default: ''
         enableIf: "{% if (config.outlineconst) %} true {% else %} false {% endif %}"
 
       - type: tabular   
@@ -158,17 +161,20 @@ metadata:
       - displayName: Data Retention Time(In days-'<integer>')
         attributeName: datretention
         type: textBox
+        default: ''
         isRequired: false
 
       - displayName: Maximum Data Extension time(In days-'<integer>')
         attributeName: maxdataretention
         type: textBox
+        default: ''
         isRequired: false
 
       
       - displayName: Default DDL Collation('<collation specification>')
         attributeName: defaultcoallation
         type: textBox
+        default: ''
         isRequired: false
         
     - groupName: Insert Data Options

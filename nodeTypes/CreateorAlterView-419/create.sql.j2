@@ -8,15 +8,30 @@ does not permit copying or modification for any other purpose.
 {# == Node Type Name           : Create or Alter View == #}
 {# == Node Type Description    : This node loads data creates and alters view== #}
 
+
+{%if desiredState and currenState!= undefined and currentState.node.nodeType != desiredState.node.nodeType%} 
+   
+    {%- set warningMsg = getNodeTypeSwitchWarning() | default('') %}
+
+        {# Warning display - Node type changes can impact related tasks, streams, or services. #}
+        {%- if warningMsg | trim | length > 0 -%}
+            {{ stage('Warning! Node Type Switching Detected', false) }}
+            {{ warningMsg }}
+            select 1=0
+        {%- endif -%}
+{%endif%}		
+
 {% if desiredState == undefined %}
 
     {# View Name #}
     {% set targetObjectDatabase = ref_no_link(currentState.node.location.name, currentState.node.name).split('.')[0] %} 
     {% set targetObjectSchema = ref_no_link(currentState.node.location.name, currentState.node.name).split('.')[1] %} 
     {% set fullyQualifiedTargetObjectName = ref_no_link(currentState.node.location.name, currentState.node.name) %}
+	
+    {{ stage('Drop ' + ref_no_link(currentState.node.location.name, currentState.node.name)) }}
+    {%- set materialization = dropMaterialization(currentState.node.materializationType) %}
+    DROP {{ materialization }} {{ ref_no_link(currentState.node.location.name, currentState.node.name) }}
 
-    {{ stage('Drop View') }}
-    DROP VIEW IF EXISTS {{ fullyQualifiedTargetObjectName }}
 
 {% elif currentState == undefined or (currentState != undefined and desiredState != currentState) %}
     {%if currentState != undefined%} 
@@ -24,8 +39,8 @@ does not permit copying or modification for any other purpose.
         {% set ns = namespace( storageLocationTest= true, descolchanges = 0, othercolchanges = 0, clusterTest = false,colchanges=0, nsCurrentDepStorageLocations="", nsCurrentSourceStorageLocations="", nsDesiredDepStorageLocations="",nsDesiredSourceStorageLocations="", sourcestorageLocationTest=true, joinTest=true ) %}
 		## Node
 	   
-        {% set distst = currentState.config.selectDistinct == desiredState.config.selectDistinct %}        
-        {% set groupAlltst = currentState.config.groupByAll == desiredState.config.groupByAll %}
+        {% set distst = currentState.config.selectDistinct | default(false) == desiredState.config.selectDistinct %}        
+        {% set groupAlltst = currentState.config.groupByAll | default(false) == desiredState.config.groupByAll %}
 
         {# Current State Source Storage Location Info #}
         {% for source in currentState.sources %}
@@ -87,8 +102,8 @@ does not permit copying or modification for any other purpose.
         {% endfor %}
 
         {#Multi source#}
-        {% set mulsrcTest = currentState.config.mstoggle == desiredState.config.mstoggle %}
-        {% set mulsrcstraTest = currentState.config.insertStrategy == desiredState.config.insertStrategy %}
+        {% set mulsrcTest = currentState.config.mstoggle | default(false) == desiredState.config.mstoggle %}
+        {% set mulsrcstraTest = currentState.config.insertStrategy | default(false) == desiredState.config.insertStrategy %}
         
         {% if 
             mulsrcTest == false or
@@ -190,8 +205,8 @@ does not permit copying or modification for any other purpose.
             {% endfor %}
     
             {#Config level changes #}
-            {%set securetst = currentState.config.secureOption == desiredState.config.secureOption%}
-            {%set chngtracktst = currentState.config.changetracking == desiredState.config.changetracking%}
+            {%set securetst = currentState.config.secureOption | default(false) == desiredState.config.secureOption%}
+            {%set chngtracktst = currentState.config.changetracking | default(false) == desiredState.config.changetracking%}
 
             {% set sourcesTest = currentState.sources | count == desiredState.sources | count %}
 
@@ -212,8 +227,8 @@ does not permit copying or modification for any other purpose.
                 {% endfor %}
             {% endif %}
 	   	
-            {%set chngtracktst = currentState.config.changetracking == desiredState.config.changetracking%}
-          
+            {%set chngtracktst = currentState.config.changetracking | default(false) == desiredState.config.changetracking%}
+            {%set materializationTest = currentState.node.materializationType == desiredState.node.materializationType %}
             {% if 
                 chngtracktst == false or
                 securetst == false or 
@@ -227,6 +242,7 @@ does not permit copying or modification for any other purpose.
                 distst == false or
                 groupAlltst == false or 
                 ns.sourcestorageLocationTest == false or
+				materializationTest or
                 msrcTest == false%}    
 
             {% set createTest = true %}
@@ -248,11 +264,14 @@ does not permit copying or modification for any other purpose.
             distst == false or
             groupAlltst == false or
             msrcTest == false or
-            sourcesTest == false %}
+            sourcesTest == false
+            or materializationTest == false			%}
         
-            {{ stage('Drop View', true, "sql", "drop") }}
 
-            DROP VIEW IF EXISTS {{ ref_no_link(currentState.node.location.name, currentState.node.name) }}
+			{{ stage('Drop ' + ref_no_link(currentState.node.location.name, currentState.node.name)) }}
+			
+			{%- set materialization = dropMaterialization(currentState.node.materializationType) %}
+            DROP {{ materialization }} {{ ref_no_link(currentState.node.location.name, currentState.node.name) }}
                 
         {%endif%}
     {%endif%}

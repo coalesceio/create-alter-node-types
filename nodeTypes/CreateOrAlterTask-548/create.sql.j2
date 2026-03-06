@@ -8,6 +8,18 @@ does not permit copying or modification for any other purpose.
 {# == Node Type Name           : Create Or Alter Task == #}
 {# == Node Type Description    : This node creates or alters a table and a task to insert data into the table and schedules the task == #}
 
+{%if desiredState and currenState!= undefined and currentState.node.nodeType != desiredState.node.nodeType%}
+    
+    {%- set warningMsg = getNodeTypeSwitchWarning() | default('') %}
+
+        {# Warning display - Node type changes can impact related tasks, streams, or services. #}
+        {%- if warningMsg | trim | length > 0 -%}
+            {{ stage('Warning! Node Type Switching Detected', false) }}
+            {{ warningMsg }}
+            select 1=0
+        {%- endif -%}
+{%endif%}
+
 {# == Determine schedulingMode == #} 
 {% if desiredState != undefined and desiredState.config.schedulingMode != '' %} 
     {% set schedulingMode = desiredState.config.schedulingMode %} 
@@ -32,8 +44,9 @@ does not permit copying or modification for any other purpose.
     {% set targetObjectSchema = ref_no_link(currentState.node.location.name, currentState.node.name).split('.')[1] %} 
     {% set fullyQualifiedTargetObjectName = ref_no_link(currentState.node.location.name, currentState.node.name) %}
     
-    {{ stage('Drop Table' ) }}
-    DROP TABLE IF EXISTS {{ fullyQualifiedTargetObjectName }}
+    {{ stage('Drop ' + ref_no_link(currentState.node.location.name, currentState.node.name)) }}
+    {%- set materialization = dropMaterialization(currentState.node.materializationType) %}
+    DROP {{ materialization }} {{ ref_no_link(currentState.node.location.name, currentState.node.name) }}
 
 {% elif currentState == undefined or (currentState != undefined and desiredState != currentState) %}
 
@@ -90,10 +103,10 @@ does not permit copying or modification for any other purpose.
         {% endif %}
 
         {# Clustering Test #}
-        {% set clusterKeyTest = currentState.config.clusterKey == desiredState.config.clusterKey %}
-        {% set clusterKeyExpressionsTest = currentState.config.clusterKeyExpressions == desiredState.config.clusterKeyExpressions %}
-        {% set clusterKeyConfigTest = currentState.config.clusterKeyConfig == desiredState.config.clusterKeyConfig %}
-        {% set clusterKeyConfigExpressionsTest = currentState.config.clusterKeyConfigExpressions == desiredState.config.clusterKeyConfigExpressions %}
+        {% set clusterKeyTest = currentState.config.clusterKey | default(false) == desiredState.config.clusterKey %}
+        {% set clusterKeyExpressionsTest = currentState.config.clusterKeyExpressions | default(false) == desiredState.config.clusterKeyExpressions %}
+        {% set clusterKeyConfigTest = currentState.config.clusterKeyConfig | default({'items': [{}]}) == desiredState.config.clusterKeyConfig %}
+        {% set clusterKeyConfigExpressionsTest = currentState.config.clusterKeyConfigExpressions | default({'items': [{}]}) == desiredState.config.clusterKeyConfigExpressions %}
 
         {% if 
             clusterKeyTest == false or
@@ -168,19 +181,19 @@ does not permit copying or modification for any other purpose.
         {% endfor %}
 
         {# Config level changes #}
-        {% set dretentiontest = currentState.config.datretention == desiredState.config.datretention%}
-        {% set mretentiontest = currentState.config.maxdataretention == desiredState.config.maxdataretention%}
-        {% set chngtracktst = currentState.config.changetracking == desiredState.config.changetracking %}
-        {% set schematst = currentState.config.eschemaevol == desiredState.config.eschemaevol %}
+        {% set dretentiontest = currentState.config.datretention | default('') == desiredState.config.datretention%}
+        {% set mretentiontest = currentState.config.maxdataretention | default('') == desiredState.config.maxdataretention%}
+        {% set chngtracktst = currentState.config.changetracking | default(false) == desiredState.config.changetracking %}
+        {% set schematst = currentState.config.eschemaevol | default(false) == desiredState.config.eschemaevol %}
         
         {# Constraint test #}
-        {% set inconsttst = currentState.config.inlineconst == desiredState.config.inlineconst%}
+        {% set inconsttst = currentState.config.inlineconst | default(false) == desiredState.config.inlineconst%}
         {% set consttst = currentState.config.constraintsspec  ==  desiredState.config.constraintsspec %}
-        {% set outconsttst = currentState.config.outlineconst == desiredState.config.outlineconst %}
+        {% set outconsttst = currentState.config.outlineconst | default(false) == desiredState.config.outlineconst %}
 
         {# primary key test #}
-        {% set primarykeytst = currentState.config.primary == desiredState.config.primary%}
-        {% set pkeynametst = currentState.config.primarykeyname == desiredState.config.primarykeyname %}
+        {% set primarykeytst = currentState.config.primary | default(false) == desiredState.config.primary%}
+        {% set pkeynametst = currentState.config.primarykeyname | default('') == desiredState.config.primarykeyname %}
         {% set primcoltst = currentState.config.primarykeycon == desiredState.config.primarykeycon %}
         
         {% if primarykeytst == false or pkeynametst == false or primcoltst == false %}
@@ -190,7 +203,7 @@ does not permit copying or modification for any other purpose.
         {% endif %}
 
         {#foreign key test #}
-        {% set foreigntst = currentState.config.foreignk == desiredState.config.foreignk %}
+        {% set foreigntst = currentState.config.foreignk | default(false) == desiredState.config.foreignk %}
         {% set foreignkeytst = currentState.config.foreignkeycon == desiredState.config.foreignkeycon %}
         
         {% if foreigntst == false or foreignkeytst == false %}
@@ -198,7 +211,9 @@ does not permit copying or modification for any other purpose.
         {% else %}
             {% set foreignTest = true %}
         {% endif %}
-
+		
+        {%set materializationTest = currentState.node.materializationType == desiredState.node.materializationType %}
+		
         {% if 
             ns.othercolchanges > 0 or
             ns.descolchanges > 0 or
@@ -213,6 +228,7 @@ does not permit copying or modification for any other purpose.
             schematst == false or
             inconsttst == false or
             consttst == false or
+			materializationTest or
             outconsttst == false %}    
 
             {% set createTest = true %}
@@ -223,7 +239,16 @@ does not permit copying or modification for any other purpose.
         {% if createTest == false and (ns.storageLocationTest == false or currentState.node.name != desiredState.node.name)  %}    
             {% set altertest = true %}		   
         {%endif%}
+		
+		{% if materializationTest == false %}
+            {# Change in materialization type #}
+
+            {{ stage('Drop ' + ref_no_link(currentState.node.location.name, currentState.node.name)) }}
+            {%- set materialization = dropMaterialization(currentState.node.materializationType) %}
+            DROP {{ materialization }} {{ ref_no_link(currentState.node.location.name, currentState.node.name) }}
+        {% endif %}
     {%endif%}
+
 
     {% if currentState == undefined or createTest %}
 
@@ -520,10 +545,10 @@ does not permit copying or modification for any other purpose.
         {# =========================================================
         Insert Strategy comparison
         ========================================================= #}
-        {% if currentState.config.insertStrategy != desiredState.config.insertStrategy %}
+        {% if currentState.config.insertStrategy | default('') != desiredState.config.insertStrategy %}
             {% set _ = nsMetaVariables.insertStrategyDiff.append({
                 "is": desiredState.config.insertStrategy,
-                "was": currentState.config.insertStrategy
+                "was": currentState.config.insertStrategy | default('')
             }) %}
 
             {{ update_metadata("Insert Strategy", nsMetaVariables.insertStrategyDiff, "Insert Strategy") }}
@@ -533,10 +558,10 @@ does not permit copying or modification for any other purpose.
         {# =========================================================
         Truncate Table comparison
         ========================================================= #}
-        {% if currentState.config.truncateBefore != desiredState.config.truncateBefore %}
+        {% if currentState.config.truncateBefore | default(false) != desiredState.config.truncateBefore %}
             {% set _ = nsMetaVariables.truncateBeforeDiff.append({
                 "is": desiredState.config.truncateBefore,
-                "was": currentState.config.truncateBefore
+                "was": currentState.config.truncateBefore | default(false)
             }) %}
 
             {{ update_metadata("Truncate Before", nsMetaVariables.truncateBeforeDiff, "Truncate Before") }}
@@ -546,15 +571,15 @@ does not permit copying or modification for any other purpose.
         {# =========================================================
         Test Enabled comparison (per column)
         ========================================================= #}
-        {% if desiredState.config.testsEnabled != currentState.config.testsEnabled %}
+        {% if desiredState.config.testsEnabled != currentState.config.testsEnabled | default(false) %}
 
                 {% set nsMetaVariables.testsEnabledTest = false %}
                 {% set _ = nsMetaVariables.testsEnabledDiff.append({
                     "is": desiredState.config.testsEnabled,
-                    "was": currentState.config.testsEnabled
+                    "was": currentState.config.testsEnabled | default(false)
                 }) %}
 
-        {% elif desiredState.config.testsEnabled and currentState.config.testsEnabled %}
+        {% elif desiredState.config.testsEnabled and currentState.config.testsEnabled | default(false) %}
 
             {# Changes in Node Tests #}
             {% if currentState.node.tests | length != desiredState.node.tests | length %}
@@ -614,10 +639,10 @@ does not permit copying or modification for any other purpose.
         {# =========================================================
         Distinct Toggle comparison
         ========================================================= #}
-        {% if currentState.config.selectDistinct != desiredState.config.selectDistinct %}
+        {% if currentState.config.selectDistinct | default(false) != desiredState.config.selectDistinct %}
             {% set _ = nsMetaVariables.distinctDiff.append({
                 "is": desiredState.config.selectDistinct,
-                "was": currentState.config.selectDistinct
+                "was": currentState.config.selectDistinct | default(false)
             }) %}
 
             {{ update_metadata("Distinct", nsMetaVariables.distinctDiff, "Distinct") }}
@@ -627,10 +652,10 @@ does not permit copying or modification for any other purpose.
         {# =========================================================
         GroupByAll Toggle comparison
         ========================================================= #}
-        {% if currentState.config.groupByAll != desiredState.config.groupByAll %}
+        {% if currentState.config.groupByAll | default(false) != desiredState.config.groupByAll %}
             {% set _ = nsMetaVariables.groupByAllDiff.append({
                 "is": desiredState.config.groupByAll,
-                "was": currentState.config.groupByAll
+                "was": currentState.config.groupByAll | default(false)
             }) %}
             
             {{ update_metadata("GroupByAll", nsMetaVariables.groupByAllDiff, "GroupByAll") }}
@@ -640,15 +665,15 @@ does not permit copying or modification for any other purpose.
         {# =========================================================
         Order By comparison (per column)
         ========================================================= #}
-        {% if currentState.config.orderby != desiredState.config.orderby %}
+        {% if currentState.config.orderby | default(false) != desiredState.config.orderby %}
 
             {% set nsMetaVariables.orderByTest = false %}
             {% set _ = nsMetaVariables.orderByDiff.append({
                     "is": desiredState.config.orderby,
-                "was": currentState.config.orderby
+                "was": currentState.config.orderby | default(false)
             }) %}
 
-        {% elif currentState.config.orderby and desiredState.config.orderby %}
+        {% elif currentState.config.orderby | default(false) and desiredState.config.orderby %}
 
             {% set desiredSortColList = [] %}
             {% set currentSortColList = [] %}
@@ -733,9 +758,9 @@ does not permit copying or modification for any other purpose.
 
         {%- endif -%}
 
-        {%-if currentState != undefined and currentState.config.schedulePeriodOption != schedulePeriodOption -%}            
-         {%- if currentState.config.schedulePeriodOption == 'Predecessor' -%}
-            {% set fullyQualifiedRootTaskName = ref_no_link(currentState.node.location.name, currentState.config.rootTask) %}
+        {%-if currentState != undefined and currentState.config.schedulePeriodOption | default('') != schedulePeriodOption -%}            
+         {%- if currentState.config.schedulePeriodOption | default('') == 'Predecessor' -%}
+            {% set fullyQualifiedRootTaskName = ref_no_link(currentState.node.location.name, currentState.config.rootTask | default('')) %}
 
             {{ stage('Suspend Root Task', true, "sql", "create") }}
             ALTER TASK IF EXISTS {{ fullyQualifiedRootTaskName }} SUSPEND
@@ -900,13 +925,13 @@ does not permit copying or modification for any other purpose.
 {# Dropping the task #}
 {% elif currentState != undefined and desiredState == undefined %}
 
-    {% if currentState.config.devMode == false %}
-		{% set fullyQualifiedRootTaskName = ref_no_link(currentState.node.location.name, currentState.config.rootTask) %}
+    {% if currentState.config.devMode | default(false) == false %}
+		{% set fullyQualifiedRootTaskName = ref_no_link(currentState.node.location.name, currentState.config.rootTask | default('')) %}
 
         {# Task Info #}
         {% set taskName = currentState.node.name + '_TASK' %}
         {% set fullyQualifiedTaskName = ref_no_link(currentState.node.location.name, taskName) %}
-        {%- if currentState.config.schedulePeriodOption == 'Predecessor' -%}
+        {%- if currentState.config.schedulePeriodOption | default('') == 'Predecessor' -%}
 
             {{ stage('Suspend Root Task') }}
             ALTER TASK IF EXISTS {{ fullyQualifiedRootTaskName }} SUSPEND

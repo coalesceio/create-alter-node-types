@@ -25,7 +25,9 @@ operation:
     groupByAll: false
     inlineconst: false
     insertStrategy: UNION
-    lastModifiedColumn: ""
+    lastModifiedColumn:
+      columnCounter: 019c75ae-a26c-7294-b12c-260342ff2bcd
+      stepCounter: 66e28fe3-1c30-4153-8f46-7f1bc4a20053
     lastModifiedComparison: true
     maxdataretention: ""
     orderby: false
