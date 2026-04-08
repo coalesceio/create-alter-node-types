@@ -666,6 +666,9 @@ Create Or Alter Task node has two or three configuration groups depending on con
 
 #### Task Scheduling Options
 
+<img width="455" height="767" alt="image" src="https://github.com/user-attachments/assets/0c7e63e8-924f-4cec-86b5-b37d3d8eb820" />
+
+
 | **Option** | **Description** |
 |------------|----------------|
 | **Scheduling Mode** | Choose compute type:<br/>- **Warehouse Task**: User managed warehouse executes tasks<br/>- **Serverless Task**: Uses serverless compute |
@@ -673,10 +676,42 @@ Create Or Alter Task node has two or three configuration groups depending on con
 | **Multiple Stream has Data Logic** | AND/OR logic when multiple streams (visible if Stream has Data Flag is true)<br/>**AND** - If there are multiple streams task will run if all streams have data<br/>**OR** -  If there are multiple streams task will run if one or more streams has data |
 | **Select Warehouse** | Visible if Scheduling Mode is set to Warehouse Task. Enter the name of the warehouse you want the task to run on without quotes.|
 | **Select initial serverless size** | Visible when Scheduling Mode is set to Serverless Task.<br/> Select the initial compute size on which to run the task. Snowflake will adjust size from there based on target schedule and task run times. |
+| **Enable Size Bounds** | Toggle to set explicit limits on serverless scaling. (Visible if **Serverless Task** is selected).<br/>**Validation Rules:**<br/>- Min size must be ≤ Initial size<br/>- Max size must be ≥ Initial size<br/>- Min size must be ≤ Max size |
+| **Minimum Warehouse Size** | The smallest compute size allowed for the task (e.g., 1. XSMALL). |
+| **Maximum Warehouse Size** | The largest compute size allowed for the task (e.g., 6. XXLARGE). |
 | **Task Schedule** | Choose schedule type:<br/>- **Minutes** - Specify interval in minutes. Enter a whole number from 1 to 11520 which represents the number of minutes between task runs.<br/>- **Cron** - Uses [Cron expressions](https://docs.coalesce.io/docs/reference/cron-reference/). Specifies a cron expression and time zone for periodically running the task. Supports a subset of standard cron utility syntax.<br/>- **Predecessor** - Specify dependent tasks |
+| **Execution Time** | The specific duration for the task run limit. Supported ranges:<br/>- **SECONDS**: 10 - 691200<br/>- **MINUTES**: 1 - 11520<br/>- **HOURS**: 1 - 192 |
 | **Enter predecessor tasks separated by a comma**| Visible when Task Schedule is set to Predecessor. <br/>One or more task names that precede the task being created in the current node. Task names are case sensitive, should not be quoted and must exist in the same schema in which the current task is being created. If there are multiple predecessor task separate the task names using a comma and no spaces.|
 | **Root task name** | Visible when Task Schedule is set to Predecessor.<br/> Name of the root task that controls scheduling for the DAG of tasks. Task names are case sensitive, should not be quoted and must exist in the same schema in which the current task is being created. If there are multiple predecessor task separate the task names using a comma and no spaces.|
 | **User Task Timeout** | Specifies the time limit on a single run of the task before it times out (in milliseconds)<br/>Values: 0 - 604800000 (7 days). A value of 0 specifies that the maximum timeout value is enforced|
+
+#### Create or Alter Task Advanced Scheduling Options
+
+<img width="465" height="708" alt="image" src="https://github.com/user-attachments/assets/44c937fa-3827-4ab7-9480-8e23a8fb89e4" />
+
+
+| **Option** | **Description** |
+|------------|----------------|
+| **Execute As Specific User** | Toggle to run on behalf of another user. Requires `GRANT IMPERSONATE` privileges. |
+| **User Name** | The specific user account name used when **Execute As Specific User** is enabled. |
+| **Allow Overlapping Execution** | Allows a new instance of the task to start if the previous one is still running. |
+| **Enable Task Graph Config** | Enables a text box to provide **Configuration JSON** for the task graph. |
+| **Auto-Suspend After Failures** | Automatically suspends the task after a set number of consecutive failures. |
+| **Number of Consecutive Failures** | Set the threshold (0 - No Limit) before the task is automatically suspended. <br/>- When toggle is OFF: Parameter is not included (uses Snowflake default of 10).<br/>- When toggle is ON with value 0: **Disables** auto-suspension.<br/>- When toggle is ON with value > 0: **Suspends** after that many consecutive failures. |
+| **Enable Auto-Retry** | Toggle to automatically retry the task if it fails. |
+| **Retry Attempts** | Specify the number of retry attempts allowed (Range: 0 - 30). |
+
+#### Create or Alter Task Notification Options
+
+<img width="453" height="459" alt="image" src="https://github.com/user-attachments/assets/83b9dcfc-20c9-41c0-a459-a8706b3c885f" />
+
+
+| **Option** | **Description** |
+|------------|----------------|
+| **Enable Error Notifications** | Toggle to send alerts on failure. Requires an **Error Integration Name**. |
+| **Enable Success Notifications** | Toggle to send alerts on success. Requires a **Success Integration Name**. |
+
+> **Note:** Options under **Advanced Scheduling Options** and **Notification Options** (Execution Time, Overlapping Execution, Auto-Suspend, Auto-Retry, etc.) are only applicable to **Root** and **Independent** tasks. The only exception is **Execute As Specific User**, which can be configured for any task in the graph.
 
 ### Create or Alter Task Deployment
 
@@ -835,14 +870,49 @@ The Create Or Alter DAG Root Task node has two configuration groups:
 
 #### Create Or Alter DAG Root Task Scheduling Options
 
+<img width="437" height="720" alt="image" src="https://github.com/user-attachments/assets/897d5677-aad5-4496-b107-fb27effb3a4f" />
+
+
 | **Option** | **Description** |
 |------------|----------------|
 | **Scheduling Mode** | Choose compute type:<br/>- **Warehouse Task** - User managed warehouse executes tasks<br/>- **Serverless Task** - Uses serverless compute |
 | **Select Warehouse** | Visible if Scheduling Mode is set to Warehouse Task. <br/> Name of warehouse to run task on without quotes |
 | **Select initial serverless size** | Visible when Scheduling Mode is set to Serverless Task <br/> Initial compute size for serverless tasks. Snowflake will adjust size from there based on target schedule and task run times. |
-| **Task Schedule** | Choose schedule type:<br/>- Minutes - Specify interval in minutes<br/>- Cron - Use cron expression |
+| **Enable Size Bounds** | Toggle to set explicit limits on serverless scaling. (Visible if **Serverless Task** is selected).<br/>**Validation Rules:**<br/>- Min size must be ≤ Initial size<br/>- Max size must be ≥ Initial size<br/>- Min size must be ≤ Max size |
+| **Minimum Warehouse Size** | The smallest compute size allowed for the task (e.g., 1. XSMALL). |
+| **Maximum Warehouse Size** | The largest compute size allowed for the task (e.g., 6. XXLARGE). |
+| **Task Schedule** | Choose schedule type:<br/>- **Minutes** - Specify interval in minutes. Enter a whole number from 1 to 11520 which represents the number of minutes between task runs.<br/>- **Cron** - Uses [Cron expressions](https://docs.coalesce.io/docs/reference/cron-reference/). Specifies a cron expression and time zone for periodically running the task. Supports a subset of standard cron utility syntax. |
+| **Execution Time** | The specific duration for the task run limit. Supported ranges:<br/>- **SECONDS**: 10 - 691200<br/>- **MINUTES**: 1 - 11520<br/>- **HOURS**: 1 - 192 |
 | **Enter root task SQL** | The SQL statement to be run when a standalone root task executes |
 | **User Task Timeout** | Specifies the time limit on a single run of the task before it times out (in milliseconds)<br/>Values: 0 - 604800000 (7 days). A value of 0 specifies that the maximum timeout value is enforced|
+
+#### Create or Alter Task Advanced Scheduling Options
+
+<img width="465" height="708" alt="image" src="https://github.com/user-attachments/assets/44c937fa-3827-4ab7-9480-8e23a8fb89e4" />
+
+
+| **Option** | **Description** |
+|------------|----------------|
+| **Execute As Specific User** | Toggle to run on behalf of another user. Requires `GRANT IMPERSONATE` privileges. |
+| **User Name** | The specific user account name used when **Execute As Specific User** is enabled. |
+| **Allow Overlapping Execution** | Allows a new instance of the task to start if the previous one is still running. |
+| **Enable Task Graph Config** | Enables a text box to provide **Configuration JSON** for the task graph. |
+| **Auto-Suspend After Failures** | Automatically suspends the task after a set number of consecutive failures. |
+| **Number of Consecutive Failures** | Set the threshold (0 - No Limit) before the task is automatically suspended. <br/>- When toggle is OFF: Parameter is not included (uses Snowflake default of 10).<br/>- When toggle is ON with value 0: **Disables** auto-suspension.<br/>- When toggle is ON with value > 0: **Suspends** after that many consecutive failures. |
+| **Enable Auto-Retry** | Toggle to automatically retry the task if it fails. |
+| **Retry Attempts** | Specify the number of retry attempts allowed (Range: 0 - 30). |
+
+#### Create or Alter Task Notification Options
+
+<img width="453" height="459" alt="image" src="https://github.com/user-attachments/assets/83b9dcfc-20c9-41c0-a459-a8706b3c885f" />
+
+
+| **Option** | **Description** |
+|------------|----------------|
+| **Enable Error Notifications** | Toggle to send alerts on failure. Requires an **Error Integration Name**. |
+| **Enable Success Notifications** | Toggle to send alerts on success. Requires a **Success Integration Name**. |
+
+> **Note:** Options under **Advanced Scheduling Options** and **Notification Options** (Execution Time, Overlapping Execution, Auto-Suspend, Auto-Retry, etc.) are only applicable to **Root** and **Independent** tasks. The only exception is **Execute As Specific User**, which can be configured for any task in the graph.
 
 ### Create Or Alter DAG Root Task Deployment
 
