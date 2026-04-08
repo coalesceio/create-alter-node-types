@@ -16,10 +16,10 @@ operation:
       items:
         - columnname: null
           constspec: ex. COLLATE <collate_specification>
-    datretention: "'2'"
+    datretention: ""
     defaultcoallation: "'de'"
     eschemaevol: false
-    foreignk: true
+    foreignk: false
     foreignkeycon:
       items:
         - foreignkeycol: null
@@ -28,16 +28,16 @@ operation:
     groupByAll: false
     inlineconst: false
     insertStrategy: UNION
-    maxdataretention: "'2'"
+    maxdataretention: ""
     orderby: false
-    outlineconst: false
+    outlineconst: true
     primary: true
     primarykeycon:
       items:
         - primarykey:
             columnCounter: 9ece12bb-6a8f-406a-8ef1-7174151054d1
             stepCounter: 6a6d66f5-819a-4606-bf0f-eb867c75f24f
-    primarykeyname: ""
+    primarykeyname: abc
     selectDistinct: false
     testsEnabled: false
     truncateBefore: false
