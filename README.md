@@ -47,8 +47,8 @@ Create Or Alter has two configuration groups:
 |--------------|-----------------|
 | **Storage Location** | (Required) Storage Location where the Create Or Alter Table will be created |
 | **Node Type** | (Required) Name of template used to create node objects |
-| **Description** | A description of the node's purpose |
-| **Deploy Enabled** | If TRUE the node will be deployed/redeployed when changes 
+| **Description** | A description of the Node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed or redeployed when changes 
 are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
 
 #### Create table Options
@@ -119,7 +119,7 @@ When the Create or Alter table node is redeployed with any changes in table or c
 
 ### Redeployment with no changes 
 
-If the nodes are redeployed with no changes compared to previous deployment,then no stages are executed
+If the nodes are redeployed with no changes compared to previous deployment, then no stages are executed
 
 ### Redeployment with only metadata changes
 
@@ -167,8 +167,8 @@ Create Or Alter has two configuration groups:
 |--------------|-----------------|
 | **Storage Location** | (Required) Storage Location where the Create Or Alter Table will be created |
 | **Node Type** | (Required) Name of template used to create node objects |
-| **Description** | A description of the node's purpose |
-| **Deploy Enabled** | If TRUE the node will be deployed/redeployed when changes 
+| **Description** | A description of the Node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed or redeployed when changes 
 are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
 
 #### Create view Options
@@ -222,7 +222,7 @@ Change in view definition like change in columns,add or drop columns,change in d
 
 ### Redeployment with no changes 
 
-If the nodes are redeployed with no changes compared to previous deployment,then no stages are executed
+If the nodes are redeployed with no changes compared to previous deployment, then no stages are executed
 
 ### Create Or Alter View Undeployment
 
@@ -254,8 +254,8 @@ Create Or Alter has two configuration groups:
 |--------------|-----------------|
 | **Storage Location** | (Required) Storage Location where the Create Or Alter Dimension Table will be created |
 | **Node Type** | (Required) Name of template used to create node objects |
-| **Description** | A description of the node's purpose |
-| **Deploy Enabled** | If TRUE the node will be deployed/redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
+| **Description** | A description of the Node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed or redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
 
 #### Create Table Options
 
@@ -384,8 +384,8 @@ Create Or Alter has two configuration groups:
 |--------------|-----------------|
 | **Storage Location** | (Required) Storage Location where the Create Or Alter fact Table will be created |
 | **Node Type** | (Required) Name of template used to create node objects |
-| **Description** | A description of the node's purpose |
-| **Deploy Enabled** | If TRUE the node will be deployed/redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
+| **Description** | A description of the Node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed or redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
 
 #### Create Table Options
 
@@ -509,8 +509,8 @@ Create Or Alter has two configuration groups:
 |--------------|-----------------|
 | **Storage Location** | (Required) Storage Location where the Create Or Alter Persistent Stage Table will be created |
 | **Node Type** | (Required) Name of template used to create node objects |
-| **Description** | A description of the node's purpose |
-| **Deploy Enabled** | If TRUE the node will be deployed/redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
+| **Description** | A description of the Node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed or redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
 
 #### Create Table Options
 
@@ -637,8 +637,8 @@ Create Or Alter Task node has two or three configuration groups depending on con
 |--------------|-----------------|
 | **Storage Location** | (Required) Storage Location where the Create Or Alter Task will be created |
 | **Node Type** | (Required) Name of template used to create node objects |
-| **Description** | A description of the node's purpose |
-| **Deploy Enabled** | If TRUE the node will be deployed/redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
+| **Description** | A description of the Node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed or redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
 
 #### Create Table Options
 
@@ -865,8 +865,8 @@ The Create Or Alter DAG Root Task node has two configuration groups:
 |-------------|-----------------|
 | **Storage Location** | Storage Location where the Stream will be created |
 | **Node Type** | Name of template used to create node objects |
-| **Description** | A description of the node's purpose |
-| **Deploy Enabled** | If TRUE the node will be deployed / redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
+| **Description** | A description of the Node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed or redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
 
 #### Create Or Alter DAG Root Task Scheduling Options
 
@@ -991,8 +991,8 @@ The Task DAG Resume Root node has two configuration groups:
 |-------------|-----------------|
 | **Storage Location** | Storage Location where the Stream will be created |
 | **Node Type** | Name of template used to create node objects |
-| **Description** | A description of the node's purpose |
-| **Deploy Enabled** | If TRUE the node will be deployed / redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
+| **Description** | A description of the Node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed or redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
 
 #### Create DAG Root Resume Task Scheduling Options
 
