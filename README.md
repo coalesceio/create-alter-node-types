@@ -1,4 +1,4 @@
-## Create or Alter package
+## Create OR Alter PackaGE
 
 Create or Alter package includes:
 * [Create or Alter table](#create-or-alter-table)
@@ -11,7 +11,7 @@ Create or Alter package includes:
 * [Create DAG Root Resume Task](#Create-DAG-Root-Resume-Task)
 * [Code](#code)
 
-## Brief summary
+## Brief Summary
 
 The Create or Alter package is a suite of Coalesce node types designed to streamline the management of Snowflake objects by leveraging Snowflake’s CREATE OR ALTER syntax. This approach simplifies the deployment lifecycle by automatically determining whether to create a new object or modify an existing one based on the defined configuration.
 
@@ -29,7 +29,7 @@ Core Functionality
 
 The main advantage of this package is declarative state management. Instead of writing manual migration scripts, users define the desired state of their Snowflake environment, and the package automates the SQL required to reach that state.
 
-# Create or Alter table
+# Create OR Alter Table
 
 The [Create or alter table](https://docs.snowflake.com/en/sql-reference/sql/create-table#create-or-alter-table) creates table if it doesn’t exist, or alters it according to the table definition. 
 
@@ -47,11 +47,11 @@ Create Or Alter has two configuration groups:
 |--------------|-----------------|
 | **Storage Location** | (Required) Storage Location where the Create Or Alter Table will be created |
 | **Node Type** | (Required) Name of template used to create node objects |
-| **Description** | A description of the node's purpose |
-| **Deploy Enabled** | If TRUE the node will be deployed/redeployed when changes 
+| **Description** | A description of the Node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed or redeployed when changes 
 are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
 
-#### Create table Options
+#### Create Table Options
 
 | **Options** | **Description** |
 |-------------|-----------------|
@@ -66,7 +66,7 @@ When enabled, you can define both primary and foreign keys. |
 | **Data Retention Time** | Set the number of days for data retention for Time Travel actions. |
 | **Default DDL Collation** | Set the default collation specification for the DDL operations. |
 
-#### Insert data Options
+#### Insert Data Options
 
 | **Options** | **Description** |
 |-------------|-----------------|
@@ -117,11 +117,11 @@ When the Create or Alter table node is redeployed with any changes in table or c
 |-----------|----------------|
 | **Create/Alter table/transient table** | This will execute a CREATE OR ALTER statement and create a table in the target environment |
 
-### Redeployment with no changes 
+### Redeployment With No Changes 
 
-If the nodes are redeployed with no changes compared to previous deployment,then no stages are executed
+If the nodes are redeployed with no changes compared to previous deployment, then no stages are executed
 
-### Redeployment with only metadata changes
+### Redeployment With Only Metadata Changes
 
 Sometimes, changes to config can result in metadata changes from node edits, DML changes, or storage updates. A few cases are listed below:
 
@@ -150,7 +150,7 @@ This is executed in below stage:
 | **Drop table/transient table** | Removes the table from the environment |
 
 
-# Create or alter view
+# Create OR Alter View
 
 A [create or alter view](https://docs.snowflake.com/en/sql-reference/sql/create-view#label-create-or-alter-view-syntax) node creates a new view if it doesn’t already exist, or updates the properties of an existing view to match those defined in the statement.
 
@@ -167,11 +167,11 @@ Create Or Alter has two configuration groups:
 |--------------|-----------------|
 | **Storage Location** | (Required) Storage Location where the Create Or Alter Table will be created |
 | **Node Type** | (Required) Name of template used to create node objects |
-| **Description** | A description of the node's purpose |
-| **Deploy Enabled** | If TRUE the node will be deployed/redeployed when changes 
+| **Description** | A description of the Node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed or redeployed when changes 
 are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
 
-#### Create view Options
+#### Create View Options
 
 | **Options** | **Description** |
 |-------------|-----------------|
@@ -212,7 +212,7 @@ When the Create or Alter view node is redeployed with any changes in secure,chan
 |-----------|----------------|
 | **Create/Alter View** | This will execute a CREATE OR ALTER statement and create a view in the target environment |
 
-### Change in view definition
+### ChanGE in View Definition
 
 Change in view definition like change in columns,add or drop columns,change in data type ,adding distinct or group by all results in below stages
 
@@ -220,9 +220,9 @@ Change in view definition like change in columns,add or drop columns,change in d
 |-----------|----------------|
 | **Create/Alter View** | This will execute a CREATE OR ALTER statement and create a view in the target environment |
 
-### Redeployment with no changes 
+### Redeployment With No Changes 
 
-If the nodes are redeployed with no changes compared to previous deployment,then no stages are executed
+If the nodes are redeployed with no changes compared to previous deployment, then no stages are executed
 
 ### Create Or Alter View Undeployment
 
@@ -254,8 +254,8 @@ Create Or Alter has two configuration groups:
 |--------------|-----------------|
 | **Storage Location** | (Required) Storage Location where the Create Or Alter Dimension Table will be created |
 | **Node Type** | (Required) Name of template used to create node objects |
-| **Description** | A description of the node's purpose |
-| **Deploy Enabled** | If TRUE the node will be deployed/redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
+| **Description** | A description of the Node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed or redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
 
 #### Create Table Options
 
@@ -271,7 +271,7 @@ Create Or Alter has two configuration groups:
 | **Maximum Data Extension time** | Set the number of days for max data extension for Historical data access.<br/>Available only for materialization type - table |
 | **Default DDL Collation** | Set the default collation specification for the DDL operations. |
 
-#### Insert data Options
+#### Insert Data Options
 
 | **Options** | **Description** |
 |-------------|-----------------|
@@ -332,11 +332,11 @@ When the Create or Alter table node is redeployed with any changes in table or c
 |-----------|----------------|
 | **Create/Alter table/transient table** | This will execute a CREATE OR ALTER statement and create a table in the target environment |
 
-### Redeployment with no changes 
+### Redeployment With No Changes 
 
 If the nodes are redeployed with no changes compared to previous deployment, then no stages are executed
 
-### Redeployment with only metadata changes
+### Redeployment With Only Metadata Changes
 
 Sometimes, changes to config can result in metadata changes from node edits, DML changes, or storage updates. A few cases are listed below:
 
@@ -384,8 +384,8 @@ Create Or Alter has two configuration groups:
 |--------------|-----------------|
 | **Storage Location** | (Required) Storage Location where the Create Or Alter fact Table will be created |
 | **Node Type** | (Required) Name of template used to create node objects |
-| **Description** | A description of the node's purpose |
-| **Deploy Enabled** | If TRUE the node will be deployed/redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
+| **Description** | A description of the Node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed or redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
 
 #### Create Table Options
 
@@ -457,11 +457,11 @@ When the Create or Alter table node is redeployed with any changes in table or c
 |-----------|----------------|
 | **Create/Alter table/transient table** | This will execute a CREATE OR ALTER statement and create a table in the target environment |
 
-### Redeployment with no changes 
+### Redeployment With No Changes 
 
 If the nodes are redeployed with no changes compared to previous deployment, then no stages are executed
 
-### Redeployment with only metadata changes
+### Redeployment With Only Metadata Changes
 
 Sometimes, changes to config can result in metadata changes from node edits, DML changes, or storage updates. A few cases are listed below:
 
@@ -509,8 +509,8 @@ Create Or Alter has two configuration groups:
 |--------------|-----------------|
 | **Storage Location** | (Required) Storage Location where the Create Or Alter Persistent Stage Table will be created |
 | **Node Type** | (Required) Name of template used to create node objects |
-| **Description** | A description of the node's purpose |
-| **Deploy Enabled** | If TRUE the node will be deployed/redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
+| **Description** | A description of the Node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed or redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
 
 #### Create Table Options
 
@@ -584,11 +584,11 @@ When the Create or Alter table node is redeployed with any changes in table or c
 |-----------|----------------|
 | **Create/Alter table/transient table** | This will execute a CREATE OR ALTER statement and create a table in the target environment |
 
-### Redeployment with no changes 
+### Redeployment With No Changes 
 
 If the nodes are redeployed with no changes compared to previous deployment, then no stages are executed
 
-### Redeployment with only metadata changes
+### Redeployment With Only Metadata Changes
 
 Sometimes, changes to config can result in metadata changes from node edits, DML changes, or storage updates. A few cases are listed below:
 
@@ -618,7 +618,7 @@ This is executed in below stage:
 
 ----
 
-## Create Or Alter Task
+## Create OR Alter Task
 
 The [Create or Alter Task](https://docs.snowflake.com/en/sql-reference/sql/create-task#create-or-alter-task) creates task if it doesn’t exist, or alters it according to the task definition. 
 
@@ -637,8 +637,8 @@ Create Or Alter Task node has two or three configuration groups depending on con
 |--------------|-----------------|
 | **Storage Location** | (Required) Storage Location where the Create Or Alter Task will be created |
 | **Node Type** | (Required) Name of template used to create node objects |
-| **Description** | A description of the node's purpose |
-| **Deploy Enabled** | If TRUE the node will be deployed/redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
+| **Description** | A description of the Node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed or redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
 
 #### Create Table Options
 
@@ -791,7 +791,7 @@ Subsequent deployments with changes in table like add or drop column and change 
 | **Create Task** | Create Or Alter task with new schedule |
 | **Resume Task** | Resumes task with new schedule |
 
-### Redeployment with only metadata changes
+### Redeployment With Only Metadata Changes
 
 Sometimes, changes to config can result in metadata changes from node edits, DML changes, or storage updates when the **DEV_MODE** is **ON**. A few cases are listed below:
 
@@ -865,8 +865,8 @@ The Create Or Alter DAG Root Task node has two configuration groups:
 |-------------|-----------------|
 | **Storage Location** | Storage Location where the Stream will be created |
 | **Node Type** | Name of template used to create node objects |
-| **Description** | A description of the node's purpose |
-| **Deploy Enabled** | If TRUE the node will be deployed / redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
+| **Description** | A description of the Node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed or redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
 
 #### Create Or Alter DAG Root Task Scheduling Options
 
@@ -991,8 +991,8 @@ The Task DAG Resume Root node has two configuration groups:
 |-------------|-----------------|
 | **Storage Location** | Storage Location where the Stream will be created |
 | **Node Type** | Name of template used to create node objects |
-| **Description** | A description of the node's purpose |
-| **Deploy Enabled** | If TRUE the node will be deployed / redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
+| **Description** | A description of the Node's purpose |
+| **Deploy Enabled** | If TRUE the node will be deployed or redeployed when changes are detected<br/>If FALSE the node will not be deployed or will be dropped during redeployment |
 
 #### Create DAG Root Resume Task Scheduling Options
 
