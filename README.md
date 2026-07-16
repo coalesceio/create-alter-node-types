@@ -536,9 +536,11 @@ Create Or Alter has two configuration groups:
 | **Business key** | Required column for both Type 1 and Type 2.<br/>Note: Geometry and Geography data type columns are not supported as business key columns. |
 | **Last Modified Comparison** | **True**:When enabled we can do timestamp based CDC<br/>**False**:Regular CDC based on Change tracking columns is done |
 | **Last Modified Column(Enabled for Last Modified Comparison)** | Timestamp/Incremental ID column can be chosen.Based on which CDC is done |
-| **Treat Null as Current timestamp(Enabled for Last Modified Comparison)**| Records with NULL timestamp are updated in target|
 | **Type 2 Dimension(Enabled for Last Modified Comparison)**|CDC is based on timestamp/ID column chosen above.Change tracking columns are not enabled for this scenario|
 | **Change tracking** | Required column for Type 2. If not chosen, treated as type 1|
+| **Delete Strategy** | Visible only when a Business Key is configured.<br/> **NO DELETE**: Deleted records are not processed.<br/>**SOFT DELETE**:  Deleted records are kept in the target but marked as inactive.<br/>**HARD DELETE**: Deleted records and all their version history are permanently removed from the target. |
+| **Column that Identifies DML Operations** | The column in the source table that tells whether a record is an Insert, Update or Delete. |
+| **Delete Value** | The value in the DML column that signals a record should be deleted. |
 | **Distinct** | Toggle: True/False<br/>**True**: Group by All is invisible.<br/>DISTINCT data is chosen for processing.<br/>**False**: Group by All is visible. |
 | **Group by All** | Toggle: True/False<br/>**True**: DISTINCT is invisible<br/>Data grouped by all columns<br/>**False**: DISTINCT is visible |
 | **Order By** | Toggle: True/False<br/>**True**: Sort column and sort order drop down are visible and are required to form order by clause.<br/>**False**: Sort options invisible |
