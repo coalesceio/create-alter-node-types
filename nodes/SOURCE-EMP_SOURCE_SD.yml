@@ -1,6 +1,6 @@
 fileVersion: 1
-id: d7ec13cd-f58a-4180-a8f5-301adffa8575
-name: CUSTOMERS
+id: 39989653-e314-4e05-a559-1fca5a87e615
+name: EMP_SOURCE_SD
 operation:
   database: ""
   deployEnabled: true
@@ -13,13 +13,32 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: b6afb211-93c7-4348-a903-96090e65e1d6
-          stepCounter: d7ec13cd-f58a-4180-a8f5-301adffa8575
+          columnCounter: ef8fcfe6-1a3e-4361-b86a-32f68bfaee5d
+          stepCounter: 39989653-e314-4e05-a559-1fca5a87e615
+        config: {}
+        dataType: NUMBER(38,0)
+        defaultValue: ""
+        description: ""
+        name: EMP_ID
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: c6b5269d-0e44-4440-ab82-00fe075561ff
+          stepCounter: 39989653-e314-4e05-a559-1fca5a87e615
         config: {}
         dataType: VARCHAR(16777216)
         defaultValue: ""
         description: ""
-        name: EMAIL
+        name: EMP_NAME
         nullable: true
         primaryKey: false
         sourceColumnReferences:
@@ -32,13 +51,51 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: a9e1c182-368f-4dc8-8f91-51b09db45ab5
-          stepCounter: d7ec13cd-f58a-4180-a8f5-301adffa8575
+          columnCounter: 13b32cfb-cb98-4a8d-a2af-d6bf9f05a52d
+          stepCounter: 39989653-e314-4e05-a559-1fca5a87e615
+        config: {}
+        dataType: VARCHAR(16777216)
+        defaultValue: ""
+        description: ""
+        name: EMP_CITY
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1ca4320b-36fd-4de8-be90-3841d6a09517
+          stepCounter: 39989653-e314-4e05-a559-1fca5a87e615
+        config: {}
+        dataType: VARCHAR(16777216)
+        defaultValue: ""
+        description: ""
+        name: DML_FLAG
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 7b29ef67-0a34-4b76-ab5f-86a066cf48eb
+          stepCounter: 39989653-e314-4e05-a559-1fca5a87e615
         config: {}
         dataType: TIMESTAMP_NTZ(9)
         defaultValue: ""
         description: ""
-        name: JOIN_DATE
+        name: LAST_MODIFIED
         nullable: true
         primaryKey: false
         sourceColumnReferences:
@@ -46,102 +103,7 @@ operation:
             transform: ""
         transform: ""
         uniqueKey: false
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
-        columnReference:
-          columnCounter: c8076a5a-9117-4275-a42b-be378a76d778
-          stepCounter: d7ec13cd-f58a-4180-a8f5-301adffa8575
-        config: {}
-        dataType: NUMBER(6,0)
-        defaultValue: ""
-        description: ""
-        name: AGE_BAND
-        nullable: true
-        primaryKey: false
-        sourceColumnReferences:
-          - columnReferences: []
-            transform: ""
-        transform: ""
-        uniqueKey: false
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
-        columnReference:
-          columnCounter: b7b66e7f-687f-46c0-ad3d-b20184747bfd
-          stepCounter: d7ec13cd-f58a-4180-a8f5-301adffa8575
-        config: {}
-        dataType: VARCHAR(18)
-        defaultValue: ""
-        description: ""
-        name: HOUSEHOLD_INCOME
-        nullable: true
-        primaryKey: false
-        sourceColumnReferences:
-          - columnReferences: []
-            transform: ""
-        transform: ""
-        uniqueKey: false
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
-        columnReference:
-          columnCounter: dd7984ca-c77b-4bfc-a815-08731765e893
-          stepCounter: d7ec13cd-f58a-4180-a8f5-301adffa8575
-        config: {}
-        dataType: VARCHAR(8)
-        defaultValue: ""
-        description: ""
-        name: MARITAL_STATUS
-        nullable: true
-        primaryKey: false
-        sourceColumnReferences:
-          - columnReferences: []
-            transform: ""
-        transform: ""
-        uniqueKey: false
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
-        columnReference:
-          columnCounter: 6e31d095-2d71-4480-beed-61300edfce6f
-          stepCounter: d7ec13cd-f58a-4180-a8f5-301adffa8575
-        config: {}
-        dataType: FLOAT
-        defaultValue: ""
-        description: ""
-        name: HOUSEHOLD_SIZE
-        nullable: true
-        primaryKey: false
-        sourceColumnReferences:
-          - columnReferences: []
-            transform: ""
-        transform: ""
-        uniqueKey: false
-      - acceptedValues:
-          strictMatch: true
-          values: []
-        appliedColumnTests: {}
-        columnReference:
-          columnCounter: 7a84c1da-dcd1-430b-820c-b9ce9556c5db
-          stepCounter: d7ec13cd-f58a-4180-a8f5-301adffa8575
-        config: {}
-        dataType: FLOAT
-        defaultValue: ""
-        description: ""
-        name: TOTAL_ORDER_VALUE
-        nullable: true
-        primaryKey: false
-        sourceColumnReferences:
-          - columnReferences: []
-            transform: ""
-        transform: ""
-        uniqueKey: false
-  name: CUSTOMERS
+  name: EMP_SOURCE_SD
   schema: ""
   sqlType: Source
   type: sourceInput
