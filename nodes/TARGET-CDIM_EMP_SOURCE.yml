@@ -1,6 +1,6 @@
 fileVersion: 1
-id: 1b038407-9633-4470-b8d0-66e061b0934b
-name: CDIM_REGION
+id: 0f3d6f4f-5052-48bd-bc3b-caf5fe3dfe16
+name: CDIM_EMP_SOURCE
 operation:
   config:
     changetracking: false
@@ -35,11 +35,18 @@ operation:
     insertZeroKeyStr: UNKNOWN
     insertZeroKeySurrogateKey: "0"
     insertZeroKeyTimestamp: "1900-01-01 00:00:00.000"
+    lastModifiedColumn:
+      columnCounter: a287467e-b45e-45e6-8e6d-c84eac588beb
+      stepCounter: 0f3d6f4f-5052-48bd-bc3b-caf5fe3dfe16
+    lastModifiedComparison: false
     maxdataretention: ""
     orderby: false
     orderbycolumn:
       items:
-        - {}
+        - sortColName:
+            columnCounter: 18b8587e-71c2-4454-91c2-9643ba0e298f
+            stepCounter: 0f3d6f4f-5052-48bd-bc3b-caf5fe3dfe16
+          sortOrder: desc
     outlineconst: false
     primary: false
     primarykeycon:
@@ -48,12 +55,13 @@ operation:
     primarykeyname: ""
     selectDistinct: false
     testsEnabled: false
-    truncateBefore: true
+    truncateBefore: false
+    type2Dimension: false
   database: ""
   deployEnabled: true
   description: ""
   isMultisource: false
-  locationName: SOURCE
+  locationName: TARGET
   materializationType: table
   metadata:
     appliedNodeTests: []
@@ -63,83 +71,97 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 1558734d-9e83-4d0c-a0ff-b59273100e82
-          stepCounter: 1b038407-9633-4470-b8d0-66e061b0934b
+          columnCounter: 409b5bce-c3bd-4062-b6bc-b63a13314055
+          stepCounter: 0f3d6f4f-5052-48bd-bc3b-caf5fe3dfe16
         config: {}
         dataType: NUMBER
         defaultValue: ""
         description: ""
         isSurrogateKey: true
-        name: CDIM_REGION_KEY
+        name: CDIM_EMP_SOURCE_KEY
         nullable: true
         sourceColumnReferences:
           - columnReferences: []
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 3f5bb2d3-5ac7-4e3e-9b56-46045fffa5a8
-          stepCounter: 1b038407-9633-4470-b8d0-66e061b0934b
+          columnCounter: a9d8dcc1-5ac9-4d7e-a477-835b0510b1f9
+          stepCounter: 0f3d6f4f-5052-48bd-bc3b-caf5fe3dfe16
         config: {}
         dataType: NUMBER(38,0)
         description: ""
         isBusinessKey: true
-        name: R_REGIONKEY
+        name: EMP_ID
         nullable: true
         sourceColumnReferences:
           - columnReferences:
-              - columnCounter: 236223a1-cda9-4217-a5ff-78c4a7e3c151
-                stepCounter: 3b24406a-8754-443d-82e0-7cc8fd91af3b
+              - columnCounter: f6476863-a555-4d73-819c-652088dac70b
+                stepCounter: 8d075ab1-a6fd-4297-b0ec-3b61893b9886
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 4c3aa2e7-5dce-46a0-b444-c2c5eec9236b
-          stepCounter: 1b038407-9633-4470-b8d0-66e061b0934b
+          columnCounter: 18b8587e-71c2-4454-91c2-9643ba0e298f
+          stepCounter: 0f3d6f4f-5052-48bd-bc3b-caf5fe3dfe16
         config: {}
-        dataType: VARCHAR(25)
+        dataType: VARCHAR(16777216)
         description: ""
-        isChangeTracking: true
-        name: R_NAME
+        isChangeTracking: false
+        name: EMP_NAME
         nullable: true
         sourceColumnReferences:
           - columnReferences:
-              - columnCounter: 236a0d64-22cc-4e43-a36f-3fc1518c07a6
-                stepCounter: 3b24406a-8754-443d-82e0-7cc8fd91af3b
+              - columnCounter: f6afe656-b742-4ff1-a426-642c288a058b
+                stepCounter: 8d075ab1-a6fd-4297-b0ec-3b61893b9886
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: c0b4949c-3140-4729-8647-3edb9ca00e4c
-          stepCounter: 1b038407-9633-4470-b8d0-66e061b0934b
+          columnCounter: ddfcd0d8-89b6-476b-bbde-cd1d6dc21978
+          stepCounter: 0f3d6f4f-5052-48bd-bc3b-caf5fe3dfe16
         config: {}
-        dataType: VARCHAR(152)
+        dataType: VARCHAR(16777216)
         description: ""
-        name: R_COMMENT
+        name: EMP_CITY
         nullable: true
         sourceColumnReferences:
           - columnReferences:
-              - columnCounter: ea5b3014-a0a8-46a3-a3d9-db1ab29fba40
-                stepCounter: 3b24406a-8754-443d-82e0-7cc8fd91af3b
+              - columnCounter: b6cdc7a2-e7f5-4e57-b09e-3f404de8a5f8
+                stepCounter: 8d075ab1-a6fd-4297-b0ec-3b61893b9886
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 1ec2db07-9855-4913-9635-30b09f3634f9
-          stepCounter: 1b038407-9633-4470-b8d0-66e061b0934b
+          columnCounter: bbedd953-03fc-4b3b-b028-86955c507bd9
+          stepCounter: 0f3d6f4f-5052-48bd-bc3b-caf5fe3dfe16
         config: {}
-        dataType: TIMESTAMP_LTZ(9)
+        dataType: VARCHAR(16777216)
         description: ""
-        name: R_LOAD_TIMESTAMP
+        name: DML_FLAG
         nullable: true
         sourceColumnReferences:
           - columnReferences:
-              - columnCounter: 0336bf0f-af4e-404c-ad74-68fe5d4b84ae
-                stepCounter: 3b24406a-8754-443d-82e0-7cc8fd91af3b
+              - columnCounter: ba641561-4b6b-4dfb-8d4f-37a4ba55b538
+                stepCounter: 8d075ab1-a6fd-4297-b0ec-3b61893b9886
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: a287467e-b45e-45e6-8e6d-c84eac588beb
+          stepCounter: 0f3d6f4f-5052-48bd-bc3b-caf5fe3dfe16
+        config: {}
+        dataType: TIMESTAMP_NTZ(9)
+        description: ""
+        name: CREATED_AT
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 3984c880-726c-411e-8612-decb9a63ed50
+                stepCounter: 8d075ab1-a6fd-4297-b0ec-3b61893b9886
             transform: ""
       - acceptedValues:
           strictMatch: true
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: b3bc75c2-94e3-4289-9fbc-f57b12717639
-          stepCounter: 1b038407-9633-4470-b8d0-66e061b0934b
+          columnCounter: 86f43e17-580f-42fb-82c9-6c20e752df69
+          stepCounter: 0f3d6f4f-5052-48bd-bc3b-caf5fe3dfe16
         config: {}
         dataType: NUMBER
         defaultValue: ""
@@ -155,8 +177,8 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: e6470e77-bd73-4d40-9a65-ac89807aa98c
-          stepCounter: 1b038407-9633-4470-b8d0-66e061b0934b
+          columnCounter: 756feb26-5f8b-475c-a308-3346f4e22277
+          stepCounter: 0f3d6f4f-5052-48bd-bc3b-caf5fe3dfe16
         config: {}
         dataType: VARCHAR
         defaultValue: ""
@@ -172,8 +194,8 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 8e83d0ce-6779-4448-a23d-a47eae770917
-          stepCounter: 1b038407-9633-4470-b8d0-66e061b0934b
+          columnCounter: 98501926-5568-431e-a26e-c30061984a65
+          stepCounter: 0f3d6f4f-5052-48bd-bc3b-caf5fe3dfe16
         config: {}
         dataType: TIMESTAMP
         defaultValue: ""
@@ -189,8 +211,8 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: fa877258-cc8e-4540-9cab-2275f1edb96c
-          stepCounter: 1b038407-9633-4470-b8d0-66e061b0934b
+          columnCounter: 2a3e1797-285e-4edc-9ed7-d20f060559f5
+          stepCounter: 0f3d6f4f-5052-48bd-bc3b-caf5fe3dfe16
         config: {}
         dataType: TIMESTAMP
         defaultValue: ""
@@ -206,8 +228,8 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 5752b82b-8c97-4819-91a4-d8354c870b40
-          stepCounter: 1b038407-9633-4470-b8d0-66e061b0934b
+          columnCounter: 57788c71-f5dd-499d-965c-4c7ac87f7115
+          stepCounter: 0f3d6f4f-5052-48bd-bc3b-caf5fe3dfe16
         config: {}
         dataType: TIMESTAMP
         defaultValue: ""
@@ -223,8 +245,8 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 750d4993-dd2d-443e-8d2f-e91dea29ef97
-          stepCounter: 1b038407-9633-4470-b8d0-66e061b0934b
+          columnCounter: 30dba7c4-646b-409e-a6f1-0d5b41db91ff
+          stepCounter: 0f3d6f4f-5052-48bd-bc3b-caf5fe3dfe16
         config: {}
         dataType: TIMESTAMP
         defaultValue: ""
@@ -239,17 +261,17 @@ operation:
     enabledColumnTestIDs: []
     sourceMapping:
       - aliases:
-          CT_REGION: 3b24406a-8754-443d-82e0-7cc8fd91af3b
+          EMP_SOURCE: 8d075ab1-a6fd-4297-b0ec-3b61893b9886
         customSQL:
           customSQL: ""
         dependencies:
-          - locationName: TARGET
-            nodeName: CT_REGION_C
+          - locationName: SOURCE
+            nodeName: EMP_SOURCE
         join:
-          joinCondition: FROM {{ ref('TARGET', 'CT_REGION_C') }} "CT_REGION"
-        name: CDIM_REGION
+          joinCondition: FROM {{ ref('SOURCE', 'EMP_SOURCE') }} "EMP_SOURCE"
+        name: CDIM_EMP_SOURCE
         noLinkRefs: []
-  name: CDIM_REGION
+  name: CDIM_EMP_SOURCE
   overrideSQL: false
   schema: ""
   sqlType: "535"

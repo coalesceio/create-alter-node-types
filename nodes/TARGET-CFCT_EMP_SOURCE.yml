@@ -1,0 +1,150 @@
+fileVersion: 1
+id: caaa4aec-5830-4417-890a-f2588dd72997
+name: CFCT_EMP_SOURCE
+operation:
+  config:
+    changetracking: false
+    clusterKey: false
+    clusterKeyConfig:
+      items:
+        - {}
+    clusterKeyConfigExpressions:
+      items:
+        - {}
+    clusterKeyExpressions: false
+    constraintsspec:
+      items:
+        - {}
+    datretention: ""
+    defaultcoallation: ""
+    eschemaevol: false
+    foreignk: false
+    foreignkeycon:
+      items:
+        - {}
+    groupByAll: false
+    inlineconst: false
+    insertStrategy: UNION
+    lastModifiedColumn:
+      columnCounter: 9b5dd53b-d4fc-4f73-9614-8330c7339a8a
+      stepCounter: caaa4aec-5830-4417-890a-f2588dd72997
+    lastModifiedComparison: true
+    maxdataretention: ""
+    orderby: true
+    orderbycolumn:
+      items:
+        - sortColName:
+            columnCounter: 1f3ec2f1-48ad-48d9-8f60-00fbae644474
+            stepCounter: caaa4aec-5830-4417-890a-f2588dd72997
+          sortOrder: desc
+    outlineconst: false
+    primary: false
+    primarykeycon:
+      items:
+        - {}
+    primarykeyname: ""
+    selectDistinct: true
+    testsEnabled: false
+    treatNullAsCurrentTimestamp: false
+    truncateBefore: false
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: TARGET
+  materializationType: table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: cb0169b0-fa88-4295-bf60-0d2782c2de3e
+          stepCounter: caaa4aec-5830-4417-890a-f2588dd72997
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        isBusinessKey: true
+        name: EMP_ID
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: f6476863-a555-4d73-819c-652088dac70b
+                stepCounter: 8d075ab1-a6fd-4297-b0ec-3b61893b9886
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1f3ec2f1-48ad-48d9-8f60-00fbae644474
+          stepCounter: caaa4aec-5830-4417-890a-f2588dd72997
+        config: {}
+        dataType: VARCHAR(16777216)
+        description: ""
+        name: EMP_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: f6afe656-b742-4ff1-a426-642c288a058b
+                stepCounter: 8d075ab1-a6fd-4297-b0ec-3b61893b9886
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 764728ac-6f85-41f6-9e7d-ac406e7a548a
+          stepCounter: caaa4aec-5830-4417-890a-f2588dd72997
+        config: {}
+        dataType: VARCHAR(16777216)
+        description: ""
+        name: EMP_CITY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: b6cdc7a2-e7f5-4e57-b09e-3f404de8a5f8
+                stepCounter: 8d075ab1-a6fd-4297-b0ec-3b61893b9886
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 1afe6956-3934-4f0a-9868-16c94a4fd25a
+          stepCounter: caaa4aec-5830-4417-890a-f2588dd72997
+        config: {}
+        dataType: VARCHAR(16777216)
+        description: ""
+        name: DML_FLAG
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: ba641561-4b6b-4dfb-8d4f-37a4ba55b538
+                stepCounter: 8d075ab1-a6fd-4297-b0ec-3b61893b9886
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 9b5dd53b-d4fc-4f73-9614-8330c7339a8a
+          stepCounter: caaa4aec-5830-4417-890a-f2588dd72997
+        config: {}
+        dataType: TIMESTAMP_NTZ(9)
+        description: ""
+        name: CREATED_AT
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 3984c880-726c-411e-8612-decb9a63ed50
+                stepCounter: 8d075ab1-a6fd-4297-b0ec-3b61893b9886
+            transform: ""
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases:
+          EMP_SOURCE: 8d075ab1-a6fd-4297-b0ec-3b61893b9886
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SOURCE
+            nodeName: EMP_SOURCE
+        join:
+          joinCondition: FROM {{ ref('SOURCE', 'EMP_SOURCE') }} "EMP_SOURCE"
+        name: CFCT_EMP_SOURCE
+        noLinkRefs: []
+  name: CFCT_EMP_SOURCE
+  overrideSQL: false
+  schema: ""
+  sqlType: "534"
+  type: sql
+  version: 1
+type: Node
