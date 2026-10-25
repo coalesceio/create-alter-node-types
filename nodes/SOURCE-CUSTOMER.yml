@@ -1,6 +1,6 @@
 fileVersion: 1
-id: d7ec13cd-f58a-4180-a8f5-301adffa8575
-name: CUSTOMERS
+id: 7a0a42e4-08ec-442e-b570-fa58e0e156e7
+name: CUSTOMER
 operation:
   database: ""
   deployEnabled: true
@@ -13,13 +13,13 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: b6afb211-93c7-4348-a903-96090e65e1d6
-          stepCounter: d7ec13cd-f58a-4180-a8f5-301adffa8575
+          columnCounter: 6c90e328-04af-4145-a53c-8643d12bc153
+          stepCounter: 7a0a42e4-08ec-442e-b570-fa58e0e156e7
         config: {}
-        dataType: VARCHAR(16777216)
+        dataType: NUMBER(38,0)
         defaultValue: ""
         description: ""
-        name: EMAIL
+        name: C_CUSTKEY
         nullable: true
         primaryKey: false
         sourceColumnReferences:
@@ -32,13 +32,13 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: a9e1c182-368f-4dc8-8f91-51b09db45ab5
-          stepCounter: d7ec13cd-f58a-4180-a8f5-301adffa8575
+          columnCounter: 989a81d0-08b0-403b-ad8f-1b273c5448c4
+          stepCounter: 7a0a42e4-08ec-442e-b570-fa58e0e156e7
         config: {}
-        dataType: TIMESTAMP_NTZ(9)
+        dataType: VARCHAR(25)
         defaultValue: ""
         description: ""
-        name: JOIN_DATE
+        name: C_NAME
         nullable: true
         primaryKey: false
         sourceColumnReferences:
@@ -51,13 +51,13 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: c8076a5a-9117-4275-a42b-be378a76d778
-          stepCounter: d7ec13cd-f58a-4180-a8f5-301adffa8575
+          columnCounter: 7473af95-d0c3-42ed-8a93-31f1eb157d17
+          stepCounter: 7a0a42e4-08ec-442e-b570-fa58e0e156e7
         config: {}
-        dataType: NUMBER(6,0)
+        dataType: VARCHAR(40)
         defaultValue: ""
         description: ""
-        name: AGE_BAND
+        name: C_ADDRESS
         nullable: true
         primaryKey: false
         sourceColumnReferences:
@@ -70,13 +70,13 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: b7b66e7f-687f-46c0-ad3d-b20184747bfd
-          stepCounter: d7ec13cd-f58a-4180-a8f5-301adffa8575
+          columnCounter: d7417e36-8b7f-403a-af61-35c7bcde7e77
+          stepCounter: 7a0a42e4-08ec-442e-b570-fa58e0e156e7
         config: {}
-        dataType: VARCHAR(18)
+        dataType: NUMBER(38,0)
         defaultValue: ""
         description: ""
-        name: HOUSEHOLD_INCOME
+        name: C_NATIONKEY
         nullable: true
         primaryKey: false
         sourceColumnReferences:
@@ -89,13 +89,13 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: dd7984ca-c77b-4bfc-a815-08731765e893
-          stepCounter: d7ec13cd-f58a-4180-a8f5-301adffa8575
+          columnCounter: cc3c88cc-e94d-4cc5-80cc-33d3523ddc89
+          stepCounter: 7a0a42e4-08ec-442e-b570-fa58e0e156e7
         config: {}
-        dataType: VARCHAR(8)
+        dataType: VARCHAR(15)
         defaultValue: ""
         description: ""
-        name: MARITAL_STATUS
+        name: C_PHONE
         nullable: true
         primaryKey: false
         sourceColumnReferences:
@@ -108,13 +108,13 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 6e31d095-2d71-4480-beed-61300edfce6f
-          stepCounter: d7ec13cd-f58a-4180-a8f5-301adffa8575
+          columnCounter: e00ec706-092c-4a14-b0b8-3b7e3b853347
+          stepCounter: 7a0a42e4-08ec-442e-b570-fa58e0e156e7
         config: {}
-        dataType: FLOAT
+        dataType: NUMBER(12,2)
         defaultValue: ""
         description: ""
-        name: HOUSEHOLD_SIZE
+        name: C_ACCTBAL
         nullable: true
         primaryKey: false
         sourceColumnReferences:
@@ -127,13 +127,13 @@ operation:
           values: []
         appliedColumnTests: {}
         columnReference:
-          columnCounter: 7a84c1da-dcd1-430b-820c-b9ce9556c5db
-          stepCounter: d7ec13cd-f58a-4180-a8f5-301adffa8575
+          columnCounter: e1409b3b-a423-4f10-b4c2-fbd7c3066682
+          stepCounter: 7a0a42e4-08ec-442e-b570-fa58e0e156e7
         config: {}
-        dataType: FLOAT
+        dataType: VARCHAR(10)
         defaultValue: ""
         description: ""
-        name: TOTAL_ORDER_VALUE
+        name: C_MKTSEGMENT
         nullable: true
         primaryKey: false
         sourceColumnReferences:
@@ -141,7 +141,26 @@ operation:
             transform: ""
         transform: ""
         uniqueKey: false
-  name: CUSTOMERS
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 64aa9f7d-bda4-4d5c-acc7-ade6852864e3
+          stepCounter: 7a0a42e4-08ec-442e-b570-fa58e0e156e7
+        config: {}
+        dataType: VARCHAR(117)
+        defaultValue: ""
+        description: ""
+        name: C_COMMENT
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+  name: CUSTOMER
   schema: ""
   sqlType: Source
   type: sourceInput

@@ -9,7 +9,7 @@ does not permit copying or modification for any other purpose.
 {# == Node Type Description    : This node loads data creates and alters view== #}
 
 
-{%if desiredState and currenState!= undefined and currentState.node.nodeType != desiredState.node.nodeType%} 
+{%if desiredState and currentState!= undefined and currentState.node.nodeType != desiredState.node.nodeType%} 
    
     {%- set warningMsg = getNodeTypeSwitchWarning() | default('') %}
 
@@ -70,7 +70,7 @@ does not permit copying or modification for any other purpose.
                 {% if loop.first %}
                     {% set ns.nsDesiredDepStorageLocations = depSourceLocation %}
                 {% else %}
-                    {% set ns.nnsDesiredDepStorageLocations = ns.nsDesiredDepStorageLocations + ',' + depSourceLocation %}
+                    {% set ns.nsDesiredDepStorageLocations = ns.nsDesiredDepStorageLocations + ',' + depSourceLocation %}
                 {% endif %}
             {% endfor %}
             
@@ -115,18 +115,32 @@ does not permit copying or modification for any other purpose.
         {% endif %}
 
         {# Test to see if the transform in a column has changed #}
-        {% set desiredTransformArray = desiredState.sources | map(attribute='columns') | first | map(attribute='transform') | list -%}
-        {# Current Namespace Variables Transform #}
-        {% set currentTransformArray = currentState.sources | map(attribute='columns') | first | map(attribute='transform') | list -%}
-
-        {% set columnsTransformTest = currentTransformArray == desiredTransformArray %}
+        {% set ns.transformTest = true %}
+        {% for src in desiredState.sources %}
+            {% set matchingSource = currentState.sources | selectattr('name', 'equalto', src.name) | first %}
+            {% if matchingSource %}
+                {% if (src.columns | map(attribute='transform') | list) != (matchingSource.columns | map(attribute='transform') | list) %}
+                    {% set ns.transformTest = false %}
+                {% endif %}
+            {% else %}
+                {% set ns.transformTest = false %}
+            {% endif %}
+        {% endfor %}
+        {% set columnsTransformTest = ns.transformTest %}
 
         {# Test to see if the sourceLinks in a column has changed #}
-        {% set desiredLinkArray = desiredState.sources | map(attribute='columns') | first | map(attribute='sourceColumns') | list -%}
-        {# Current Namespace Variables Transform #}
-        {% set currentLinkArray = currentState.sources | map(attribute='columns') | first | map(attribute='sourceColumns') | list -%}
-
-        {% set columnsLinkTest = desiredLinkArray == currentLinkArray %}
+        {% set ns.linkTest = true %}
+        {% for src in desiredState.sources %}
+            {% set matchingSource = currentState.sources | selectattr('name', 'equalto', src.name) | first %}
+            {% if matchingSource %}
+                {% if (src.columns | map(attribute='sourceColumns') | list) != (matchingSource.columns | map(attribute='sourceColumns') | list) %}
+                    {% set ns.linkTest = false %}
+                {% endif %}
+            {% else %}
+                {% set ns.linkTest = false %}
+            {% endif %}
+        {% endfor %}
+        {% set columnsLinkTest = ns.linkTest %}
 
         {#Target location Test  #}
         {%if currentState.storageLocations|length == 0%}          
@@ -242,7 +256,7 @@ does not permit copying or modification for any other purpose.
                 distst == false or
                 groupAlltst == false or 
                 ns.sourcestorageLocationTest == false or
-				materializationTest or
+				materializationTest == false or
                 msrcTest == false%}    
 
             {% set createTest = true %}

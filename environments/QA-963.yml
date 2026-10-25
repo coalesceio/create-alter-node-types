@@ -1,0 +1,11 @@
+fileVersion: 1
+id: "963"
+mappingDefinitions:
+  SOURCE:
+    database: SOURCE
+    schema: SRC
+  TARGET:
+    database: TARGET
+    schema: TARGET_QA
+name: QA
+type: Environment
