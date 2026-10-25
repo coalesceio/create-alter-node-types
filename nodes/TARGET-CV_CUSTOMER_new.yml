@@ -1,6 +1,6 @@
 fileVersion: 1
 id: 949e5599-65d7-4080-94df-95fd2cacd031
-name: CV_CUSTOMER
+name: CV_CUSTOMER_new
 operation:
   config:
     changetracking: false
@@ -141,9 +141,9 @@ operation:
             nodeName: CUSTOMER
         join:
           joinCondition: FROM {{ ref('SOURCE', 'CUSTOMER') }} "CUSTOMER"
-        name: CV_CUSTOMER
+        name: CV_CUSTOMER_new
         noLinkRefs: []
-  name: CV_CUSTOMER
+  name: CV_CUSTOMER_new
   overrideSQL: false
   schema: ""
   sqlType: "419"
