@@ -160,7 +160,7 @@ operation:
           - columnReferences:
               - columnCounter: 337ec185-6127-4c6a-87cd-0bec5afa3d13
                 stepCounter: 949e5599-65d7-4080-94df-95fd2cacd031
-            transform: ""
+            transform: "NULL"
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
