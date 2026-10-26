@@ -124,7 +124,7 @@ operation:
           - columnReferences:
               - columnCounter: 9494bdd4-4a3c-4841-b717-29e4534f0c3a
                 stepCounter: 949e5599-65d7-4080-94df-95fd2cacd031
-            transform: ""
+            transform: ROUND("CV_CUSTOMER_new".C_ACCTBAL, 2)
       - appliedColumnTests: {}
         columnReference:
           columnCounter: 2adb7f61-f307-4162-923e-b8909bbdb813
