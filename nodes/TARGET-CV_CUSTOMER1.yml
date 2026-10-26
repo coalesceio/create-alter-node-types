@@ -86,8 +86,8 @@ operation:
                 stepCounter: 2417e59c-21b0-464c-bcb7-5c4b5450ced0
             transform: ""
           - columnReferences:
-              - columnCounter: e9f6d542-6fdd-4706-b488-8dfea933e822
-                stepCounter: 949e5599-65d7-4080-94df-95fd2cacd031
+              - columnCounter: efb34e41-363e-4d44-8540-f7255c4b5f82
+                stepCounter: 2417e59c-21b0-464c-bcb7-5c4b5450ced0
             transform: ""
       - appliedColumnTests: {}
         columnReference:
