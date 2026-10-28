@@ -288,7 +288,7 @@ does not permit copying or modification for any other purpose.
 
         {% if dropTest == true %}
 
-			{{ stage('Drop ' + ref_no_link(currentState.node.location.name, currentState.node.name)) }}
+			{{ stage('Drop ' + ref_no_link(currentState.node.location.name, currentState.node.name), true, "sql", "create") }}
 
 			{%- set materialization = dropMaterialization(currentState.node.materializationType) %}
             DROP {{ materialization }} {{ ref_no_link(currentState.node.location.name, currentState.node.name) }}
@@ -298,7 +298,7 @@ does not permit copying or modification for any other purpose.
         {# Rename before Create/Alter so CREATE OR ALTER applies to the renamed view #}
         {%if altertest == true %}
 
-            {{ stage('Rename and / or Move View') }}
+            {{ stage('Rename and / or Move View', true, "sql", "create") }}
             {% set srcSchName = currentState.node.location.name %}
             {% set cdb = currentState.storageLocations | selectattr('name', 'equalto', srcSchName) | map(attribute='database') | first %}
             {% set csch = currentState.storageLocations | selectattr('name', 'equalto', srcSchName) | map(attribute='schema') | first %}
@@ -311,7 +311,7 @@ does not permit copying or modification for any other purpose.
     {%if currentState == undefined  or createTest == true%}
        
         {# CreateSQL for View #}
-        {{ stage('Create/Alter View') }}
+        {{ stage('Create/Alter View', true, "sql", "create") }}
 
 	    CREATE OR ALTER {% if desiredState.config.secureOption %} SECURE {% endif %} VIEW {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
         (
