@@ -264,10 +264,6 @@ does not permit copying or modification for any other purpose.
             {% set createTest = false %}
         {% endif %}
 
-        {%if createTest == false and (ns.storageLocationTest == false or currentState.node.name != desiredState.node.name)  %}    
-           {%set altertest = true %}		   
-	    {%endif%}
-
         {# Dropping the view before recreating for specific cases #}
         {% if ns.othercolchanges > 0 or
             ns.descolchanges > 0 or
@@ -280,13 +276,35 @@ does not permit copying or modification for any other purpose.
             msrcTest == false or
             sourcesTest == false
             or materializationTest == false			%}
-        
+            {% set dropTest = true %}
+        {% else %}
+            {% set dropTest = false %}
+        {% endif %}
+
+        {# Rename / move the existing view unless it is being dropped, so it is not orphaned when createTest is also true #}
+        {%if dropTest == false and (ns.storageLocationTest == false or currentState.node.name != desiredState.node.name)  %}
+           {%set altertest = true %}
+	    {%endif%}
+
+        {% if dropTest == true %}
 
 			{{ stage('Drop ' + ref_no_link(currentState.node.location.name, currentState.node.name)) }}
-			
+
 			{%- set materialization = dropMaterialization(currentState.node.materializationType) %}
             DROP {{ materialization }} {{ ref_no_link(currentState.node.location.name, currentState.node.name) }}
-                
+
+        {%endif%}
+
+        {# Rename before Create/Alter so CREATE OR ALTER applies to the renamed view #}
+        {%if altertest == true %}
+
+            {{ stage('Rename and / or Move View') }}
+            {% set srcSchName = currentState.node.location.name %}
+            {% set cdb = currentState.storageLocations | selectattr('name', 'equalto', srcSchName) | map(attribute='database') | first %}
+            {% set csch = currentState.storageLocations | selectattr('name', 'equalto', srcSchName) | map(attribute='schema') | first %}
+
+            ALTER VIEW "{{cdb}}"."{{csch}}"."{{currentState.node.name}}"
+            RENAME TO   {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
         {%endif%}
     {%endif%}
 
@@ -328,17 +346,6 @@ does not permit copying or modification for any other purpose.
                 {% endif %}
             {% endif %}
         {% endfor %}
-    {%endif%}
-
-    {%if altertest == true %}
-        
-        {{ stage('Rename and / or Move View') }}
-        {% set srcSchName = currentState.node.location.name %}
-        {% set cdb = currentState.storageLocations | selectattr('name', 'equalto', srcSchName) | map(attribute='database') | first %}
-        {% set csch = currentState.storageLocations | selectattr('name', 'equalto', srcSchName) | map(attribute='schema') | first %}
-
-        ALTER VIEW "{{cdb}}"."{{csch}}"."{{currentState.node.name}}"
-        RENAME TO   {{ ref_no_link(desiredState.node.location.name, desiredState.node.name) }}
     {%endif%}
 
 {%endif%}
