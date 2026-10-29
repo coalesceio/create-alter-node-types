@@ -7,5 +7,8 @@ mappingDefinitions:
   TARGET:
     database: TARGET
     schema: TARGET_QA
+  TARGET_NEW:
+    database: ""
+    schema: ""
 name: QA
 type: Environment

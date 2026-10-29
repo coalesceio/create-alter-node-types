@@ -1,5 +1,8 @@
 fileVersion: 1
 id: "731"
-mappingDefinitions: {}
+mappingDefinitions:
+  TARGET_NEW:
+    database: ""
+    schema: ""
 name: TST-QA
 type: Environment
