@@ -4,6 +4,9 @@ mappingDefinitions:
   SOURCE:
     database: SOURCE
     schema: SRC
+  SOURCE_TEST:
+    database: SOURCE_TEST
+    schema: PUBLIC
   TARGET:
     database: TARGET
     schema: TARGET_QA

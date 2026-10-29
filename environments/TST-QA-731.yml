@@ -1,6 +1,9 @@
 fileVersion: 1
 id: "731"
 mappingDefinitions:
+  SOURCE_TEST:
+    database: ""
+    schema: ""
   TARGET_NEW:
     database: ""
     schema: ""
