@@ -1,9 +1,9 @@
 fileVersion: 1
 id: 2417e59c-21b0-464c-bcb7-5c4b5450ced0
-name: CV_CUSTOMER_CT
+name: CV_CUSTOMER
 operation:
   config:
-    changetracking: true
+    changetracking: false
     groupByAll: false
     insertStrategy: INSERT
     secureOption: false
@@ -129,6 +129,26 @@ operation:
               - columnCounter: 64aa9f7d-bda4-4d5c-acc7-ade6852864e3
                 stepCounter: 7a0a42e4-08ec-442e-b570-fa58e0e156e7
             transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 7976ce31-953e-4c95-9bc4-d6a30898791c
+          stepCounter: 2417e59c-21b0-464c-bcb7-5c4b5450ced0
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ""
+        description: ""
+        keyColumnType: None
+        name: C_TESTCOL
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: "0"
+                stepCounter: "0"
+            transform: "NULL"
+        systemColumnType: None
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
@@ -141,9 +161,9 @@ operation:
             nodeName: CUSTOMER
         join:
           joinCondition: FROM {{ ref('SOURCE', 'CUSTOMER') }} "CUSTOMER"
-        name: CV_CUSTOMER_CT
+        name: CV_CUSTOMER
         noLinkRefs: []
-  name: CV_CUSTOMER_CT
+  name: CV_CUSTOMER
   overrideSQL: false
   schema: ""
   sqlType: "419"
