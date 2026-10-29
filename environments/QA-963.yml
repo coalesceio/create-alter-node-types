@@ -6,6 +6,6 @@ mappingDefinitions:
     schema: SRC
   TARGET:
     database: TARGET
-    schema: TARGET_QA
+    schema: TARGET_NEW
 name: QA
 type: Environment
