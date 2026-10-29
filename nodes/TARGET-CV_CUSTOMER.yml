@@ -6,7 +6,7 @@ operation:
     changetracking: false
     groupByAll: false
     insertStrategy: INSERT
-    secureOption: false
+    secureOption: true
     selectDistinct: false
   database: ""
   deployEnabled: true
