@@ -170,6 +170,26 @@ operation:
               - columnCounter: 059aab00-20b2-4a60-a528-43ba9ceb7650
                 stepCounter: c49498f0-6242-40bc-89c9-9c548a1bd277
             transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 14d8e857-0e30-412c-b171-a57a4d1dc0b4
+          stepCounter: c2077ed8-9889-4d38-b43d-28841d6172f4
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ""
+        description: ""
+        keyColumnType: None
+        name: O_TESTCOL
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: "0"
+                stepCounter: "0"
+            transform: "NULL"
+        systemColumnType: None
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
