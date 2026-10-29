@@ -12,7 +12,7 @@ operation:
   deployEnabled: true
   description: ""
   isMultisource: false
-  locationName: TARGET_NEW
+  locationName: TARGET
   materializationType: view
   metadata:
     appliedNodeTests: []
@@ -255,12 +255,12 @@ operation:
         dependencies:
           - locationName: SOURCE
             nodeName: CUSTOMER
-          - locationName: SOURCE_TEST
+          - locationName: SOURCE
             nodeName: ORDERS
         join:
           joinCondition: |-
             FROM {{ ref('SOURCE', 'CUSTOMER') }} "CUSTOMER"
-            JOIN {{ ref('SOURCE_TEST', 'ORDERS') }} "ORDERS"
+            JOIN {{ ref('SOURCE', 'ORDERS') }} "ORDERS"
             on "CUSTOMER"."C_CUSTKEY" = "ORDERS"."O_CUSTKEY"
         name: CV_CUSTOMER
         noLinkRefs: []
