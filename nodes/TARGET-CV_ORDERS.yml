@@ -92,7 +92,7 @@ operation:
           columnCounter: b1e533ce-b181-461f-be72-bd208b894ce1
           stepCounter: bfa18d4d-9691-459d-a22e-1d3c52eb7b46
         config: {}
-        dataType: VARCHAR(15)
+        dataType: VARCHAR(20)
         description: ""
         name: O_ORDERPRIORITY
         nullable: true
@@ -106,7 +106,7 @@ operation:
           columnCounter: 934ae082-8e99-412c-8c0e-2cf18940f745
           stepCounter: bfa18d4d-9691-459d-a22e-1d3c52eb7b46
         config: {}
-        dataType: VARCHAR(15)
+        dataType: VARCHAR(20)
         description: ""
         name: O_CLERK
         nullable: true
