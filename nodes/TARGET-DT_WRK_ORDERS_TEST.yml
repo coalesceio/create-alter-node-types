@@ -1,6 +1,6 @@
 fileVersion: 1
 id: c2077ed8-9889-4d38-b43d-28841d6172f4
-name: DT_WRK_ORDERS
+name: DT_WRK_ORDERS_TEST
 operation:
   config:
     advanceWarehouse: false
@@ -182,9 +182,9 @@ operation:
             nodeName: ORDERS
         join:
           joinCondition: FROM {{ ref('SOURCE', 'ORDERS') }} "ORDERS"
-        name: DT_WRK_ORDERS
+        name: DT_WRK_ORDERS_TEST
         noLinkRefs: []
-  name: DT_WRK_ORDERS
+  name: DT_WRK_ORDERS_TEST
   overrideSQL: false
   schema: ""
   sqlType: DT:::347

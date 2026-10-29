@@ -147,14 +147,14 @@ operation:
     enabledColumnTestIDs: []
     sourceMapping:
       - aliases:
-          DT_WRK_ORDERS: c2077ed8-9889-4d38-b43d-28841d6172f4
+          DT_WRK_ORDERS_TEST: c2077ed8-9889-4d38-b43d-28841d6172f4
         customSQL:
           customSQL: ""
         dependencies:
           - locationName: TARGET
-            nodeName: DT_WRK_ORDERS
+            nodeName: DT_WRK_ORDERS_TEST
         join:
-          joinCondition: FROM {{ ref('TARGET', 'DT_WRK_ORDERS') }} "DT_WRK_ORDERS"
+          joinCondition: FROM {{ ref('TARGET', 'DT_WRK_ORDERS_TEST') }} "DT_WRK_ORDERS_TEST"
         name: CV_ORDERS
         noLinkRefs: []
   name: CV_ORDERS
