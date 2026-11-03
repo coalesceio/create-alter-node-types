@@ -243,8 +243,11 @@ does not permit copying or modification for any other purpose.
 	   	
             {%set chngtracktst = currentState.config.changetracking | default(false) == desiredState.config.changetracking%}
             {%set materializationTest = currentState.node.materializationType == desiredState.node.materializationType %}
-            {% if 
+            {# View description test - CREATE OR ALTER VIEW updates the view comment in place #}
+            {%set nodeDescTest = currentState.node.description | default('') == desiredState.node.description | default('') %}
+            {% if
                 chngtracktst == false or
+                nodeDescTest == false or
                 securetst == false or 
                 sourcesTest == false or
                 ns.othercolchanges > 0 or 
@@ -265,8 +268,8 @@ does not permit copying or modification for any other purpose.
         {% endif %}
 
         {# Dropping the view before recreating for specific cases #}
+        {# Column description changes are not included - CREATE OR ALTER VIEW updates column comments in place #}
         {% if ns.othercolchanges > 0 or
-            ns.descolchanges > 0 or
             ns.colchanges > 0 or
             ns.joinTest == false or
             columnsTransformTest == false or
