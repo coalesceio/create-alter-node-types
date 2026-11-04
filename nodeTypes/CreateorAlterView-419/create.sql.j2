@@ -268,13 +268,9 @@ does not permit copying or modification for any other purpose.
             {% set createTest = false %}
         {% endif %}
 
-        {# Dropping the view before recreating for specific cases #}
-        {# Not included - CREATE OR ALTER VIEW applies these in place: column add / remove / rename / reorder,
-           column data type / nullable / default, column description, transform, source link, join / filter,
-           distinct, group by all #}
-        {% if msrcTest == false or
-            sourcesTest == false
-            or materializationTest == false			%}
+        {# Drop only when the existing object is not a view (materialization change) -
+           CREATE OR ALTER VIEW applies every other change in place #}
+        {% if materializationTest == false %}
             {% set dropTest = true %}
         {% else %}
             {% set dropTest = false %}
