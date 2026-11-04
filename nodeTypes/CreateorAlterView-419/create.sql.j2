@@ -270,9 +270,9 @@ does not permit copying or modification for any other purpose.
 
         {# Dropping the view before recreating for specific cases #}
         {# Not included - CREATE OR ALTER VIEW applies these in place: column add / remove / rename / reorder,
-           column description, transform, source link, join / filter, distinct, group by all #}
-        {% if ns.othercolchanges > 0 or
-            msrcTest == false or
+           column data type / nullable / default, column description, transform, source link, join / filter,
+           distinct, group by all #}
+        {% if msrcTest == false or
             sourcesTest == false
             or materializationTest == false			%}
             {% set dropTest = true %}
