@@ -177,10 +177,10 @@ operation:
         customSQL:
           customSQL: ""
         dependencies:
-          - locationName: TARGET_NEW
+          - locationName: TARGET
             nodeName: DT_WRK_ORDERS_TEST1
         join:
-          joinCondition: FROM {{ ref('TARGET_NEW', 'DT_WRK_ORDERS_TEST1') }} "DT_WRK_ORDERS_TEST1"
+          joinCondition: FROM {{ ref('TARGET', 'DT_WRK_ORDERS_TEST1') }} "DT_WRK_ORDERS_TEST1"
         name: CV_ORDERS
         noLinkRefs: []
   name: CV_ORDERS

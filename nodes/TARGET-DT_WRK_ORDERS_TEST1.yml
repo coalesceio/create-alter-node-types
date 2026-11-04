@@ -39,7 +39,7 @@ operation:
   deployEnabled: true
   description: ""
   isMultisource: false
-  locationName: TARGET_NEW
+  locationName: TARGET
   materializationType: dynamic table
   metadata:
     appliedNodeTests: []
