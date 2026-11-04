@@ -102,8 +102,9 @@ does not permit copying or modification for any other purpose.
         {% endfor %}
 
         {#Multi source#}
-        {% set mulsrcTest = currentState.config.mstoggle | default(false) == desiredState.config.mstoggle %}
-        {% set mulsrcstraTest = currentState.config.insertStrategy | default(false) == desiredState.config.insertStrategy %}
+        {# The multi source toggle is stored on the node (node.isMultisource), not in config #}
+        {% set mulsrcTest = currentState.node.isMultisource | default(false) == desiredState.node.isMultisource | default(false) %}
+        {% set mulsrcstraTest = currentState.config.insertStrategy | default('') == desiredState.config.insertStrategy | default('') %}
         
         {% if 
             mulsrcTest == false or
