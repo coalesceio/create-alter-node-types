@@ -129,49 +129,18 @@ does not permit copying or modification for any other purpose.
         {% set columnsTransformTest = ns.transformTest %}
 
         {# Test to see if the sourceLinks in a column has changed #}
-        {# ns.linkLogicTest ignores link changes caused only by an upstream node being renamed or moved #}
         {% set ns.linkTest = true %}
-        {% set ns.linkLogicTest = true %}
         {% for src in desiredState.sources %}
             {% set matchingSource = currentState.sources | selectattr('name', 'equalto', src.name) | first %}
             {% if matchingSource %}
                 {% if (src.columns | map(attribute='sourceColumns') | list) != (matchingSource.columns | map(attribute='sourceColumns') | list) %}
                     {% set ns.linkTest = false %}
-                    {# Compare links again with each upstream node identified by its dependency position instead of its name / location #}
-                    {% for st in [src, matchingSource] %}
-                        {% set depNames = st.dependencies | default([]) | map(attribute='node') | map(attribute='name') | list %}
-                        {% set ns.links = '' %}
-                        {% for col in st.columns %}
-                            {% set ns.links = ns.links ~ '|' %}
-                            {% for sc in col.sourceColumns | default([]) %}
-                                {% set ns.token = sc.node.name if sc.node is defined else '' %}
-                                {% set ns.found = false %}
-                                {% for depName in depNames %}
-                                    {% if ns.found == false and sc.node is defined and depName == sc.node.name %}
-                                        {% set ns.token = '__UPSTREAM_' ~ loop.index0 ~ '__' %}
-                                        {% set ns.found = true %}
-                                    {% endif %}
-                                {% endfor %}
-                                {% set ns.links = ns.links ~ ns.token ~ '.' ~ (sc.column.name if sc.column is defined else '') ~ ',' %}
-                            {% endfor %}
-                        {% endfor %}
-                        {% if loop.first %}
-                            {% set ns.desiredLinks = ns.links %}
-                        {% else %}
-                            {% set ns.currentLinks = ns.links %}
-                        {% endif %}
-                    {% endfor %}
-                    {% if ns.desiredLinks != ns.currentLinks %}
-                        {% set ns.linkLogicTest = false %}
-                    {% endif %}
                 {% endif %}
             {% else %}
                 {% set ns.linkTest = false %}
-                {% set ns.linkLogicTest = false %}
             {% endif %}
         {% endfor %}
         {% set columnsLinkTest = ns.linkTest %}
-        {% set columnsLinkLogicTest = ns.linkLogicTest %}
 
         {#Target location Test  #}
         {%if currentState.storageLocations|length == 0%}          
@@ -243,7 +212,8 @@ does not permit copying or modification for any other purpose.
                     {% if (descriptionTest == false) %}
                         {% set ns.descolchanges = ns.descolchanges + 1 %}
                     {%endif%} 														
-                    {%if (datatypeTest == false or nullableTest == false or defaultValueTest == false or columnnameTest == false )%} 
+                    {# Column renames are counted in ns.colchanges, so they do not force a drop #}
+                    {%if (datatypeTest == false or nullableTest == false or defaultValueTest == false )%} 
                        {% set ns.othercolchanges = ns.othercolchanges + 1 %}                                      
                     {%endif%} 																										
                 {%endif%}    
@@ -255,8 +225,6 @@ does not permit copying or modification for any other purpose.
 
             {% set sourcesTest = currentState.sources | count == desiredState.sources | count %}
 
-            {# ns.joinLogicTest ignores join changes caused only by an upstream node being renamed or moved #}
-            {% set ns.joinLogicTest = true %}
             {% if sourcesTest %}
                 {% for src in desiredState.sources %}
                     {% set matchingSource = currentState.sources | selectattr('name', 'equalto', src.name) | first %}
@@ -267,46 +235,9 @@ does not permit copying or modification for any other purpose.
                         {# Same number of sources — compare join transformations #}
                         {% if desiredStateSources != currentStateSources %}
                             {% set ns.joinTest = false %}
-
-                            {% if (src.dependencies | default([]) | length) != (matchingSource.dependencies | default([]) | length) %}
-                                {% set ns.joinLogicTest = false %}
-                            {% else %}
-                                {# Replace each upstream ref('LOCATION', 'NODE') with its dependency position (pass 1),
-                                   then also each quoted upstream alias "NODE" (pass 2), and compare again #}
-                                {% for st in [src, matchingSource] %}
-                                    {% set ns.joinRefs = st.join | default('') | string %}
-                                    {% for dep in st.dependencies | default([]) %}
-                                        {% set depLoc = dep.node.location.name %}
-                                        {% set depName = dep.node.name %}
-                                        {% set depToken = '(__UPSTREAM_' ~ loop.index0 ~ '__)' %}
-                                        {% for refArgs in [
-                                            "('" ~ depLoc ~ "', '" ~ depName ~ "')",
-                                            "('" ~ depLoc ~ "','" ~ depName ~ "')",
-                                            '("' ~ depLoc ~ '", "' ~ depName ~ '")',
-                                            '("' ~ depLoc ~ '","' ~ depName ~ '")'] %}
-                                            {% set ns.joinRefs = ns.joinRefs | replace(refArgs, depToken) %}
-                                        {% endfor %}
-                                    {% endfor %}
-                                    {% set ns.joinAliases = ns.joinRefs %}
-                                    {% for dep in st.dependencies | default([]) %}
-                                        {% set ns.joinAliases = ns.joinAliases | replace('"' ~ dep.node.name ~ '"', '"__UPSTREAM_' ~ loop.index0 ~ '__"') %}
-                                    {% endfor %}
-                                    {% if loop.first %}
-                                        {% set ns.desiredJoinRefs = ns.joinRefs %}
-                                        {% set ns.desiredJoinAliases = ns.joinAliases %}
-                                    {% else %}
-                                        {% set ns.currentJoinRefs = ns.joinRefs %}
-                                        {% set ns.currentJoinAliases = ns.joinAliases %}
-                                    {% endif %}
-                                {% endfor %}
-                                {% if ns.desiredJoinRefs != ns.currentJoinRefs and ns.desiredJoinAliases != ns.currentJoinAliases %}
-                                    {% set ns.joinLogicTest = false %}
-                                {% endif %}
-                            {% endif %}
                         {% endif %}
                     {% else %}
                         {% set ns.joinTest = false %}
-                        {% set ns.joinLogicTest = false %}
                     {% endif %}
                 {% endfor %}
             {% endif %}
@@ -338,15 +269,9 @@ does not permit copying or modification for any other purpose.
         {% endif %}
 
         {# Dropping the view before recreating for specific cases #}
-        {# Column description changes are not included - CREATE OR ALTER VIEW updates column comments in place #}
-        {# Join / link changes caused only by an upstream node rename or location change are not included - CREATE OR ALTER VIEW only #}
+        {# Not included - CREATE OR ALTER VIEW applies these in place: column add / remove / rename / reorder,
+           column description, transform, source link, join / filter, distinct, group by all #}
         {% if ns.othercolchanges > 0 or
-            ns.colchanges > 0 or
-            ns.joinLogicTest == false or
-            columnsTransformTest == false or
-            columnsLinkLogicTest == false or
-            distst == false or
-            groupAlltst == false or
             msrcTest == false or
             sourcesTest == false
             or materializationTest == false			%}
