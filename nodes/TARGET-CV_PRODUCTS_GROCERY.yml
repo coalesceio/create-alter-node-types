@@ -31,10 +31,6 @@ operation:
               - columnCounter: 001699f9-9d41-408b-97c0-13d616269cbe
                 stepCounter: 548f5969-a305-48cb-98c6-4a92394fd9da
             transform: ""
-          - columnReferences:
-              - columnCounter: ac1dd0f0-e86f-431e-be56-114618c66b0d
-                stepCounter: 78891456-1baa-4ec2-b437-0567bb843e38
-            transform: ""
       - appliedColumnTests: {}
         columnReference:
           columnCounter: 0788cb0f-c92e-43da-af46-31f99658f102
@@ -48,10 +44,6 @@ operation:
           - columnReferences:
               - columnCounter: d20bb410-8c79-4560-acb0-e07210b49c72
                 stepCounter: 548f5969-a305-48cb-98c6-4a92394fd9da
-            transform: ""
-          - columnReferences:
-              - columnCounter: 6e96ec73-01d9-4390-ac43-2214e813b965
-                stepCounter: 78891456-1baa-4ec2-b437-0567bb843e38
             transform: ""
       - appliedColumnTests: {}
         columnReference:
@@ -67,10 +59,6 @@ operation:
               - columnCounter: 8a365ccc-96f7-48b2-9bac-c3c778365b6e
                 stepCounter: 548f5969-a305-48cb-98c6-4a92394fd9da
             transform: ""
-          - columnReferences:
-              - columnCounter: 82b2db4f-9b3e-4898-90eb-26804cb2b0ba
-                stepCounter: 78891456-1baa-4ec2-b437-0567bb843e38
-            transform: ""
       - appliedColumnTests: {}
         columnReference:
           columnCounter: 5cee66ca-9223-40e9-9cac-8fac8173d7a9
@@ -85,10 +73,6 @@ operation:
               - columnCounter: 5039565f-1ac2-45ee-b8d3-7ed621e74c0f
                 stepCounter: 548f5969-a305-48cb-98c6-4a92394fd9da
             transform: ""
-          - columnReferences:
-              - columnCounter: 0067ec39-2bf5-420e-bf8b-434ba41ce34b
-                stepCounter: 78891456-1baa-4ec2-b437-0567bb843e38
-            transform: ""
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
@@ -102,17 +86,6 @@ operation:
         join:
           joinCondition: FROM {{ ref('SOURCE', 'PRODUCTS_GROCERY') }} "PRODUCTS_GROCERY"
         name: CV_PRODUCTS_GROCERY
-        noLinkRefs: []
-      - aliases:
-          PRODUCTS: 78891456-1baa-4ec2-b437-0567bb843e38
-        customSQL:
-          customSQL: ""
-        dependencies:
-          - locationName: SOURCE
-            nodeName: PRODUCTS
-        join:
-          joinCondition: FROM {{ ref('SOURCE', 'PRODUCTS') }} "PRODUCTS"
-        name: NEW_SOURCE
         noLinkRefs: []
   name: CV_PRODUCTS_GROCERY
   overrideSQL: false

@@ -10,7 +10,7 @@ operation:
     selectDistinct: true
   database: ""
   deployEnabled: true
-  description: ""
+  description: CustomerC/A view
   isMultisource: false
   locationName: TARGET
   materializationType: view
