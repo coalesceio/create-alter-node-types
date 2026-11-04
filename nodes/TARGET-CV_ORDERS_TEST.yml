@@ -100,7 +100,7 @@ operation:
           - columnReferences:
               - columnCounter: 830db721-b650-4db8-895e-2d36efdbb254
                 stepCounter: c2077ed8-9889-4d38-b43d-28841d6172f4
-            transform: ""
+            transform: UPPER(O_ORDERPRIORITY)
       - appliedColumnTests: {}
         columnReference:
           columnCounter: 93da6c60-753d-4961-8a62-7d431f69a5a2

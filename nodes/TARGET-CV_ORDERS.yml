@@ -61,20 +61,6 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 7d21e649-bd0f-4689-ae58-56761c571ee6
-          stepCounter: 1e142436-7202-4210-9778-22a52e03f118
-        config: {}
-        dataType: NUMBER(12,2)
-        description: ""
-        name: O_TOTALPRICE
-        nullable: true
-        sourceColumnReferences:
-          - columnReferences:
-              - columnCounter: 4deaf0ae-e894-484c-81cc-fa719ce83139
-                stepCounter: c2077ed8-9889-4d38-b43d-28841d6172f4
-            transform: ""
-      - appliedColumnTests: {}
-        columnReference:
           columnCounter: 4d3a315c-2fcb-4c5c-90be-3449dec9c74e
           stepCounter: 1e142436-7202-4210-9778-22a52e03f118
         config: {}
@@ -162,6 +148,26 @@ operation:
               - columnCounter: 14d8e857-0e30-412c-b171-a57a4d1dc0b4
                 stepCounter: c2077ed8-9889-4d38-b43d-28841d6172f4
             transform: ""
+        systemColumnType: None
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 52addc56-3197-46f4-b9d3-56de78d186f1
+          stepCounter: 1e142436-7202-4210-9778-22a52e03f118
+        config: {}
+        dataType: VARCHAR
+        defaultValue: ""
+        description: ""
+        keyColumnType: None
+        name: SAMP
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: "0"
+                stepCounter: "0"
+            transform: "'HI'"
         systemColumnType: None
     cteString: ""
     enabledColumnTestIDs: []
