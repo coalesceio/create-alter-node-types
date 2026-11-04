@@ -10,7 +10,7 @@ operation:
     selectDistinct: false
   database: ""
   deployEnabled: true
-  description: ""
+  description: Order table
   isMultisource: false
   locationName: TARGET
   materializationType: view
