@@ -4,7 +4,7 @@ name: CV_ORDERS_TEST
 operation:
   config:
     changetracking: false
-    groupByAll: false
+    groupByAll: true
     insertStrategy: UNION
     secureOption: false
     selectDistinct: false

@@ -3,11 +3,11 @@ id: 3fc3ecda-5ede-438d-b3ea-f34401d156ad
 name: CV_CUSTOMER
 operation:
   config:
-    changetracking: false
+    changetracking: true
     groupByAll: false
     insertStrategy: UNION
     secureOption: false
-    selectDistinct: false
+    selectDistinct: true
   database: ""
   deployEnabled: true
   description: ""
