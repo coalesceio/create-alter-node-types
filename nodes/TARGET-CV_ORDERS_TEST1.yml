@@ -1,9 +1,9 @@
 fileVersion: 1
 id: 4fa50925-1f8f-4163-a804-7e2773e1c48b
-name: CV_ORDERS_TEST
+name: CV_ORDERS_TEST1
 operation:
   config:
-    changetracking: false
+    changetracking: true
     groupByAll: true
     insertStrategy: UNION
     secureOption: false
@@ -169,9 +169,9 @@ operation:
             nodeName: DT_WRK_ORDERS_TEST1
         join:
           joinCondition: FROM {{ ref('TARGET', 'DT_WRK_ORDERS_TEST1') }} "DT_WRK_ORDERS_TEST1"
-        name: CV_ORDERS_TEST
+        name: CV_ORDERS_TEST1
         noLinkRefs: []
-  name: CV_ORDERS_TEST
+  name: CV_ORDERS_TEST1
   overrideSQL: false
   schema: ""
   sqlType: "419"
