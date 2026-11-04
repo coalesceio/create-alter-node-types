@@ -1,0 +1,92 @@
+fileVersion: 1
+id: 78891456-1baa-4ec2-b437-0567bb843e38
+name: PRODUCTS
+operation:
+  database: ""
+  deployEnabled: true
+  description: ""
+  locationName: SOURCE
+  metadata:
+    columns:
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: ac1dd0f0-e86f-431e-be56-114618c66b0d
+          stepCounter: 78891456-1baa-4ec2-b437-0567bb843e38
+        config: {}
+        dataType: NUMBER(38,0)
+        defaultValue: ""
+        description: ""
+        name: PRODUCT_ID
+        nullable: false
+        primaryKey: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6e96ec73-01d9-4390-ac43-2214e813b965
+          stepCounter: 78891456-1baa-4ec2-b437-0567bb843e38
+        config: {}
+        dataType: VARCHAR(255)
+        defaultValue: ""
+        description: ""
+        name: PRODUCT_NAME
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 82b2db4f-9b3e-4898-90eb-26804cb2b0ba
+          stepCounter: 78891456-1baa-4ec2-b437-0567bb843e38
+        config: {}
+        dataType: VARCHAR(100)
+        defaultValue: ""
+        description: ""
+        name: BRAND
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 0067ec39-2bf5-420e-bf8b-434ba41ce34b
+          stepCounter: 78891456-1baa-4ec2-b437-0567bb843e38
+        config: {}
+        dataType: VARCHAR(50)
+        defaultValue: ""
+        description: ""
+        name: COLOUR
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+  name: PRODUCTS
+  schema: ""
+  sqlType: Source
+  type: sourceInput
+  version: 1
+type: Node

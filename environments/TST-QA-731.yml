@@ -1,11 +1,17 @@
 fileVersion: 1
 id: "731"
 mappingDefinitions:
+  SOURCE:
+    database: ANANDHIS_DEV
+    schema: SOURCE_DATA
   SOURCE_TEST:
-    database: ""
-    schema: ""
+    database: ANANDHIS_DEV
+    schema: SOURCE_DATA
+  TARGET:
+    database: ANANDHIS_DEV
+    schema: TARGET_ACC
   TARGET_NEW:
-    database: ""
-    schema: ""
+    database: ANANDHIS_DEV
+    schema: TARGET_DEV
 name: TST-QA
 type: Environment

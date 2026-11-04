@@ -1,0 +1,92 @@
+fileVersion: 1
+id: 548f5969-a305-48cb-98c6-4a92394fd9da
+name: PRODUCTS_GROCERY
+operation:
+  database: ""
+  deployEnabled: true
+  description: ""
+  locationName: SOURCE
+  metadata:
+    columns:
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 001699f9-9d41-408b-97c0-13d616269cbe
+          stepCounter: 548f5969-a305-48cb-98c6-4a92394fd9da
+        config: {}
+        dataType: NUMBER(38,0)
+        defaultValue: ""
+        description: ""
+        name: PRODUCT_ID
+        nullable: false
+        primaryKey: true
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: d20bb410-8c79-4560-acb0-e07210b49c72
+          stepCounter: 548f5969-a305-48cb-98c6-4a92394fd9da
+        config: {}
+        dataType: VARCHAR(255)
+        defaultValue: ""
+        description: ""
+        name: PRODUCT_NAME
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 8a365ccc-96f7-48b2-9bac-c3c778365b6e
+          stepCounter: 548f5969-a305-48cb-98c6-4a92394fd9da
+        config: {}
+        dataType: VARCHAR(100)
+        defaultValue: ""
+        description: ""
+        name: BRAND
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 5039565f-1ac2-45ee-b8d3-7ed621e74c0f
+          stepCounter: 548f5969-a305-48cb-98c6-4a92394fd9da
+        config: {}
+        dataType: VARCHAR(50)
+        defaultValue: ""
+        description: ""
+        name: COLOUR
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+  name: PRODUCTS_GROCERY
+  schema: ""
+  sqlType: Source
+  type: sourceInput
+  version: 1
+type: Node

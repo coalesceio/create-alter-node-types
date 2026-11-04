@@ -1,0 +1,92 @@
+fileVersion: 1
+id: 5a8c9a04-a973-48eb-b0fb-68793ae786aa
+name: PRODUCTS_GROCERY_VW
+operation:
+  database: ""
+  deployEnabled: true
+  description: ""
+  locationName: SOURCE
+  metadata:
+    columns:
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 72e2b097-8447-4430-ba05-871e8c6da5cf
+          stepCounter: 5a8c9a04-a973-48eb-b0fb-68793ae786aa
+        config: {}
+        dataType: NUMBER(38,0)
+        defaultValue: ""
+        description: ""
+        name: PRODUCT_ID
+        nullable: false
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: c359d350-3d8a-478d-8dbc-5de0e735ca02
+          stepCounter: 5a8c9a04-a973-48eb-b0fb-68793ae786aa
+        config: {}
+        dataType: VARCHAR(255)
+        defaultValue: ""
+        description: ""
+        name: PRODUCT_NAME
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 9f53e6e6-c737-438b-829f-79421c0625eb
+          stepCounter: 5a8c9a04-a973-48eb-b0fb-68793ae786aa
+        config: {}
+        dataType: VARCHAR(100)
+        defaultValue: ""
+        description: ""
+        name: BRAND
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 400faabc-9c82-4980-ae28-76630b13f411
+          stepCounter: 5a8c9a04-a973-48eb-b0fb-68793ae786aa
+        config: {}
+        dataType: VARCHAR(50)
+        defaultValue: ""
+        description: ""
+        name: COLOUR
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+  name: PRODUCTS_GROCERY_VW
+  schema: ""
+  sqlType: Source
+  type: sourceInput
+  version: 1
+type: Node
