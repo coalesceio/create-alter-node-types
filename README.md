@@ -1,4 +1,4 @@
-## Create OR Alter PackaGE
+## Create OR Alter Package
 
 Create or Alter package includes:
 * [Create or Alter table](#create-or-alter-table)
@@ -183,7 +183,9 @@ are detected<br/>If FALSE the node will not be deployed or will be dropped durin
 
 ### Limitations of Create or Alter View
 
-* The CREATE OR ALTER VIEW command doesn’t support changing a view definition once a view is created. In Coalesce,it is supported by dropping and recreating the view during redeployment.
+* Column data type, nullability and default value cannot be set on a view. Snowflake derives them from the view query, so changing them in the mapping grid has no effect on the view.
+* The view is dropped and recreated only when the existing object is not a view, for example after switching the node from a table node type. All other changes are applied in place with CREATE OR ALTER VIEW.
+* New columns can only be added to the end of the column list. Snowflake cannot insert a column between existing columns or reorder the columns of an existing view with CREATE OR ALTER VIEW, so redeploying after either change fails. See [Adding a Column in Between or Reordering Columns](#adding-a-column-in-between-or-reordering-columns).
 
 ### Create Or Alter View Deployment
 
@@ -194,45 +196,110 @@ When deployed for the first time into an environment the Create or Alter view no
 |-----------|----------------|
 | **Create/Alter view** | This will execute a CREATE OR ALTER statement and create a view in the target environment |
 
-#### Create Or Alter View Redeployment
+### Create Or Alter View Redeployment
+
+On redeployment, the node compares the previous deployment (current state) with the new one (desired state). It then runs only the stages that the change needs. All redeployment stages run in the **create** phase of the deployment, after upstream nodes such as tables, Dynamic Tables or other views have been created or altered. So a column added to an upstream node and to the view in the same commit can be deployed together.
+
+A redeployment can run up to three stages, always in this order:
+
+| **Order** | **Stage** | **When it runs** |
+|-----------|-----------|------------------|
+| 1 | **Drop `<previous object name>`** | The materialization type changed, so the existing object is not a view. See [Changing the Materialization or Node Type](#changing-the-materialization-or-node-type). The object is dropped under its **previous** name and location. |
+| 2 | **Rename and / or Move View** | The node name or target location changed, and the object is **not** being dropped. |
+| 3 | **Create/Alter View** | The view definition or a view property changed. See [Altering the View](#altering-the-view). |
+
+Except for a materialization change, the view is never dropped. CREATE OR ALTER VIEW updates the existing view in place, so grants on the view are kept and the view stays available during the deployment.
+
+#### Rename or Move View
+
+If you redeploy with only a new node name, a new target Storage Location, or a new database/schema mapping for the target Storage Location, the existing view is renamed or moved in place.
+
+| **Stage** | **Description** |
+|-----------|----------------|
+| **Rename and / or Move View** | Runs `ALTER VIEW <old name> RENAME TO <new database>.<new schema>.<new name>` |
 
 #### Altering the View
 
-When redeployed with change in target location or change in node name,results in alter of the view
+Any of the changes below runs CREATE OR ALTER VIEW on the existing view. The view is not dropped first.
+
+**Columns**
+* Columns added to the end of the column list in the mapping grid
+* Columns removed or renamed in the mapping grid
+* A column transformation changed
+* A column's source column mapping changed
+* A column description changed. The column comment is updated.
+
+**Sources and joins**
+* Join, filter or other clauses in the Join tab changed
+* Sources added to or removed from a multi-source node
+* An upstream node renamed or moved. Its reference in the join and the column source mappings changes.
+* The database/schema mapping of a **source** node's Storage Location changed
+
+**Options**
+* **Secure** toggled on or off
+* **Change Tracking** toggled on or off
+* **Distinct** or **Group By All** toggled on or off
+* **Multi Source** toggled on or off, or the **Multi Source Strategy** changed between UNION and UNION ALL
+* The node description changed. The view comment is updated.
 
 | **Stage** | **Description** |
 |-----------|----------------|
-| **Rename/Move View** | Alter view statement is executed to perform the alter operation |
+| **Create/Alter View** | Runs CREATE OR ALTER VIEW with the new definition and properties |
 
-### Recreating the Create Or Alter View
+#### Adding a Column in Between or Reordering Columns
 
-When the Create or Alter view node is redeployed with any changes in secure,change_tracking or multi-source config options,create or alter view is executed again.
+Adding a column between existing columns, or changing the column order, in the mapping grid runs the **Create/Alter View** stage. Snowflake rejects it, and the deployment fails with this error:
+
+```
+CREATE OR ALTER execution failed. Partial updates may have been applied.
+Error message: SQL compilation error: error line 0 at position -1
+Cannot reorder VIEW columns in ALTER.
+```
+
+Adding a column to the end of the column list does not cause this error. To avoid it, add new columns at the end of the mapping grid.
+
+The node does not drop the view for these changes. To deploy a column added in between or a new column order, drop the view in the target environment before you redeploy. The **Create/Alter View** stage then creates the view with the new columns. Grants on the dropped view are lost, unless future grants on the schema apply them again.
+
+Snowflake reports that partial updates may have been applied, so check the view in the target environment after a failed deployment.
+
+#### Changing the Materialization or Node Type
+
+If the existing object has a different materialization, for example because the node was switched from a table node type to Create or Alter View, the object is dropped and the view is created.
 
 | **Stage** | **Description** |
 |-----------|----------------|
-| **Create/Alter View** | This will execute a CREATE OR ALTER statement and create a view in the target environment |
+| **Warning! Node Type Switching Detected** | Runs only when the node type changed. Shows a warning that node type changes can affect related tasks, streams or services. |
+| **Drop `<previous object name>`** | Drops the existing object under its previous name and location |
+| **Create/Alter View** | Creates the view under the new name and location |
 
-### ChanGE in View Definition
+Grants on the dropped object are lost, unless future grants on the schema apply them again.
 
-Change in view definition like change in columns,add or drop columns,change in data type ,adding distinct or group by all results in below stages
+#### Combined Changes
 
-| **Stage** | **Description** |
-|-----------|----------------|
-| **Create/Alter View** | This will execute a CREATE OR ALTER statement and create a view in the target environment |
+When one redeployment has several kinds of change, the stages are combined as follows:
 
-### Redeployment With No Changes 
+| **Change** | **Stages Executed** |
+|------------|-------------------|
+| **Rename or move only** | Rename and / or Move View |
+| **View definition or property change only** | Create/Alter View |
+| **Rename or move + view definition or property change** | Rename and / or Move View<br/>Create/Alter View (applied to the renamed view) |
+| **Materialization change** (with or without other changes) | Drop `<previous object name>`<br/>Create/Alter View (under the new name and location)<br/>No rename stage runs, and no object is left behind under the old name. |
 
-If the nodes are redeployed with no changes compared to previous deployment, then no stages are executed
+#### Redeployment With No Changes
+
+If the node is redeployed with no changes compared to the previous deployment, then no stages are executed.
+
+A change only to a column's data type, nullability or default value also runs no stages, because Snowflake derives these from the view query.
 
 ### Create Or Alter View Undeployment
 
-If a Create or Alter view node are deleted from a Workspace, that Workspace is committed to Git and that commit deployed to a higher level environment then the table in the target environment will be dropped.
+If a Create or Alter view node is deleted from a Workspace, and that Workspace is committed to Git and the commit is deployed to a higher-level environment, the view in the target environment is dropped.
 
-This is executed in below stage:
+The drop runs in this stage:
 
 | **Stage** | **Description** |
 |-----------|----------------|
-| **Drop View** | Removes the table or view from the environment |
+| **Drop View** | Removes the view from the environment |
 
 ----
 
