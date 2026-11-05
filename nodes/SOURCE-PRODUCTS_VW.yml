@@ -1,0 +1,92 @@
+fileVersion: 1
+id: 0cf008f2-e168-480a-91c5-b4d65f7a1881
+name: PRODUCTS_VW
+operation:
+  database: ""
+  deployEnabled: true
+  description: ""
+  locationName: SOURCE
+  metadata:
+    columns:
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: f62a0930-315d-4739-aba8-6ab7097c4776
+          stepCounter: 0cf008f2-e168-480a-91c5-b4d65f7a1881
+        config: {}
+        dataType: NUMBER(38,0)
+        defaultValue: ""
+        description: ""
+        name: PRODUCT_ID
+        nullable: false
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 851fefdf-83bc-45b9-a25d-929cf230516d
+          stepCounter: 0cf008f2-e168-480a-91c5-b4d65f7a1881
+        config: {}
+        dataType: VARCHAR(255)
+        defaultValue: ""
+        description: ""
+        name: PRODUCT_NAME
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: eb6d4601-982e-443f-a260-5a67630813b9
+          stepCounter: 0cf008f2-e168-480a-91c5-b4d65f7a1881
+        config: {}
+        dataType: VARCHAR(100)
+        defaultValue: ""
+        description: ""
+        name: BRAND
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: bdd89ebe-e602-44ba-87c1-cb879bda145a
+          stepCounter: 0cf008f2-e168-480a-91c5-b4d65f7a1881
+        config: {}
+        dataType: VARCHAR(50)
+        defaultValue: ""
+        description: ""
+        name: COLOUR
+        nullable: true
+        primaryKey: false
+        sourceColumnReferences:
+          - columnReferences: []
+            transform: ""
+        transform: ""
+        uniqueKey: false
+  name: PRODUCTS_VW
+  schema: ""
+  sqlType: Source
+  type: sourceInput
+  version: 1
+type: Node
