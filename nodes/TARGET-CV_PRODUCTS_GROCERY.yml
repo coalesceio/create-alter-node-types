@@ -52,7 +52,7 @@ operation:
           - columnReferences:
               - columnCounter: 851fefdf-83bc-45b9-a25d-929cf230516d
                 stepCounter: 0cf008f2-e168-480a-91c5-b4d65f7a1881
-            transform: ""
+            transform: UPPER("PRODUCTS_VW"."PRODUCT_NAME")
       - appliedColumnTests: {}
         columnReference:
           columnCounter: e56d57ae-c62a-4eee-a747-61ac95804545
