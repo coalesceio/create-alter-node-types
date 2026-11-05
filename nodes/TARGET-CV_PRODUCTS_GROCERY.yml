@@ -104,14 +104,14 @@ operation:
         name: CV_PRODUCTS_GROCERY
         noLinkRefs: []
       - aliases:
-          PRODUCTS_VW: 0cf008f2-e168-480a-91c5-b4d65f7a1881
+          PRODUCTS_GROCERY_VW: 5a8c9a04-a973-48eb-b0fb-68793ae786aa
         customSQL:
           customSQL: ""
         dependencies:
           - locationName: SOURCE
-            nodeName: PRODUCTS_VW
+            nodeName: PRODUCTS_GROCERY_VW
         join:
-          joinCondition: FROM {{ ref('SOURCE', 'PRODUCTS_VW') }} "PRODUCTS_VW"
+          joinCondition: FROM {{ ref('SOURCE', 'PRODUCTS_GROCERY_VW') }} "PRODUCTS_GROCERY_VW"
         name: NEW_SOURCE
         noLinkRefs: []
   name: CV_PRODUCTS_GROCERY
