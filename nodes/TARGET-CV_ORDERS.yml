@@ -33,20 +33,6 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: 41471ee8-c070-4a75-b46d-925413b627b4
-          stepCounter: 1e142436-7202-4210-9778-22a52e03f118
-        config: {}
-        dataType: NUMBER(38,0)
-        description: ""
-        name: O_CUSTKEY
-        nullable: true
-        sourceColumnReferences:
-          - columnReferences:
-              - columnCounter: a52e880b-b712-4d54-a4bc-18acb4f7f2e3
-                stepCounter: c2077ed8-9889-4d38-b43d-28841d6172f4
-            transform: ""
-      - appliedColumnTests: {}
-        columnReference:
           columnCounter: 627b037d-4a4b-433e-b94d-c1a358f3d07c
           stepCounter: 1e142436-7202-4210-9778-22a52e03f118
         config: {}
@@ -169,6 +155,20 @@ operation:
                 stepCounter: "0"
             transform: "'HI'"
         systemColumnType: None
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 41471ee8-c070-4a75-b46d-925413b627b4
+          stepCounter: 1e142436-7202-4210-9778-22a52e03f118
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        name: O_CUSTKEY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: a52e880b-b712-4d54-a4bc-18acb4f7f2e3
+                stepCounter: c2077ed8-9889-4d38-b43d-28841d6172f4
+            transform: ""
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:

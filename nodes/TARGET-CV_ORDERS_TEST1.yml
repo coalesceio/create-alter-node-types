@@ -47,26 +47,12 @@ operation:
             transform: ""
       - appliedColumnTests: {}
         columnReference:
-          columnCounter: f530c78b-4b71-4bed-a427-a8ff00539ce3
-          stepCounter: 4fa50925-1f8f-4163-a804-7e2773e1c48b
-        config: {}
-        dataType: VARCHAR(1)
-        description: ""
-        name: O_ORDERSTATUS
-        nullable: true
-        sourceColumnReferences:
-          - columnReferences:
-              - columnCounter: 906a3357-af9f-419a-b860-954bdbba6f4b
-                stepCounter: c2077ed8-9889-4d38-b43d-28841d6172f4
-            transform: ""
-      - appliedColumnTests: {}
-        columnReference:
           columnCounter: 8aa40121-1d11-4e34-9079-0616f4dd8764
           stepCounter: 4fa50925-1f8f-4163-a804-7e2773e1c48b
         config: {}
         dataType: NUMBER(12,2)
         description: ""
-        name: O_TOTALPRICE
+        name: O_TOTALPRICE1
         nullable: true
         sourceColumnReferences:
           - columnReferences:
@@ -101,20 +87,6 @@ operation:
               - columnCounter: 830db721-b650-4db8-895e-2d36efdbb254
                 stepCounter: c2077ed8-9889-4d38-b43d-28841d6172f4
             transform: UPPER(O_ORDERPRIORITY)
-      - appliedColumnTests: {}
-        columnReference:
-          columnCounter: 93da6c60-753d-4961-8a62-7d431f69a5a2
-          stepCounter: 4fa50925-1f8f-4163-a804-7e2773e1c48b
-        config: {}
-        dataType: VARCHAR(15)
-        description: ""
-        name: O_CLERK
-        nullable: false
-        sourceColumnReferences:
-          - columnReferences:
-              - columnCounter: 767f9db3-24cd-4a88-a82b-5a67ba68cea4
-                stepCounter: c2077ed8-9889-4d38-b43d-28841d6172f4
-            transform: ""
       - appliedColumnTests: {}
         columnReference:
           columnCounter: 7e1817f3-0ab9-4fce-afd4-a94a06859b24
@@ -157,6 +129,54 @@ operation:
               - columnCounter: 14d8e857-0e30-412c-b171-a57a4d1dc0b4
                 stepCounter: c2077ed8-9889-4d38-b43d-28841d6172f4
             transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: f530c78b-4b71-4bed-a427-a8ff00539ce3
+          stepCounter: 4fa50925-1f8f-4163-a804-7e2773e1c48b
+        config: {}
+        dataType: VARCHAR(1)
+        description: ""
+        name: O_ORDERSTATUS
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 906a3357-af9f-419a-b860-954bdbba6f4b
+                stepCounter: c2077ed8-9889-4d38-b43d-28841d6172f4
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 93da6c60-753d-4961-8a62-7d431f69a5a2
+          stepCounter: 4fa50925-1f8f-4163-a804-7e2773e1c48b
+        config: {}
+        dataType: VARCHAR(15)
+        description: ""
+        name: O_CLERK
+        nullable: false
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 767f9db3-24cd-4a88-a82b-5a67ba68cea4
+                stepCounter: c2077ed8-9889-4d38-b43d-28841d6172f4
+            transform: ""
+      - acceptedValues:
+          strictMatch: true
+          values: []
+        appliedColumnTests: {}
+        columnReference:
+          columnCounter: 4cb41f7e-0ebe-4f33-adea-429b2b198c8e
+          stepCounter: 4fa50925-1f8f-4163-a804-7e2773e1c48b
+        config: {}
+        dataType: string
+        defaultValue: ""
+        description: ""
+        keyColumnType: None
+        name: NEW_COL
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: "0"
+                stepCounter: "0"
+            transform: "'abc'"
+        systemColumnType: None
     cteString: ""
     enabledColumnTestIDs: []
     sourceMapping:
