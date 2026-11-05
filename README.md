@@ -185,6 +185,7 @@ are detected<br/>If FALSE the node will not be deployed or will be dropped durin
 
 * Column data type, nullability and default value cannot be set on a view. Snowflake derives them from the view query, so changing them in the mapping grid has no effect on the view.
 * The view is dropped and recreated only when the existing object is not a view, for example after switching the node from a table node type. All other changes are applied in place with CREATE OR ALTER VIEW.
+* Snowflake cannot add or reorder the columns of an existing view with CREATE OR ALTER VIEW. Redeploying after adding a column or changing the column order fails. See [Adding or Reordering Columns](#adding-or-reordering-columns).
 
 ### Create Or Alter View Deployment
 
@@ -222,7 +223,7 @@ If you redeploy with only a new node name, a new target Storage Location, or a n
 Any of the changes below runs CREATE OR ALTER VIEW on the existing view. The view is not dropped first.
 
 **Columns**
-* Columns added, removed, renamed or reordered in the mapping grid
+* Columns removed or renamed in the mapping grid
 * A column transformation changed
 * A column's source column mapping changed
 * A column description changed. The column comment is updated.
@@ -243,6 +244,20 @@ Any of the changes below runs CREATE OR ALTER VIEW on the existing view. The vie
 | **Stage** | **Description** |
 |-----------|----------------|
 | **Create/Alter View** | Runs CREATE OR ALTER VIEW with the new definition and properties |
+
+#### Adding or Reordering Columns
+
+Adding a column or changing the column order in the mapping grid runs the **Create/Alter View** stage. Snowflake rejects it, and the deployment fails with this error:
+
+```
+CREATE OR ALTER execution failed. Partial updates may have been applied.
+Error message: SQL compilation error: error line 0 at position -1
+Cannot reorder VIEW columns in ALTER.
+```
+
+The node does not drop the view for these changes. To deploy them, drop the view in the target environment before you redeploy. The **Create/Alter View** stage then creates the view with the new columns. Grants on the dropped view are lost, unless future grants on the schema apply them again.
+
+Snowflake reports that partial updates may have been applied, so check the view in the target environment after a failed deployment.
 
 #### Changing the Materialization or Node Type
 
