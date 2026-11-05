@@ -32,8 +32,8 @@ operation:
                 stepCounter: 548f5969-a305-48cb-98c6-4a92394fd9da
             transform: ""
           - columnReferences:
-              - columnCounter: f62a0930-315d-4739-aba8-6ab7097c4776
-                stepCounter: 0cf008f2-e168-480a-91c5-b4d65f7a1881
+              - columnCounter: 72e2b097-8447-4430-ba05-871e8c6da5cf
+                stepCounter: 5a8c9a04-a973-48eb-b0fb-68793ae786aa
             transform: ""
       - appliedColumnTests: {}
         columnReference:
@@ -50,8 +50,8 @@ operation:
                 stepCounter: 548f5969-a305-48cb-98c6-4a92394fd9da
             transform: ""
           - columnReferences:
-              - columnCounter: 851fefdf-83bc-45b9-a25d-929cf230516d
-                stepCounter: 0cf008f2-e168-480a-91c5-b4d65f7a1881
+              - columnCounter: c359d350-3d8a-478d-8dbc-5de0e735ca02
+                stepCounter: 5a8c9a04-a973-48eb-b0fb-68793ae786aa
             transform: UPPER("PRODUCTS_GROCERY_VW"."PRODUCT_NAME")
       - appliedColumnTests: {}
         columnReference:
@@ -68,8 +68,8 @@ operation:
                 stepCounter: 548f5969-a305-48cb-98c6-4a92394fd9da
             transform: ""
           - columnReferences:
-              - columnCounter: eb6d4601-982e-443f-a260-5a67630813b9
-                stepCounter: 0cf008f2-e168-480a-91c5-b4d65f7a1881
+              - columnCounter: 9f53e6e6-c737-438b-829f-79421c0625eb
+                stepCounter: 5a8c9a04-a973-48eb-b0fb-68793ae786aa
             transform: ""
       - appliedColumnTests: {}
         columnReference:
@@ -86,8 +86,8 @@ operation:
                 stepCounter: 548f5969-a305-48cb-98c6-4a92394fd9da
             transform: ""
           - columnReferences:
-              - columnCounter: bdd89ebe-e602-44ba-87c1-cb879bda145a
-                stepCounter: 0cf008f2-e168-480a-91c5-b4d65f7a1881
+              - columnCounter: 400faabc-9c82-4980-ae28-76630b13f411
+                stepCounter: 5a8c9a04-a973-48eb-b0fb-68793ae786aa
             transform: ""
     cteString: ""
     enabledColumnTestIDs: []
