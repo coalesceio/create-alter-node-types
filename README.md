@@ -1,4 +1,4 @@
-## Create OR Alter Package
+## Create Or Alter Package
 
 Create or Alter package includes:
 * [Create or Alter table](#create-or-alter-table)
